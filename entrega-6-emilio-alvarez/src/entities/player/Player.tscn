@@ -1,0 +1,168 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://src/entities/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/player/player_sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/player/staff.png" type="Texture" id=3]
+[ext_resource path="res://src/entities/player/Cannon.gd" type="Script" id=4]
+[ext_resource path="res://src/entities/player/PlayerProjectile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/textures/fx/bolt/bolt3.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/fx/bolt/bolt4.png" type="Texture" id=7]
+[ext_resource path="res://assets/textures/fx/bolt/bolt1.png" type="Texture" id=8]
+[ext_resource path="res://assets/textures/fx/bolt/bolt2.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.5, 9 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Die"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 27, 28, 29, 30, 31, 32, 33, 34, 35 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyPivot/Body:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "jump"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0281656, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11, 12, 13, 14, 15, 16 ]
+}
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ null, ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "charge",
+"speed": 20.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 1 )
+ACCELERATION = 30.0
+H_SPEED_LIMIT = 100.0
+jump_speed = 300
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, -9 )
+shape = SubResource( 1 )
+
+[node name="BodyAnimations" type="AnimationPlayer" parent="."]
+anims/Die = SubResource( 7 )
+anims/Idle = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+anims/jump = SubResource( 4 )
+anims/walk = SubResource( 5 )
+
+[node name="BodyPivot" type="Node2D" parent="."]
+
+[node name="Body" type="Sprite" parent="BodyPivot"]
+position = Vector2( -2, -11 )
+texture = ExtResource( 2 )
+hframes = 9
+vframes = 5
+frame = 29
+
+[node name="WeaponContainer" type="Node2D" parent="."]
+
+[node name="Weapon" type="Node2D" parent="WeaponContainer"]
+unique_name_in_owner = true
+position = Vector2( -2, -6 )
+script = ExtResource( 4 )
+projectile_scene = ExtResource( 5 )
+
+[node name="WeponAnimatedSprite" type="AnimatedSprite" parent="WeaponContainer/Weapon"]
+position = Vector2( 14, 0 )
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 6 )
+animation = "charge"
+
+[node name="Sprite" type="Sprite" parent="WeaponContainer/Weapon"]
+position = Vector2( 6.70233, 2.54244e-06 )
+rotation = 1.5708
+scale = Vector2( 0.367902, 1.4136 )
+texture = ExtResource( 3 )
+
+[node name="WeaponTip" type="Position2D" parent="WeaponContainer/Weapon"]
+position = Vector2( 15, 1 )
+rotation = 1.5708

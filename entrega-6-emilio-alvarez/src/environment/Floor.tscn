@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1631.62, 4.25 )
+
+[node name="Floor" type="StaticBody2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ -592.0 ]
+}
+
+[node name="floor" type="Sprite" parent="."]
+position = Vector2( 1651, -14.5 )
+scale = Vector2( 49.303, 0.0757576 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1649.38, -12.75 )
+shape = SubResource( 1 )

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/entities/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/fx/pulse/pulse1.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[node name="TurretProjectile" instance=ExtResource( 1 )]
+VELOCITY = 100.0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+position = Vector2( 0, -4.76837e-07 )
+scale = Vector2( 0.234375, 0.234375 )
+texture = ExtResource( 2 )
+
+[node name="LifetimeTimer" parent="." index="1"]
+wait_time = 3.0
+
+[node name="Hitbox" parent="." index="3"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 1 )
