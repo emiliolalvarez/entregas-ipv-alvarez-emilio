@@ -100,7 +100,7 @@ func notify_hit() -> void:
 
 func _remove() -> void:
 	set_physics_process(false)
-	hide()
+	#hide()
 	collision_layer = 0
 
 ## Acá manejamos el callback de "animation finished" y procesamos qué
