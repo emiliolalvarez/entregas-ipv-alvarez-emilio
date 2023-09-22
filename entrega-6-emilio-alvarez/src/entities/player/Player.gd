@@ -40,6 +40,7 @@ func initialize(projectile_container: Node = get_parent()) -> void:
 	print(projectile_container)
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
+	body_animations.connect("animation_finished", self, "_on_animation_finished")
 	body_animations.play("Idle")
 
 
@@ -48,6 +49,8 @@ func _process_input() -> void:
 	## que no se deslice como cubito de hielo
 	if dead:
 		velocity.x = lerp(velocity.x, 0, FRICTION_WEIGHT) if abs(velocity.x) > 1 else 0
+		weapon.hide()
+		_play_animation("Die")
 		return
 	
 	# Weapon Fire
@@ -90,8 +93,8 @@ func _physics_process(delta: float) -> void:
 
 
 func notify_hit() -> void:
-	print("I'm player and imma! die!!!")
-	_play_animation("Die")
+	print("I'm player and imma die")
+	dead = true
 	#call_deferred("_remove")
 
 
@@ -100,12 +103,18 @@ func _remove() -> void:
 	hide()
 	collision_layer = 0
 
+## Acá manejamos el callback de "animation finished" y procesamos qué
+## lógica ejecutar a continuación, estilo grafo.
+func _on_animation_finished(animation) -> void:
+	if (animation == "Die"): 
+		_remove()
+
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
 func _play_animation(animation: String) -> void:
-	print("about to anim " + animation)
 	## Acá debe ir la lógica de llamado a animaciones
 	if body_animations.has_animation(animation):
 		body_animations.play(animation)
 	else: 
-		print(" has no animation " + animation)
+		print("has no animation " + animation)
+
