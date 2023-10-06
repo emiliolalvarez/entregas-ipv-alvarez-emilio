@@ -22,7 +22,8 @@ const MODE_ROBOT = 1
 onready var weapon: Node = $"%Weapon"
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var body_pivot: Node2D = $BodyPivot
-#onready var weapon_container: Node2D = $WeaponContainer
+onready var weapon_pivot: Node2D = $WeaponPivot
+onready var weapon_container: Node2D = $WeaponContainer
 onready var floor_raycasts: Array = $FloorRaycasts.get_children()
 
 ## Estas variables de exportación podríamos abstraerlas a cada
@@ -77,7 +78,7 @@ func _handle_move_input() -> void:
 	if move_direction != 0:
 		velocity.x = clamp(velocity.x + (move_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
 		body_pivot.scale.x = 1 - 2 * float(move_direction < 0)
-	if mode == MODE_PLANE && move_vertical_direction !=0:
+	if mode == MODE_PLANE && move_vertical_direction != 0:
 		velocity.y = clamp(velocity.y + (move_vertical_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
 	
 
@@ -144,6 +145,10 @@ func _remove() -> void:
 func _play_animation(animation: String) -> void:
 	if body_animations.has_animation(animation):
 		body_animations.play(animation)
+	
+func _stop_animation(reset:bool) -> void:
+	if body_animations.is_playing():
+		body_animations.stop(reset)
 
 func _set_plane_mode():
 	mode = MODE_PLANE
@@ -153,4 +158,7 @@ func _set_robot_mode():
 
 func _is_plane_mode() -> bool:
 	return mode == MODE_PLANE
+	
+func _is_robot_mode() -> bool:
+	return mode == MODE_ROBOT
 	

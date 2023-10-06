@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var weapon_tip: Node2D = $WeaponTip
+onready var weapon_tip_source: Node2D = $WeaponTipSource
 onready var fx_anim: AnimationPlayer = $FXAnim
 
 export (PackedScene) var projectile_scene: PackedScene
@@ -13,8 +14,9 @@ var fire_tween: SceneTreeTween
 ## Esto es como corrección de apuntado para compensar por el delay
 ## aplicado por la animación de disparo.
 func process_input() -> void:
-	if fx_anim.is_playing():
-		rotation = (get_global_mouse_position() - global_position).angle()
+	pass
+	#if fx_anim.is_playing():
+		#rotation = (get_global_mouse_position() - global_position).angle()
 
 
 func fire() -> void:
@@ -30,8 +32,8 @@ func fire() -> void:
 ## La animación de disparo llama a esta función que va a ser la que instancie
 ## el proyectil
 func _fire() -> void:
-	projectile_scene.instance().initialize(projectile_container, weapon_tip.global_position, global_position.direction_to(weapon_tip.global_position))
-	
+	#projectile_scene.instance().initialize(projectile_container, weapon_tip.global_position, global_position.direction_to(weapon_tip.global_position))
+	projectile_scene.instance().initialize(projectile_container, weapon_tip.global_position, global_position.direction_to(weapon_tip.global_position), deg2rad(weapon_tip.rotation_degrees))
 	## Y por último animo el retorno a la posición de inicio del arma
 	fire_tween = create_tween()
 	
