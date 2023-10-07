@@ -158,7 +158,7 @@ z_as_relative = false
 
 [node name="Valkyrie" parent="Environment/Entities" instance=ExtResource( 3 )]
 position = Vector2( 213, 343 )
-ACCELERATION = 169.0
+ACCELERATION = 120.0
 H_SPEED_LIMIT = 99.0
 jump_speed = 300
 

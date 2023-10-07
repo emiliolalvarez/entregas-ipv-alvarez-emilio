@@ -19,7 +19,8 @@ const SLOPE_THRESHOLD: float = deg2rad(46)
 const MODE_PLANE = 0
 const MODE_ROBOT = 1
 
-onready var weapon: Node = $"%Weapon"
+#onready var weapon: Node = $"%Weapon"
+onready var weapon: Node =$WeaponContainer.get_node("%Weapon")
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var body_pivot: Node2D = $BodyPivot
 onready var weapon_pivot: Node2D = $WeaponPivot

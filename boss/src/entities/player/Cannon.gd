@@ -32,8 +32,15 @@ func fire() -> void:
 ## La animación de disparo llama a esta función que va a ser la que instancie
 ## el proyectil
 func _fire() -> void:
-	#projectile_scene.instance().initialize(projectile_container, weapon_tip.global_position, global_position.direction_to(weapon_tip.global_position))
-	projectile_scene.instance().initialize(projectile_container, weapon_tip.global_position, global_position.direction_to(weapon_tip.global_position), deg2rad(weapon_tip.rotation_degrees))
+	var direction: Vector2 = global_position.direction_to(weapon_tip.global_position)
+	#if global_scale.y < 0:
+	#	direction *= -1
+	
+	projectile_scene.instance().initialize(
+		projectile_container,
+		weapon_tip.global_position,
+		direction
+	)
 	## Y por último animo el retorno a la posición de inicio del arma
 	fire_tween = create_tween()
 	

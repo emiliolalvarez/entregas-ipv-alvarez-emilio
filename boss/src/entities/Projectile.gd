@@ -13,12 +13,12 @@ export (float) var VELOCITY: float = 800.0
 var direction: Vector2
 
 
-func initialize(container: Node, spawn_position: Vector2, direction: Vector2, angle: float ) -> void:
+func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2 ) -> void:
 	container.add_child(self)
-	self.direction = direction
+	#self.direction = direction
+	self.direction = target_direction
 	global_position = spawn_position
-	rotation = direction.angle()
-	#rotation =  angle
+	rotation =  target_direction.angle()
 	lifetime_timer.connect("timeout", self, "_on_lifetime_timer_timeout")
 	lifetime_timer.start()
 	

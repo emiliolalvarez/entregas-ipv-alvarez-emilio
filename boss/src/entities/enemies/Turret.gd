@@ -36,6 +36,7 @@ func initialize(container, turret_pos, projectile_container) -> void:
 func _fire() -> void:
 	if target != null:
 		var proj_instance: Node = projectile_scene.instance()
+		
 		if projectile_container == null:
 			projectile_container = get_parent()
 		proj_instance.initialize(
