@@ -7,7 +7,8 @@ func enter() -> void:
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_released("move_up"):
 		emit_signal("finished", "idle")
-	if (event.is_action_pressed("move_left") || event.is_action_pressed("move_right"))  && character.is_on_floor():
+	if (event.is_action_pressed("move_left") || event.is_action_pressed("move_right")) && character.is_on_floor():
+		print("changing to aim up walk")
 		emit_signal("finished", "aim_up_walk")
 	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished", "jump")

@@ -2,6 +2,7 @@ extends AbstractState
 
 
 func enter() -> void:
+	print("AIM UP WALK")
 	character._play_animation("aim_up_walk")
 
 func handle_input(event:InputEvent) -> void:
