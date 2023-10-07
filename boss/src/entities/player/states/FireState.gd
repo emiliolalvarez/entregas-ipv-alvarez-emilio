@@ -2,7 +2,6 @@ extends AbstractState
 
 
 func enter() -> void:
-	print("FIRe STATE")
 	character._play_animation("fire")
 	
 func handle_event(event: String, value = null) -> void:
