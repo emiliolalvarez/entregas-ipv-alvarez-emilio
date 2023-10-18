@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/Default-Medium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/game/ui/options/ActionInput.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/game/ui/options/OptionsMenu.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.270588, 0.0509804, 0.0509804, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.941176, 0.376471, 0.376471, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="OptionsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.247
+margin_left = 1.0
+margin_top = 9.0
+margin_right = -9.0
+margin_bottom = -39.014
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_right = 7.0
+margin_bottom = -6.0
+color = Color( 0.0352941, 0.0352941, 0.0352941, 0.25098 )
+
+[node name="MainPanel" type="Panel" parent="."]
+anchor_top = -0.039
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 20.0
+margin_right = -50.0
+margin_bottom = -20.0
+custom_styles/panel = SubResource( 13 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 19.0
+margin_right = -5.0
+margin_bottom = -28.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/ScrollContainer"]
+margin_right = 108.0
+margin_bottom = 110.0
+
+[node name="ActionInputA" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 108.0
+margin_bottom = 34.0
+action_id = "move_left"
+action_name = "Move Left"
+
+[node name="ActionInputD" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 38.0
+margin_right = 108.0
+margin_bottom = 72.0
+action_id = "move_right"
+action_name = "Move Right"
+
+[node name="ActionInputW" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 76.0
+margin_right = 108.0
+margin_bottom = 110.0
+action_id = "jump"
+action_name = "Jump"
+
+[node name="Label" type="Label" parent="MainPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_bottom = -100.006
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+align = 1
+
+[node name="ReturnButton" type="Button" parent="MainPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -27.0
+margin_top = -27.0
+margin_right = 27.0
+margin_bottom = -7.0
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 1 )
+text = "Return"
+
+[connection signal="pressed" from="MainPanel/ReturnButton" to="." method="hide"]
