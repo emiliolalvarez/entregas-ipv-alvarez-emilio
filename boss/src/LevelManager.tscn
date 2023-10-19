@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/LevelManager.gd" type="Script" id=1]
+[ext_resource path="res://src/game/levels/level1/Level01.tscn" type="PackedScene" id=2]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource( 1 )
+levels = [ ExtResource( 2 ) ]
+
+[node name="CurrentLevelContainer" type="Node" parent="."]

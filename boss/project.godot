@@ -12,46 +12,52 @@ _global_script_classes=[ {
 "base": "AbstractState",
 "class": "AbstractEnemyState",
 "language": "GDScript",
-"path": "res://src/entities/enemies/states/AbstractEnemyState.gd"
+"path": "res://src/game/entities/enemies/states/AbstractEnemyState.gd"
 }, {
 "base": "Node",
 "class": "AbstractState",
 "language": "GDScript",
-"path": "res://src/entities/AbstractState.gd"
+"path": "res://src/game/entities/AbstractState.gd"
 }, {
 "base": "Node",
 "class": "AbstractStateMachine",
 "language": "GDScript",
-"path": "res://src/entities/AbstractStateMachine.gd"
+"path": "res://src/game/entities/AbstractStateMachine.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "EnemyPod",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/pod/Pod.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyTurret",
 "language": "GDScript",
-"path": "res://src/entities/enemies/Turret.gd"
+"path": "res://src/game/entities/enemies/Turret.gd"
+}, {
+"base": "Node",
+"class": "GameLevel",
+"language": "GDScript",
+"path": "res://src/game/levels/GameLevel.gd"
 }, {
 "base": "TileMap",
 "class": "PathfindAstar",
 "language": "GDScript",
-"path": "res://src/entities/AstarTilemap.gd"
+"path": "res://src/game/entities/AstarTilemap.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://src/entities/player/Player.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Valkyrie",
-"language": "GDScript",
-"path": "res://src/entities/player/Valkyrie.gd"
+"path": "res://src/game/entities/player/Player.gd"
 } ]
 _global_script_class_icons={
 "AbstractEnemyState": "",
 "AbstractState": "",
 "AbstractStateMachine": "",
+"EnemyPod": "",
 "EnemyTurret": "",
+"GameLevel": "",
 "PathfindAstar": "",
-"Player": "",
-"Valkyrie": ""
+"Player": ""
 }
 
 [application]
@@ -59,6 +65,10 @@ _global_script_class_icons={
 config/name="Boss"
 run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameState="*res://src/game/singletons/GameState.gd"
 
 [display]
 
@@ -126,6 +136,7 @@ move_down={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="turrets"
+2d_physics/layer_4="battlepods"
 
 [rendering]
 

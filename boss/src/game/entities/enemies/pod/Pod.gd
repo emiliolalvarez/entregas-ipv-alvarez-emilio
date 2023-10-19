@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name EnemyTurret
+class_name EnemyPod
 
 signal hit(amount)
 
@@ -66,7 +66,7 @@ func _apply_movement() -> void:
 ## dependiendo de si el enemigo esta o no alerta
 func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
-	print("I'm turret and imma die")
+	print("I'm battlepod and imma die")
 
 
 func _remove() -> void:

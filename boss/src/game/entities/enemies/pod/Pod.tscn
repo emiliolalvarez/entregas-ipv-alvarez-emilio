@@ -1,0 +1,190 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://src/game/entities/enemies/pod/IdleState.gd" type="Script" id=1]
+[ext_resource path="res://src/game/entities/enemies/pod/PodStateMachine.gd" type="Script" id=2]
+[ext_resource path="res://src/game/entities/enemies/pod/DieState.gd" type="Script" id=3]
+[ext_resource path="res://src/game/entities/enemies/pod/Pod.gd" type="Script" id=4]
+[ext_resource path="res://src/game/entities/enemies/pod/PodProjectile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=6]
+[ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=8]
+[ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=15]
+
+[sub_resource type="AtlasTexture" id=83]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=84]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=85]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=86]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=87]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=88]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=89]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=90]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=91]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=92]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=93]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=94]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=95]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=96]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=97]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=98]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=99]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=100]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=101]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=80]
+animations = [ {
+"frames": [ SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ) ],
+"loop": false,
+"name": "alert",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 87 ), SubResource( 88 ), SubResource( 89 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ) ],
+"loop": false,
+"name": "die",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 95 ), SubResource( 96 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ) ],
+"loop": true,
+"name": "walk",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=81]
+extents = Vector2( 9.5, 12.5 )
+
+[sub_resource type="CircleShape2D" id=82]
+radius = 192.0
+
+[node name="Pod" type="KinematicBody2D"]
+script = ExtResource( 4 )
+projectile_scene = ExtResource( 5 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+character_path = NodePath("..")
+START_STATE = NodePath("Idle")
+STATES_LIST = [ NodePath("Idle") ]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 1 )
+state_id = "idle"
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="FirePosition" type="Position2D" parent="."]
+position = Vector2( 0, -18.0339 )
+
+[node name="Body" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 80 )
+animation = "alert"
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, -12.5 )
+shape = SubResource( 81 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0.0428963, -18.0659 )
+cast_to = Vector2( 0, 0 )
+collision_mask = 3
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2( 0, -12 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 15 )
+
+[node name="green_circle" type="Sprite" parent="DetectionArea"]
+visible = false
+modulate = Color( 1, 1, 1, 0.301961 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 82 )

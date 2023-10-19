@@ -1,6 +1,6 @@
 extends Camera2D
 
-onready var player: Valkyrie = get_parent()
+onready var player: Player = get_parent()
 
 export (float) var max_offset_h: float
 export (float) var max_offset_y: float

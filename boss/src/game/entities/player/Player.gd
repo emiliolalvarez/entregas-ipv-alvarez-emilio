@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name Valkyrie
+class_name Player
 
 ## Señales que sirven para comunicar el estado del Player
 ## a los elementos conectados. Se puede utilizar tanto para

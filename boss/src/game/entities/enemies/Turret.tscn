@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/game/entities/enemies/Turret.gd" type="Script" id=2]
+[ext_resource path="res://src/game/entities/enemies/TurretProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=4]
+[ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=5]
+[ext_resource path="res://src/game/entities/enemies/TurretStateMachine.gd" type="Script" id=13]
+[ext_resource path="res://src/game/entities/enemies/states/IdleState.gd" type="Script" id=14]
+[ext_resource path="res://src/game/entities/enemies/states/WalkState.gd" type="Script" id=15]
+[ext_resource path="res://src/game/entities/enemies/states/DieState.gd" type="Script" id=16]
+[ext_resource path="res://src/game/entities/enemies/states/AlertState.gd" type="Script" id=17]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.5, 12.5 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 192.0
+
+[node name="Turret" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 2 )
+projectile_scene = ExtResource( 3 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 13 )
+character_path = NodePath("..")
+START_STATE = NodePath("Idle")
+STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Alert"), NodePath("Die") ]
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 14 )
+state_id = "idle"
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
+one_shot = true
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource( 15 )
+state_id = "walk"
+wander_radius = Vector2( 50, 50 )
+speed = 5.0
+max_speed = 100.0
+
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource( 17 )
+state_id = "alert"
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 16 )
+state_id = "die"
+
+[node name="FirePosition" type="Position2D" parent="."]
+position = Vector2( 0, -18.0339 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, -12.5 )
+shape = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0.0428963, -18.0659 )
+cast_to = Vector2( 0, 0 )
+collision_mask = 3
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2( 0, -12 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="green_circle" type="Sprite" parent="DetectionArea"]
+visible = false
+modulate = Color( 1, 1, 1, 0.301961 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 2 )
+
+[connection signal="hit" from="." to="StateMachine" method="notify_hit"]
+[connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_IdleTimer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="StateMachine" method="_on_DetectionArea_body_exited"]

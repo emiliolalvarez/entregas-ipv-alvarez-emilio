@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/entities/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://src/game/entities/Projectile.gd" type="Script" id=1]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fire_loop"
