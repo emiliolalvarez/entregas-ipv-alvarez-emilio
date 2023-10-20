@@ -6,12 +6,10 @@ onready var idle_timer = $IdleTimer
 func enter() -> void:
 	character.velocity = Vector2.ZERO
 	character._play_animation("idle")
-	
 	idle_timer.start()
 	
 func exit() -> void:
 	idle_timer.stop()
-	
 	
 func update(delta:float) -> void:
 	character._apply_movement()

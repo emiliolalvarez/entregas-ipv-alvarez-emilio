@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/pod/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/pod/PodStateMachine.gd" type="Script" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://src/game/entities/enemies/pod/Pod.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/enemies/pod/PodProjectile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=6]
+[ext_resource path="res://src/game/entities/enemies/pod/WalkState.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=8]
+[ext_resource path="res://src/game/entities/enemies/pod/AlertState.gd" type="Script" id=9]
 [ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=15]
 
 [sub_resource type="AtlasTexture" id=83]
@@ -133,45 +135,57 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=81]
-extents = Vector2( 9.5, 12.5 )
+extents = Vector2( 24, 32.5 )
 
 [sub_resource type="CircleShape2D" id=82]
-radius = 192.0
+radius = 226.874
 
 [node name="Pod" type="KinematicBody2D"]
+collision_layer = 6
+collision_mask = 7
 script = ExtResource( 4 )
 projectile_scene = ExtResource( 5 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
 character_path = NodePath("..")
-START_STATE = NodePath("Idle")
-STATES_LIST = [ NodePath("Idle") ]
+START_STATE = NodePath("Walk")
+STATES_LIST = [ NodePath("Idle"), NodePath("Die"), NodePath("Walk"), NodePath("Alert") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
 state_id = "idle"
 
+[node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
+
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
+state_id = "die"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+state_id = "walk"
+
+[node name="Alert" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+state_id = "alert"
 
 [node name="FirePosition" type="Position2D" parent="."]
 position = Vector2( 0, -18.0339 )
 
 [node name="Body" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -16 )
 frames = SubResource( 80 )
 animation = "alert"
 frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -12.5 )
+position = Vector2( 0, -1 )
 shape = SubResource( 81 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 0.0428963, -18.0659 )
-cast_to = Vector2( 0, 0 )
+position = Vector2( 0, 27 )
+cast_to = Vector2( 8, 45 )
 collision_mask = 3
 
 [node name="DetectionArea" type="Area2D" parent="."]
@@ -181,10 +195,16 @@ collision_mask = 2
 script = ExtResource( 15 )
 
 [node name="green_circle" type="Sprite" parent="DetectionArea"]
-visible = false
 modulate = Color( 1, 1, 1, 0.301961 )
-scale = Vector2( 0.75, 0.75 )
+position = Vector2( 0.874996, 2.625 )
+scale = Vector2( 0.90375, 0.857917 )
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource( 82 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_IdleTimer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="StateMachine" method="_on_DetectionArea_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="StateMachine" method="_on_DetectionArea_body_exited"]
