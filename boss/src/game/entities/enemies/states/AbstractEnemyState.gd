@@ -7,6 +7,8 @@ func handle_event(event: String, value = null) -> void:
 			_handle_body_entered(value)
 		"body_exited":
 			_handle_body_exited(value)
+		"damage_received":
+			_handle_damage_recieved(value)
 
 func _handle_body_entered(body: Node) -> void:
 	if character.target == null:
@@ -18,3 +20,7 @@ func _handle_body_exited(body: Node) -> void:
 		character.target = null
 	emit_signal("finished", "idle")
 
+func _handle_damage_recieved(amount) -> void:
+	character.life = max(0, character.life - 1)
+	if character.life == 0:
+		emit_signal("finished", "die")

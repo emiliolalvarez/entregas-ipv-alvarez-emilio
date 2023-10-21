@@ -10,4 +10,5 @@ func fire() -> void:
 	character._fire()
 	
 func update(delta:float) -> void:
-	fire()
+	#fire()
+	print("pod fire attack!")

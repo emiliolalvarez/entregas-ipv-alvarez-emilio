@@ -1,7 +1,5 @@
 extends AbstractEnemyState
 
-
- 
 func enter() -> void:
 	character.velocity = Vector2.ZERO
 	character._play_animation("idle")
