@@ -216,7 +216,7 @@ position = Vector2( -96, 97 )
 navpoly = SubResource( 7 )
 
 [node name="Pod" parent="Environment/Entities/Enemies/Navigation2D" instance=ExtResource( 14 )]
-position = Vector2( 159, 619 )
+position = Vector2( 120, 627 )
 
 [node name="Objects" type="Node2D" parent="Environment"]
 position = Vector2( 44, 44 )

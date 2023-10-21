@@ -27,19 +27,3 @@ func update(delta:float) -> void:
 		var steering = (desired_velocity - character.velocity) * delta * character.ACCELERATION
 		character.velocity += steering 
 		character._apply_movement()
-	
-	
-func _handle_body_entered(body: Node) -> void:
-	._handle_body_entered(body)
-	#character._play_animation("alert")
-	
-func _handle_body_exited(body: Node) -> void:
-	._handle_body_exited(body)
-	#haracter._play_animation("walk")
-	
-func _on_amimation_finished(anim_name: String) -> void:
-	match anim_name:
-		"alert":
-			character._play_animation("walk")
-		"go_normal":
-			character._play_animation("walk")

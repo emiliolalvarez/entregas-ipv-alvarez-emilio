@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/game/entities/player/Player.gd"
+}, {
+"base": "AbstractStateMachine",
+"class": "PodStateMachine",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/pod/PodStateMachine.gd"
 } ]
 _global_script_class_icons={
 "AbstractEnemyState": "",
@@ -57,7 +62,8 @@ _global_script_class_icons={
 "EnemyTurret": "",
 "GameLevel": "",
 "PathfindAstar": "",
-"Player": ""
+"Player": "",
+"PodStateMachine": ""
 }
 
 [application]

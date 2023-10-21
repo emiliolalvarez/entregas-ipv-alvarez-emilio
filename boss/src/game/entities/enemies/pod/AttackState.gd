@@ -1,12 +1,13 @@
 extends AbstractEnemyState
 
 func enter() -> void:
+	print("pod attack")
+	character._play_animation("attack")
 	character.velocity = Vector2.ZERO
-	fire()
+	character._look_at_target()
 	
 func fire() -> void:
 	character._fire()
-	character._play_animation("alert")
-
+	
 func update(delta:float) -> void:
-	character._look_at_target()
+	fire()

@@ -1,5 +1,7 @@
 extends AbstractStateMachine
 
+class_name PodStateMachine
+
 ## Flag de ayuda para saber identificar el estado de actividad
 var dead: bool = false
 

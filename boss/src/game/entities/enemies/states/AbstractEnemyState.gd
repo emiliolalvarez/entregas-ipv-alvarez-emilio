@@ -11,9 +11,10 @@ func handle_event(event: String, value = null) -> void:
 func _handle_body_entered(body: Node) -> void:
 	if character.target == null:
 		character.target = body
+	emit_signal("finished", "walk")
 	
 func _handle_body_exited(body: Node) -> void:
 	if body == character.target:
 		character.target = null
-		
- 
+	emit_signal("finished", "idle")
+

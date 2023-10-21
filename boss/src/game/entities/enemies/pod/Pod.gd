@@ -18,6 +18,7 @@ onready var navigation_agent = $NavigationAgent2D
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
 export (int) var gravity: int = 10
+export (int) var life: int = 15
 export (PackedScene) var projectile_scene: PackedScene
 
 
@@ -72,6 +73,7 @@ func _apply_movement() -> void:
 ## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
 ## dependiendo de si el enemigo esta o no alerta
 func notify_hit(amount:int = 1) -> void:
+	life = max(0, life -1)
 	emit_signal("hit", amount)
 	print("I'm battlepod and imma die")
 
