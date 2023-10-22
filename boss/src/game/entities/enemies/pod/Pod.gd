@@ -8,7 +8,7 @@ const MAX_LIFE = 5
 
 signal hit(amount)
 
-onready var fire_position: Node2D = $Pivot/FirePosition
+onready var fire_position: Position2D = $Pivot/FirePosition
 onready var raycast: RayCast2D = $Pivot/RayCast2D
 onready var body_anim: AnimatedSprite = $Pivot/Body
 onready var navigation_agent = $NavigationAgent2D
@@ -41,11 +41,11 @@ func _fire() -> void:
 		var proj_instance: Node = projectile_scene.instance()
 		if projectile_container == null:
 			projectile_container = get_parent()
-		print(projectile_container)
 		proj_instance.initialize(
 			projectile_container,
 			fire_position.global_position,
-			fire_position.global_position.direction_to(target.global_position)
+			#fire_position.global_position.direction_to(target.global_position)
+			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
 		)
 	
 func _look_at_target() -> void:
@@ -57,7 +57,6 @@ func _look_at_target() -> void:
 func _can_see_target() -> bool:
 	if target == null:
 		return false
-	#print("isColliding: " + String(raycast.is_colliding()))
 	raycast.set_cast_to(raycast.to_local(target.global_position))
 	raycast.force_raycast_update()
 	return raycast.is_colliding() && raycast.get_collider() == target
@@ -72,7 +71,6 @@ func _apply_movement() -> void:
 	velocity.y += gravity
 	velocity = move_and_slide(velocity)
 	_look_at_target()
-	#body_anim.flip_h = velocity.x > 0
 
 ## Esta función ya no llama directamente a remove, sino que inhabilita las
 ## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
@@ -82,11 +80,10 @@ func notify_hit(amount:int = 1) -> void:
 
 	
 func _remove() -> void:
-	print("Removing pod nod and its children")
 	dead = true
 	collision_layer = 0
 	collision_mask = 0
-	#set_physics_process(false)
+	set_physics_process(false)
 	for n in get_children():
 		remove_child(n)
 		n.queue_free()

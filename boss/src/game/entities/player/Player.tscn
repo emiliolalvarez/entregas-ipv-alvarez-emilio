@@ -456,7 +456,7 @@ tracks/1/keys = {
 extents = Vector2( 14, 22 )
 
 [node name="Player" type="KinematicBody2D"]
-position = Vector2( 201, 358 )
+position = Vector2( 1, -28 )
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 1 )
@@ -543,7 +543,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
-position = Vector2( 0, 27 )
+position = Vector2( -1, 28 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
