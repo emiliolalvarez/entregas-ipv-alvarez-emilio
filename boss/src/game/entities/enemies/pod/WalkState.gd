@@ -17,7 +17,7 @@ func exited() -> void:
 	
 func update(delta:float) -> void:
 	
-	if abs(character.target.global_position.x - character.global_position.x) <= attack_distance_threshold:
+	if character.target && abs(character.target.global_position.x - character.global_position.x) <= attack_distance_threshold:
 		emit_signal("finished", "alert")
 	#if character._can_see_target():
 #		print("I see you!")
