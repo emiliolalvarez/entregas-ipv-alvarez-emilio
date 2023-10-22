@@ -23,7 +23,7 @@ const MODE_ROBOT = 1
 onready var weapon: Node =$WeaponContainer.get_node("%Weapon")
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var body_pivot: Node2D = $BodyPivot
-onready var weapon_pivot: Node2D = $WeaponPivot
+onready var weapondy_pivot: Node2D = $WeaponPivot
 onready var weapon_container: Node2D = $WeaponContainer
 onready var floor_raycasts: Array = $FloorRaycasts.get_children()
 

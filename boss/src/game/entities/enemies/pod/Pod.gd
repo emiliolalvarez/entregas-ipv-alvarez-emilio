@@ -3,22 +3,23 @@ class_name EnemyPod
 
 export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
-const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
-const SNAP_DIRECTION: Vector2 = Vector2.DOWN
-const SNAP_LENGTH: float = 32.0
-const SLOPE_THRESHOLD: float = deg2rad(46)
+
+const MAX_LIFE = 5
 
 signal hit(amount)
 
-onready var fire_position: Node2D = $FirePosition
-onready var raycast: RayCast2D = $RayCast2D
-onready var body_anim: AnimatedSprite = $Body
+onready var fire_position: Node2D = $Pivot/FirePosition
+onready var raycast: RayCast2D = $Pivot/RayCast2D
+onready var body_anim: AnimatedSprite = $Pivot/Body
 onready var navigation_agent = $NavigationAgent2D
+onready var life_progress_bar:ProgressBar = $HUD/Control/LifeProgressBar
+onready var hud:Node2D = $HUD
+onready var pivot:Node2D = $Pivot
 
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
 export (int) var gravity: int = 10
-export (int) var life: int = 5
+export (int) var life: int = MAX_LIFE
 export (PackedScene) var projectile_scene: PackedScene
 
 
@@ -31,16 +32,16 @@ var velocity: Vector2 = Vector2.ZERO
 var dead: bool = false
 
 
-func initialize(container, turret_pos, projectile_container) -> void:
-	container.add_child(self)
-	global_position = turret_pos
-	self.projectile_container = projectile_container
+func _ready():
+	life_progress_bar.max_value = MAX_LIFE
+	life_progress_bar.value = life
 	
 func _fire() -> void:
 	if target != null:
 		var proj_instance: Node = projectile_scene.instance()
 		if projectile_container == null:
 			projectile_container = get_parent()
+		print(projectile_container)
 		proj_instance.initialize(
 			projectile_container,
 			fire_position.global_position,
@@ -48,7 +49,10 @@ func _fire() -> void:
 		)
 	
 func _look_at_target() -> void:
-	body_anim.flip_h = raycast.cast_to.x < 0
+	if target != null:
+		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
+	else:
+		pivot.scale.x = -1 if velocity.x > 0 else 1
 
 func _can_see_target() -> bool:
 	if target == null:
@@ -66,22 +70,26 @@ func _apply_movement() -> void:
 	else:
 		print("no navigation agent")	
 	velocity.y += gravity
-	velocity = move_and_slide(velocity) 
-	body_anim.flip_h = velocity.x > 0
+	velocity = move_and_slide(velocity)
+	_look_at_target()
+	#body_anim.flip_h = velocity.x > 0
 
 ## Esta función ya no llama directamente a remove, sino que inhabilita las
 ## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
 ## dependiendo de si el enemigo esta o no alerta
 func notify_hit(amount:int = 1) -> void:
-	print("I'm battlepod and recieved hit")
 	emit_signal("hit", amount)
+
 	
-
-
 func _remove() -> void:
+	print("Removing pod nod and its children")
 	dead = true
 	collision_layer = 0
 	collision_mask = 0
+	#set_physics_process(false)
+	for n in get_children():
+		remove_child(n)
+		n.queue_free()
 	get_parent().remove_child(self)
 	queue_free()
 
