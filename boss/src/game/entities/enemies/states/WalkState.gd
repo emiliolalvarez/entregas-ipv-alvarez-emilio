@@ -52,7 +52,7 @@ func update(delta:float) -> void:
 	character.velocity = (
 		character.velocity +
 		character.global_position.direction_to(next_point) * speed
-	).clamped(max_speed)
+	).limit_length(max_speed)
 	character._apply_movement()
 	character.body_anim.flip_h = character.velocity.x < 0
 	

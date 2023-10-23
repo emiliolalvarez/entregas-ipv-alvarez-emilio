@@ -31,9 +31,9 @@ onready var floor_raycasts: Array = $FloorRaycasts.get_children()
 ## estado correspondiente de la state machine, pero como queremos
 ## poder modificar estos valores desde afuera de la escena del Player,
 ## los exponemos desde el script de Player.
-export (float) var ACCELERATION: float = 60.0
-export (float) var H_SPEED_LIMIT: float = 600.0
-export (int) var jump_speed: int = 500
+export (float) var ACCELERATION: float = 25
+export (float) var H_SPEED_LIMIT: float = 50
+export (int) var jump_speed: int
 export (float) var FRICTION_WEIGHT: float = 0.1
 export (int) var gravity: int = 10
 export (int) var life: int

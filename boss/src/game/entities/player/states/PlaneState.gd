@@ -1,7 +1,11 @@
 extends AbstractState
 
+var original_h_speed: float
+
 
 func enter() -> void:
+	original_h_speed = character.H_SPEED_LIMIT
+	character.H_SPEED_LIMIT += original_h_speed * 1.25
 	character.snap_vector = Vector2.ZERO
 	character._set_plane_mode()
 	character._play_animation("plane")
@@ -9,6 +13,8 @@ func enter() -> void:
 	
 func exit() -> void:
 	character._set_robot_mode()
+	character.H_SPEED_LIMIT = original_h_speed
+	
 	
 func do_move_up() -> void:
 	character.velocity.y -= character.jump_speed

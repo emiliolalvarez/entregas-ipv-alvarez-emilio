@@ -4,6 +4,7 @@ extends AbstractState
 # Al entrar se activa primero la animación "idle"
 func enter() -> void:
 	character._play_animation("idle")
+	print ("IDLE H SPEED " + String(character.H_SPEED_LIMIT))
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_up") && character._is_robot_mode():
