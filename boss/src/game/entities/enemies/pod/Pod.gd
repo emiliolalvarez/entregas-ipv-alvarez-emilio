@@ -12,8 +12,8 @@ onready var fire_position: Position2D = $Pivot/FirePosition
 onready var raycast: RayCast2D = $Pivot/RayCast2D
 onready var body_anim: AnimatedSprite = $Pivot/Body
 onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $HUD/Control/LifeProgressBar
-onready var hud:Node2D = $HUD
+onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
+onready var hud:Node2D = $Pivot/HUD
 onready var pivot:Node2D = $Pivot
 
 export (float) var speed:float  = 10.0

@@ -465,7 +465,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 14, 22 )
+extents = Vector2( 14, 23 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1, -28 )
@@ -535,7 +535,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 28 )
+position = Vector2( -1, 29 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]

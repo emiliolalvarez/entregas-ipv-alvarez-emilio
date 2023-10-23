@@ -38,11 +38,4 @@ func update(delta: float) -> void:
 			else:
 				character._play_animation("jump")
 
-# En este callback manejamos, por el momento, solo los impactos
-func handle_event(event: String, value = null) -> void:
-	match event:
-		"hit":
-			character._handle_hit(value)
-			if character.dead:
-				emit_signal("finished", "dead")
 

@@ -36,6 +36,8 @@ export (float) var H_SPEED_LIMIT: float = 600.0
 export (int) var jump_speed: int = 500
 export (float) var FRICTION_WEIGHT: float = 0.1
 export (int) var gravity: int = 10
+export (int) var life: int
+export (int) var MAX_LIFE: int = 30
 
 var projectile_container: Node
 
@@ -55,6 +57,8 @@ func _ready() -> void:
 
 
 func initialize(projectile_container: Node = get_parent()) -> void:
+	life = MAX_LIFE
+	emit_signal("hp_changed", life, MAX_LIFE)
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
 
@@ -130,8 +134,9 @@ func notify_hit(amount: int = 1) -> void:
 ## para otras cosas, y como sabemos que incorporaremos una barra de salud después
 ## es apropiado manejarlo de esta manera.
 func _handle_hit(amount: int = 1) -> void:
-	dead = true
-	emit_signal("hp_changed", 0, 1)
+	life = max(0, life - amount)
+	dead = true if life == 0 else false
+	emit_signal("hp_changed", life, MAX_LIFE)
 
 
 # El llamado a remove final

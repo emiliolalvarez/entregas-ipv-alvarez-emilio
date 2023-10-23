@@ -10,6 +10,9 @@
 [ext_resource path="res://src/game/entities/enemies/pod/AlertState.gd" type="Script" id=9]
 [ext_resource path="res://src/game/entities/enemies/pod/AttackState.gd" type="Script" id=10]
 
+[sub_resource type="RectangleShape2D" id=81]
+extents = Vector2( 23.4286, 33.8927 )
+
 [sub_resource type="StyleBoxFlat" id=104]
 bg_color = Color( 0.72549, 0.109804, 0.345098, 1 )
 
@@ -20,9 +23,6 @@ corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
-
-[sub_resource type="RectangleShape2D" id=81]
-extents = Vector2( 24, 32.5 )
 
 [sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 6 )
@@ -134,28 +134,8 @@ radius = 226.874
 [node name="Pod" type="KinematicBody2D"]
 scale = Vector2( 0.7, 0.7 )
 collision_layer = 4
-collision_mask = 5
 script = ExtResource( 4 )
 projectile_scene = ExtResource( 5 )
-
-[node name="HUD" type="Node2D" parent="."]
-
-[node name="Control" type="Control" parent="HUD"]
-margin_left = -16.0
-margin_top = -40.0
-margin_right = 16.0
-margin_bottom = -35.0
-
-[node name="LifeProgressBar" type="ProgressBar" parent="HUD/Control"]
-margin_top = 5.0
-margin_right = 32.0
-custom_styles/fg = SubResource( 104 )
-custom_styles/bg = SubResource( 103 )
-max_value = 10.0
-step = 1.0
-value = 5.0
-rounded = true
-percent_visible = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -190,10 +170,33 @@ state_id = "attack"
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( -0.571, -3.607 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 81 )
 
 [node name="Pivot" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="HUD" type="Node2D" parent="Pivot"]
+position = Vector2( 0, -5.36442e-07 )
+scale = Vector2( 1, 1 )
+
+[node name="Control" type="Control" parent="Pivot/HUD"]
+margin_left = -16.0
+margin_top = -40.0
+margin_right = 16.0
+margin_bottom = -35.0
+
+[node name="LifeProgressBar" type="ProgressBar" parent="Pivot/HUD/Control"]
+margin_top = 5.0
+margin_right = 32.0
+custom_styles/fg = SubResource( 104 )
+custom_styles/bg = SubResource( 103 )
+max_value = 10.0
+step = 1.0
+value = 5.0
+rounded = true
+percent_visible = false
 
 [node name="FirePosition" type="Position2D" parent="Pivot"]
 position = Vector2( -24, -14.0339 )
@@ -204,6 +207,7 @@ cast_to = Vector2( -120, 0 )
 collision_mask = 3
 
 [node name="Body" type="AnimatedSprite" parent="Pivot"]
+position = Vector2( 0, 1 )
 frames = SubResource( 80 )
 animation = "alert"
 frame = 3
@@ -215,6 +219,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/DetectionArea"]
+position = Vector2( 0, 1 )
 shape = SubResource( 82 )
 
 [connection signal="hit" from="." to="StateMachine" method="_on_damage_received"]

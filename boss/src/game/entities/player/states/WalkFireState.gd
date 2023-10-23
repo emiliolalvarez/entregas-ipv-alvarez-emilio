@@ -35,11 +35,3 @@ func update(delta: float) -> void:
 				character._play_animation("fall")
 			else:
 				character._play_animation("jump")
-
-func handle_event(event: String, value = null) -> void:
-	match event:
-		"hit":
-			character._handle_hit(value)
-			if character.dead:
-				emit_signal("finished", "dead")
-
