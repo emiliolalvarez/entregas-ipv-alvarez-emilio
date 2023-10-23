@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
 [ext_resource path="res://src/game/entities/player/states/AimUpState.gd" type="Script" id=3]
 [ext_resource path="res://src/game/entities/player/states/FireState.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/player/states/PlaneState.gd" type="Script" id=5]
+[ext_resource path="res://src/game/entities/player/DownState.gd" type="Script" id=6]
 [ext_resource path="res://src/game/entities/player/states/WalkFireState.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/player/varitek-sprites.png" type="Texture" id=8]
 [ext_resource path="res://src/game/entities/player/WeaponContainer.tscn" type="PackedScene" id=9]
@@ -162,6 +163,34 @@ tracks/1/keys = {
 "values": [ 30, 31, 32, 33, 34 ]
 }
 
+[sub_resource type="Animation" id=18]
+resource_name = "down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 35, 36, 37 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 18, 36 ), Vector2( 22, 24 ), Vector2( 22, 30 ) ]
+}
+
 [sub_resource type="Animation" id=7]
 resource_name = "fall"
 length = 0.3
@@ -227,7 +256,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 21, 22 ), Vector2( 22, 22 ), Vector2( 22, 22 ) ]
+"values": [ Vector2( 21, 22 ), Vector2( 22, 22 ), Vector2( 22, 23 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -480,7 +509,7 @@ jump_speed = 230
 script = ExtResource( 12 )
 character_path = NodePath("..")
 START_STATE = NodePath("Idle")
-STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("WalkFire"), NodePath("AimUp"), NodePath("AimUpWalk") ]
+STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("WalkFire"), NodePath("AimUp"), NodePath("AimUpWalk"), NodePath("Down") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
@@ -515,6 +544,10 @@ state_id = "plane"
 script = ExtResource( 3 )
 state_id = "aim_up"
 
+[node name="Down" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+state_id = "down"
+
 [node name="AimUpWalk" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
 state_id = "aim_up_walk"
@@ -525,6 +558,7 @@ anims/RESET = SubResource( 3 )
 anims/aim_up = SubResource( 14 )
 anims/aim_up_walk = SubResource( 16 )
 anims/die = SubResource( 8 )
+anims/down = SubResource( 18 )
 anims/fall = SubResource( 7 )
 anims/fire = SubResource( 12 )
 anims/idle = SubResource( 4 )
@@ -559,20 +593,19 @@ position = Vector2( -1, 28 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
-vframes = 7
-frame = 27
+vframes = 8
+frame = 17
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 16, 7 )
-rotation = -0.942478
+position = Vector2( 22, 23 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 16, 7 )
-rotation = -0.942478
+visible = false
+position = Vector2( 22, 23 )
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]
