@@ -1,6 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/game/entities/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/textures/fx/bean/beams.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 206, 112, 12, 12 )
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = SubResource( 10 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = SubResource( 11 )
+region = Rect2( 205, 109, 12, 12 )
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -28,6 +41,34 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( -1, -5 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Sprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ SubResource( 12 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 208, 166, 12, 24 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "fire_loop"
@@ -41,15 +82,55 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.35 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 13 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 202, 110, 20, 16 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "fire_start"
-length = 0.5
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Sprite:position")
 tracks/0/interp = 2
@@ -57,10 +138,46 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ), Vector2( -2, -4 ) ]
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 14 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -96,10 +213,6 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 3.5, 9.5 )
 
-[sub_resource type="StreamTexture" id=10]
-flags = 4
-load_path = "res://.import/spark-preview2.png-989d54d011ba9b8ef9aabe2e12f2bcfe.stex"
-
 [node name="PodProjectile" instance=ExtResource( 1 )]
 scale = Vector2( 0.5, 0.5 )
 VELOCITY = 150.0
@@ -124,5 +237,5 @@ shape = SubResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="Body" index="0"]
 position = Vector2( -1, -5 )
-scale = Vector2( 0.328125, 0.328125 )
-texture = SubResource( 10 )
+rotation = 1.5708
+texture = SubResource( 12 )

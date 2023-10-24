@@ -193,7 +193,7 @@ rounded = true
 percent_visible = false
 
 [node name="FirePosition" type="Position2D" parent="Pivot"]
-position = Vector2( -24, -14.0339 )
+position = Vector2( -16, -14.0339 )
 
 [node name="RayCast2D" type="RayCast2D" parent="Pivot"]
 position = Vector2( 0, 1 )
