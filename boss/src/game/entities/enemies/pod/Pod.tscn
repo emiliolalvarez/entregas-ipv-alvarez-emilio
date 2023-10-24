@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/pod/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/pod/PodStateMachine.gd" type="Script" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=6]
 [ext_resource path="res://src/game/entities/enemies/pod/WalkState.gd" type="Script" id=7]
 [ext_resource path="res://src/game/entities/enemies/pod/AlertState.gd" type="Script" id=9]
-[ext_resource path="res://src/game/entities/enemies/pod/AttackState.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=81]
 extents = Vector2( 23.4286, 33.8927 )
@@ -142,7 +141,7 @@ projectile_scene = ExtResource( 5 )
 script = ExtResource( 2 )
 character_path = NodePath("..")
 START_STATE = NodePath("Walk")
-STATES_LIST = [ NodePath("Idle"), NodePath("Die"), NodePath("Walk"), NodePath("Alert"), NodePath("Attack") ]
+STATES_LIST = [ NodePath("Idle"), NodePath("Die"), NodePath("Walk"), NodePath("Alert") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
@@ -163,10 +162,6 @@ state_id = "alert"
 [node name="Timer" type="Timer" parent="StateMachine/Alert"]
 wait_time = 2.0
 one_shot = true
-
-[node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 10 )
-state_id = "attack"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
