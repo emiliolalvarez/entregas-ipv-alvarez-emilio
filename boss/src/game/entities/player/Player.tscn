@@ -364,7 +364,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 20, 8 ), Vector2( 21, 22 ), Vector2( 24, -4 ), Vector2( 22, -4 ) ]
+"values": [ Vector2( 20, 8 ), Vector2( 23, -4 ), Vector2( 24, -4 ), Vector2( 22, -4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -914,7 +914,7 @@ vframes = 8
 frame = 17
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 24, -4 )
+position = Vector2( 22, -4 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -922,7 +922,7 @@ remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 24, -4 )
+position = Vector2( 22, -4 )
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]

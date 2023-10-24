@@ -161,7 +161,7 @@ script = ExtResource( 9 )
 state_id = "alert"
 
 [node name="Timer" type="Timer" parent="StateMachine/Alert"]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
 
 [node name="Attack" type="Node" parent="StateMachine"]

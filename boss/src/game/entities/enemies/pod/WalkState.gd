@@ -19,9 +19,6 @@ func update(delta:float) -> void:
 	
 	if character.target && abs(character.target.global_position.x - character.global_position.x) <= attack_distance_threshold:
 		emit_signal("finished", "alert")
-	#if character._can_see_target():
-#		print("I see you!")
-	#	emit_signal("finished", "alert")
 	
 	if character.navigation_agent != null:
 		var direction:Vector2 = character.global_position.direction_to(
@@ -30,4 +27,4 @@ func update(delta:float) -> void:
 		var desired_velocity = direction * character.H_SPEED_LIMIT
 		var steering = (desired_velocity - character.velocity) * delta * character.ACCELERATION
 		character.velocity += steering 
-		character._apply_movement()
+	character._apply_movement()

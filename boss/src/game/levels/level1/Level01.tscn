@@ -201,9 +201,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 1176, 320, 1176, 248, 1304, 248, 1304, 320 ) ]
 
 [sub_resource type="NavigationPolygon" id=7]
-vertices = PoolVector2Array( 288, 560, 232, 560, 232, 480, 264, 483, 288, 524, 288, 484 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 4, 3, 5 ) ]
-outlines = [ PoolVector2Array( 232, 480, 264, 483, 288, 484, 288, 524, 288, 560, 232, 560 ) ]
+vertices = PoolVector2Array( 232, 560, 232, 480, 264, 483, 584, 560, 288, 484, 584, 480 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4 ), PoolIntArray( 3, 4, 5 ) ]
+outlines = [ PoolVector2Array( 232, 480, 264, 483, 288, 484, 584, 480, 584, 560, 232, 560 ) ]
 
 [sub_resource type="NavigationPolygon" id=26]
 vertices = PoolVector2Array( 1760, 472, 1760, 416, 2289, 410, 2289, 474 )
@@ -3932,7 +3932,7 @@ position = Vector2( -375, 154 )
 navpoly = SubResource( 8 )
 
 [node name="Platform2Navigation" type="NavigationPolygonInstance" parent="Environment/Ground"]
-position = Vector2( 129, -134 )
+position = Vector2( 49, -86 )
 navpoly = SubResource( 7 )
 
 [node name="PodPowerPlantNavigation" type="NavigationPolygonInstance" parent="Environment/Ground"]
@@ -4013,7 +4013,7 @@ extents = Vector2( 250, 61 )
 pathfinding_path = NodePath("../AstarTilemap")
 
 [node name="Pod" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 208, 651 )
+position = Vector2( 272, 707 )
 
 [node name="Pod2" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
 position = Vector2( 672, 707 )
