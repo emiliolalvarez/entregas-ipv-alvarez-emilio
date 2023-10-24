@@ -1,5 +1,6 @@
 extends AbstractState
 
+onready var collision_shape = $"../../CollisionShape2D"
 var original_h_speed: float
 
 
@@ -12,6 +13,7 @@ func enter() -> void:
 	do_move_up()
 	
 func exit() -> void:
+	collision_shape.scale.y = 1
 	character._set_robot_mode()
 	character.H_SPEED_LIMIT = original_h_speed
 	
