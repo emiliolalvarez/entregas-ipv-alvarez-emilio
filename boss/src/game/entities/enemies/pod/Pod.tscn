@@ -114,7 +114,7 @@ animations = [ {
 "frames": [ SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 102 ) ],
 "loop": false,
 "name": "die",
-"speed": 5.0
+"speed": 24.0
 }, {
 "frames": [ SubResource( 95 ) ],
 "loop": true,
@@ -124,7 +124,7 @@ animations = [ {
 "frames": [ SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=82]
