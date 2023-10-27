@@ -47,7 +47,7 @@ func _fire() -> void:
 	
 
 func _look_at_target() -> void:
-	body_anim.flip_h = raycast.cast_to.x < 0
+	body_anim.flip_h = raycast.cast_to.x > 0
 
 func _can_see_target() -> bool:
 	if target == null:
