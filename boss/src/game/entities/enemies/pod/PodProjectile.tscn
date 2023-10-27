@@ -237,5 +237,4 @@ shape = SubResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="Body" index="0"]
 position = Vector2( -1, -5 )
-rotation = 1.5708
 texture = SubResource( 12 )
