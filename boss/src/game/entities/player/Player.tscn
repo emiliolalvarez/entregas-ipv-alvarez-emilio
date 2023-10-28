@@ -301,7 +301,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 21, 24 ), Vector2( 21, 23 ) ]
+"values": [ Vector2( 21, 24 ), Vector2( 24.3333, -5.33333 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -881,7 +881,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( -4, 3 )
 scale = Vector2( 1.2, 1 )
 shape = SubResource( 17 )
 
@@ -902,7 +902,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( 0, 3 )
+position = Vector2( -4, 3 )
 scale = Vector2( 1.2, 1 )
 remote_path = NodePath("../../CollisionShape2D")
 
@@ -911,18 +911,19 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 8
-frame = 17
+frame = 13
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 22, -4 )
+position = Vector2( 24.3333, -5.33333 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
+position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 22, -4 )
+position = Vector2( 26.6667, -5 )
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]
