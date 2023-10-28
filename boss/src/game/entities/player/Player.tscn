@@ -886,7 +886,7 @@ scale = Vector2( 1.2, 1 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
-position = Vector2( -6, 56 )
+position = Vector2( -2.66667, 24.3333 )
 
 [node name="RayCast2D" type="RayCast2D" parent="FloorRaycasts"]
 position = Vector2( -4, 0 )
