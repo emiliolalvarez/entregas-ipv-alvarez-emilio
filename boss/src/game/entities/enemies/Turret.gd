@@ -6,12 +6,16 @@ signal hit(amount)
 onready var fire_position: Node2D = $FirePosition
 onready var raycast: RayCast2D = $RayCast2D
 onready var body_anim: AnimatedSprite = $Body
-
+onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
+onready var hud:Node2D = $Pivot/HUD
+onready var pivot:Node2D = $Pivot
 export (float) var pathfinding_step_threshold:float = 5.0
 
 export (Vector2) var wander_radius: Vector2 = Vector2(10.0, 10.0)
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
+export (float) var max_life:int = 20
+
 export (PackedScene) var projectile_scene: PackedScene
 
 export (NodePath) var pathfinding_path: NodePath
@@ -19,6 +23,7 @@ onready var pathfinding: PathfindAstar = get_node_or_null(pathfinding_path)
 
 var target: Node2D
 var projectile_container: Node
+var life:int = 0
 
 var velocity: Vector2 = Vector2.ZERO
 
@@ -26,6 +31,10 @@ var velocity: Vector2 = Vector2.ZERO
 ## Flag de ayuda para saber identificar el estado de actividad
 var dead: bool = false
 
+func _ready():
+	life = max_life
+	life_progress_bar.max_value = max_life
+	life_progress_bar.value = life
 
 func initialize(container, turret_pos, projectile_container) -> void:
 	container.add_child(self)

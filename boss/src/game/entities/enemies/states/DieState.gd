@@ -11,6 +11,7 @@ func enter() -> void:
 	else:
 		character._play_animation("die")
 	
+	
 func _on_animation_finished(anim_name: String) ->  void:
-	if anim_name in ["die_alert", "die"]:
-		character._remove()
+	print("removing soldier")
+	character._remove()
