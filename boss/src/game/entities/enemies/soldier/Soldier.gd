@@ -71,13 +71,8 @@ func _apply_movement() -> void:
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-## Esta función ya no llama directamente a remove, sino que inhabilita las
-## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
-## dependiendo de si el enemigo esta o no alerta
 func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
-	print("I'm turret and imma die")
-
 
 func _remove() -> void:
 	get_parent().remove_child(self)

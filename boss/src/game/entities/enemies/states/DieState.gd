@@ -1,6 +1,8 @@
 extends AbstractEnemyState
+onready var hud = $"../../Pivot/HUD"
 
 func enter() -> void:
+	hud.hide()
 	character._play_animation("die")
 	character.dead = true
 	character.collision_layer = 0

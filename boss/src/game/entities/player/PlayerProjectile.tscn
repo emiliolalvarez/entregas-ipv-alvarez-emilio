@@ -25,6 +25,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 39, 172, 15, 25 )
 
@@ -83,10 +84,12 @@ tracks/3/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 36, 115, 18, 20 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 38, 143, 15, 19 )
 
@@ -132,9 +135,11 @@ tracks/2/keys = {
 }
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 2 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = SubResource( 8 )
 
 [sub_resource type="Animation" id=5]
@@ -225,6 +230,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 show_behind_parent = true
-position = Vector2( -4, 1.42108e-14 )
 rotation = 1.5708
 scale = Vector2( 0.408829, 0.362919 )
+texture = SubResource( 9 )
