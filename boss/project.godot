@@ -30,9 +30,9 @@ _global_script_classes=[ {
 "path": "res://src/game/entities/enemies/pod/Pod.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "EnemyTurret",
+"class": "EnemySoldier",
 "language": "GDScript",
-"path": "res://src/game/entities/enemies/Turret.gd"
+"path": "res://src/game/entities/enemies/soldier/Soldier.gd"
 }, {
 "base": "Node",
 "class": "GameLevel",
@@ -59,7 +59,7 @@ _global_script_class_icons={
 "AbstractState": "",
 "AbstractStateMachine": "",
 "EnemyPod": "",
-"EnemyTurret": "",
+"EnemySoldier": "",
 "GameLevel": "",
 "PathfindAstar": "",
 "Player": "",

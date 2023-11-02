@@ -1,106 +1,106 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=1]
-[ext_resource path="res://src/game/entities/enemies/states/DieState.gd" type="Script" id=2]
-[ext_resource path="res://src/game/entities/enemies/TurretStateMachine.gd" type="Script" id=3]
-[ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=4]
-[ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=5]
-[ext_resource path="res://src/game/entities/enemies/Turret.gd" type="Script" id=13]
-[ext_resource path="res://src/game/entities/enemies/states/WalkState.gd" type="Script" id=14]
-[ext_resource path="res://src/game/entities/enemies/TurretProjectile.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/game/entities/enemies/states/IdleState.gd" type="Script" id=16]
-[ext_resource path="res://src/game/entities/enemies/states/AlertState.gd" type="Script" id=17]
+[ext_resource path="res://src/game/entities/enemies/states/AlertState.gd" type="Script" id=1]
+[ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=2]
+[ext_resource path="res://src/game/entities/enemies/states/DieState.gd" type="Script" id=3]
+[ext_resource path="res://src/game/entities/enemies/states/IdleState.gd" type="Script" id=4]
+[ext_resource path="res://src/game/entities/enemies/states/WalkState.gd" type="Script" id=5]
+[ext_resource path="res://src/game/entities/enemies/soldier/SoldierStateMachine.gd" type="Script" id=6]
+[ext_resource path="res://src/game/entities/enemies/soldier/Soldier.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=8]
+[ext_resource path="res://src/game/entities/enemies/soldier/SoldierProjectile.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=10]
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 128, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 192, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 256, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 128, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 192, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 256, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 320, 64, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 128, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
+atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=7]
@@ -168,39 +168,39 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
-[node name="Turret" type="KinematicBody2D"]
+[node name="Soldier" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 5
-script = ExtResource( 13 )
-max_life = 5.0
-projectile_scene = ExtResource( 15 )
+script = ExtResource( 7 )
+max_life = 10.0
+projectile_scene = ExtResource( 9 )
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 character_path = NodePath("..")
 START_STATE = NodePath("Idle")
 STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Alert"), NodePath("Die") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 16 )
+script = ExtResource( 4 )
 state_id = "idle"
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/Idle"]
 one_shot = true
 
 [node name="Walk" type="Node" parent="StateMachine"]
-script = ExtResource( 14 )
+script = ExtResource( 5 )
 state_id = "walk"
 wander_radius = Vector2( 50, 50 )
 speed = 5.0
 max_speed = 100.0
 
 [node name="Alert" type="Node" parent="StateMachine"]
-script = ExtResource( 17 )
+script = ExtResource( 1 )
 state_id = "alert"
 
 [node name="Die" type="Node" parent="StateMachine"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 state_id = "die"
 
 [node name="FirePosition" type="Position2D" parent="."]
@@ -211,6 +211,7 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 7 )
 animation = "walk_alert"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -226,13 +227,13 @@ collision_mask = 3
 position = Vector2( 0, -12 )
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 
 [node name="green_circle" type="Sprite" parent="DetectionArea"]
 visible = false
 modulate = Color( 1, 1, 1, 0.301961 )
 scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 5 )
+texture = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 visible = false

@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
 [ext_resource path="res://src/game/levels/GameLevel.gd" type="Script" id=3]
 [ext_resource path="res://src/Camera.gd" type="Script" id=4]
-[ext_resource path="res://src/game/entities/enemies/TurretsSpawner.gd" type="Script" id=5]
+[ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/textures-16.png" type="Texture" id=6]
-[ext_resource path="res://src/game/entities/enemies/Turret.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/game/entities/enemies/soldier/Soldier.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/game/environment/Floor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/game/environment/DefaultBackground.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/game/environment/Goal.tscn" type="PackedScene" id=10]
@@ -4858,10 +4858,12 @@ position = Vector2( 152, 315 )
 cell_size = Vector2( 16, 16 )
 tile_data = PoolIntArray( 983080, 0, 0, 983081, 0, 0, 983082, 0, 0, 983083, 0, 0, 983084, 0, 0, 983085, 0, 0, 983086, 0, 0, 983087, 0, 0, 983088, 0, 0, 983089, 0, 0, 983090, 0, 0, 983091, 0, 0, 983092, 0, 0, 983093, 0, 0, 983094, 0, 0, 983095, 0, 0, 983096, 0, 0, 983097, 0, 0, 983098, 0, 0, 983099, 0, 0, 983100, 0, 0, 983101, 0, 0, 1048616, 0, 0, 1048617, 0, 0, 1048618, 0, 0, 1048619, 0, 0, 1048620, 0, 0, 1048621, 0, 0, 1048622, 0, 0, 1048623, 0, 0, 1048624, 0, 0, 1048625, 0, 0, 1048626, 0, 0, 1048627, 0, 0, 1048628, 0, 0, 1048629, 0, 0, 1048630, 0, 0, 1048631, 0, 0, 1048632, 0, 0, 1048633, 0, 0, 1048634, 0, 0, 1048635, 0, 0, 1048636, 0, 0, 1048637, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114155, 0, 0, 1114156, 0, 0, 1114157, 0, 0, 1114158, 0, 0, 1114159, 0, 0, 1114160, 0, 0, 1114161, 0, 0, 1114162, 0, 0, 1114163, 0, 0, 1114164, 0, 0, 1114165, 0, 0, 1114166, 0, 0, 1114167, 0, 0, 1114168, 0, 0, 1114169, 0, 0, 1114170, 0, 0, 1114171, 0, 0, 1114172, 0, 0, 1114173, 0, 0, 1179688, 0, 0, 1179689, 0, 0, 1179690, 0, 0, 1179691, 0, 0, 1179692, 0, 0, 1179693, 0, 0, 1179694, 0, 0, 1179695, 0, 0, 1179696, 0, 0, 1179697, 0, 0, 1179698, 0, 0, 1179699, 0, 0, 1179700, 0, 0, 1179701, 0, 0, 1179702, 0, 0, 1179703, 0, 0, 1179704, 0, 0, 1179705, 0, 0, 1179706, 0, 0, 1179707, 0, 0, 1179708, 0, 0, 1179709, 0, 0, 1245225, 0, 0, 1245226, 0, 0, 1245227, 0, 0, 1245228, 0, 0, 1245229, 0, 0, 1245230, 0, 0, 1245231, 0, 0, 1245232, 0, 0, 1245233, 0, 0, 1245234, 0, 0, 1245235, 0, 0, 1245236, 0, 0, 1245237, 0, 0, 1245238, 0, 0, 1245239, 0, 0, 1245240, 0, 0, 1245241, 0, 0, 1245242, 0, 0, 1245243, 0, 0, 1245244, 0, 0, 1245245, 0, 0 )
 
-[node name="Turret" parent="Environment/Entities/Enemies" instance=ExtResource( 7 )]
+[node name="Soldier" parent="Environment/Entities/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 3392, 611 )
+max_life = 20.0
+projectile_scene = null
 
-[node name="TurretsSpawner" type="Position2D" parent="Environment/Entities/Enemies"]
+[node name="SoldierSpawner" type="Position2D" parent="Environment/Entities/Enemies"]
 position = Vector2( 824, 571 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )
@@ -4869,7 +4871,7 @@ amount = 3
 extents = Vector2( 300, 50 )
 pathfinding_path = NodePath("../AstarTilemap")
 
-[node name="TurretsSpawner2" type="Position2D" parent="Environment/Entities/Enemies"]
+[node name="SoldierSpawner2" type="Position2D" parent="Environment/Entities/Enemies"]
 position = Vector2( 1400, 539 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )
@@ -4877,7 +4879,7 @@ amount = 6
 extents = Vector2( 250, 61 )
 pathfinding_path = NodePath("../AstarTilemap")
 
-[node name="TurretsSpawner3" type="Position2D" parent="Environment/Entities/Enemies"]
+[node name="SoldierSpawner3" type="Position2D" parent="Environment/Entities/Enemies"]
 position = Vector2( 2592, 523 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )

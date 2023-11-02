@@ -1,5 +1,6 @@
 extends KinematicBody2D
-class_name EnemyTurret
+
+class_name EnemySoldier
 
 signal hit(amount)
 
