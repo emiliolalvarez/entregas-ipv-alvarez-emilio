@@ -26,8 +26,8 @@ margin_top = 4.0
 margin_right = 660.0
 margin_bottom = 186.0
 rect_scale = Vector2( 0.1, 0.1 )
-max_value = 30.0
-value = 30.0
+max_value = 20.0
+value = 20.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
 texture_progress_offset = Vector2( -13, -32 )
@@ -44,7 +44,16 @@ value = 30.0
 texture_progress = SubResource( 1 )
 texture_progress_offset = Vector2( 18, 27 )
 
-[node name="circle" type="Sprite" parent="Control"]
+[node name="Circle" type="Sprite" parent="Control"]
 position = Vector2( 36, 13 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 4 )
+
+[node name="HealthPercentage" type="Label" parent="Control/Circle"]
+margin_left = -26.0
+margin_top = -6.0
+margin_right = 10.0
+margin_bottom = 8.0
+rect_scale = Vector2( 1.5, 1.5 )
+text = "100%"
+align = 1
