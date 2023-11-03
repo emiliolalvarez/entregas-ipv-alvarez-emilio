@@ -136,6 +136,7 @@ func notify_hit(amount: int = 1) -> void:
 func _handle_hit(amount: int = 1) -> void:
 	life = max(0, life - amount)
 	dead = true if life == 0 else false
+	print(life)
 	emit_signal("hp_changed", life, MAX_LIFE)
 
 

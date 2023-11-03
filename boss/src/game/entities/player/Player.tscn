@@ -923,7 +923,7 @@ remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 26.6667, -5 )
+position = Vector2( 26.6666, -5 )
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]
