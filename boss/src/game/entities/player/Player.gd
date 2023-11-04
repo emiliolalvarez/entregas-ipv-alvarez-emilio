@@ -21,10 +21,13 @@ const MODE_ROBOT = 1
 
 #onready var weapon: Node = $"%Weapon"
 onready var weapon: Node =$WeaponContainer.get_node("%Weapon")
+onready var missile: Missile =$MissileContainer.get_node("%Weapon")
+
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var body_pivot: Node2D = $BodyPivot
 onready var weapondy_pivot: Node2D = $WeaponPivot
 onready var weapon_container: Node2D = $WeaponContainer
+onready var missile_container: Node2D = $MissileContainer
 onready var floor_raycasts: Array = $FloorRaycasts.get_children()
 
 ## Estas variables de exportación podríamos abstraerlas a cada
@@ -61,6 +64,7 @@ func initialize(projectile_container: Node = get_parent()) -> void:
 	emit_signal("hp_changed", life, MAX_LIFE)
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
+	missile.projectile_container =  projectile_container
 
 
 ## Se extrae el comportamiento de manejo del disparo del arma a
@@ -68,11 +72,9 @@ func initialize(projectile_container: Node = get_parent()) -> void:
 func _handle_weapon_actions() -> void:
 	weapon.process_input()
 	if Input.is_action_just_pressed("fire_weapon"):
-		if projectile_container == null:
-			projectile_container = get_parent()
-		if weapon.projectile_container == null:
-			weapon.projectile_container = projectile_container
 		weapon.fire()
+	if Input.is_action_just_pressed("mana"):
+		missile.fire()
 		
 
 ## Se extrae el comportamiento del manejo del movimiento horizontal

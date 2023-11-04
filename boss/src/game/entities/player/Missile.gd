@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Missile
+
 onready var weapon_tip: Node2D = $WeaponTip
 onready var weapon_tip_source: Node2D = $WeaponTipSource
 
@@ -17,8 +19,6 @@ func process_input() -> void:
 
 func fire() -> void:
 	var direction: Vector2 = global_position.direction_to(weapon_tip.global_position)
-	#if global_scale.y < 0:
-	#	direction *= -1
 	
 	projectile_scene.instance().initialize(
 		projectile_container,

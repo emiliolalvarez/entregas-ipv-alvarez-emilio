@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/game/entities/player/states/WalkFireState.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/player/varitek-sprites.png" type="Texture" id=8]
 [ext_resource path="res://src/game/entities/player/WeaponContainer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/entities/player/MissileContainer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/game/entities/player/MissileState.gd" type="Script" id=11]
 [ext_resource path="res://src/game/entities/player/PlayerStateMachine.gd" type="Script" id=12]
 [ext_resource path="res://src/game/entities/player/states/WalkState.gd" type="Script" id=13]
 [ext_resource path="res://src/game/entities/player/states/IdleState.gd" type="Script" id=14]
@@ -213,7 +215,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=18]
 resource_name = "down"
-length = 0.4
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
 tracks/0/interp = 1
@@ -547,6 +549,48 @@ tracks/4/keys = {
 "values": [ 29.0, -22.3 ]
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "missile"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/CollisionShapeTransform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.2, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("MissileContainer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_weapon_fire"
+} ]
+}
+
 [sub_resource type="Animation" id=11]
 resource_name = "plane"
 length = 0.5
@@ -821,7 +865,7 @@ gravity = 8
 script = ExtResource( 12 )
 character_path = NodePath("..")
 START_STATE = NodePath("Idle")
-STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("WalkFire"), NodePath("AimUp"), NodePath("AimUpWalk"), NodePath("Down") ]
+STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("WalkFire"), NodePath("AimUp"), NodePath("AimUpWalk"), NodePath("Down"), NodePath("Missile") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
@@ -843,6 +887,10 @@ jumps_limit = 0
 [node name="Fire" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
 state_id = "fire"
+
+[node name="Missile" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+state_id = "missile"
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
@@ -875,13 +923,14 @@ anims/fall = SubResource( 7 )
 anims/fire = SubResource( 12 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
+anims/missile = SubResource( 19 )
 anims/plane = SubResource( 11 )
 anims/robot = SubResource( 13 )
 anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4, 3 )
+position = Vector2( 0, 3 )
 scale = Vector2( 1.2, 1 )
 shape = SubResource( 17 )
 
@@ -902,7 +951,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -4, 3 )
+position = Vector2( 0, 3 )
 scale = Vector2( 1.2, 1 )
 remote_path = NodePath("../../CollisionShape2D")
 
@@ -911,10 +960,11 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 8
-frame = 13
+frame = 15
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 24.3333, -5.33333 )
+position = Vector2( 20, 8 )
+rotation = 0.523599
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -922,8 +972,10 @@ position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 26.6666, -5 )
+position = Vector2( 21.8541, 9.45534 )
+rotation = 0.523599
+
+[node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]

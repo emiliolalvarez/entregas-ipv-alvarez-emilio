@@ -4,6 +4,8 @@
 ## manera independiente con su propia implementación
 extends Node2D
 
+class_name Projectile
+
 onready var lifetime_timer: Timer = $LifetimeTimer
 onready var hitbox: Area2D = $Hitbox
 onready var projectile_animations: AnimationPlayer = $ProjectileAnimations
@@ -15,7 +17,6 @@ var direction: Vector2
 
 func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2 ) -> void:
 	container.add_child(self)
-	#self.direction = direction
 	self.direction = target_direction
 	global_position = spawn_position
 	rotation =  target_direction.angle()
@@ -51,6 +52,7 @@ func remove() -> void:
 	## Acá, como hicimos con Turret y Player, delegamos la "muerte"
 	## a una animación de golpe.
 	projectile_animations.play("hit")
+	_remove()
 
 
 ## Esta función se llamaría desde "hit" al terminar la animación
@@ -63,4 +65,3 @@ func _on_Hitbox_body_entered(body: Node) -> void:
 	if body.has_method("notify_hit"):
 		body.notify_hit()
 	remove()
-
