@@ -860,6 +860,8 @@ script = ExtResource( 1 )
 ACCELERATION = 15.0
 jump_speed = 200
 gravity = 8
+life = 30
+mana = 30
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 12 )
@@ -930,8 +932,6 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 3 )
-scale = Vector2( 1.2, 1 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -951,8 +951,6 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( 0, 3 )
-scale = Vector2( 1.2, 1 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -960,11 +958,9 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 8
-frame = 15
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 20, 8 )
-rotation = 0.523599
+position = Vector2( 18, 34 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -972,11 +968,11 @@ position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 21.8541, 9.45534 )
-rotation = 0.523599
+position = Vector2( 20.3333, 34.3333 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]
+[connection signal="mana" from="." to="StateMachine" method="notify_mana"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]

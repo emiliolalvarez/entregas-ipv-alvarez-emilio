@@ -14,16 +14,16 @@ func handle_input(event: InputEvent) -> void:
 		emit_signal("finished", "jump")
 	if event.is_action_pressed("fire_weapon") && character.is_on_floor():
 		emit_signal("finished", "fire")
-	if event.is_action_pressed("mana") && character.is_on_floor():
-		emit_signal("finished", "missile")
 	if event.is_action_pressed("change_mode"):
-		character._set_plane_mode()
 		emit_signal("finished", "plane")
 
 # En esta función vamos a manejar las acciones apropiadas para este estado
 func update(delta: float) -> void:
+	if (character.force_plane):
+		emit_signal("finished", "plane")
 	# Vamos a permitir detectar inputs de movimiento
 	character._handle_move_input()
+	character._handle_weapon_actions()
 	# Para chequear si se realiza un movimiento
 	if character.move_direction != 0:
 		# Y cambiamos el estado a walk

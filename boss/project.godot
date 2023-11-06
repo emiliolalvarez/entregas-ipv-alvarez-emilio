@@ -68,6 +68,11 @@ _global_script_classes=[ {
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://src/game/entities/Projectile.gd"
+}, {
+"base": "AbstractStateMachine",
+"class": "ShipStateMachine",
+"language": "GDScript",
+"path": "res://src/game/levels/level1/boss/ShipStateMachine.gd"
 } ]
 _global_script_class_icons={
 "AbstractEnemyState": "",
@@ -81,7 +86,8 @@ _global_script_class_icons={
 "Player": "",
 "PlayerMissileProjectile": "",
 "PodStateMachine": "",
-"Projectile": ""
+"Projectile": "",
+"ShipStateMachine": ""
 }
 
 [application]

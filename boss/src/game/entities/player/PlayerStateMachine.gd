@@ -13,8 +13,10 @@ extends AbstractStateMachine
 func notify_hit(amount: int) -> void:
 	current_state.handle_event("hit", amount)
 
-
 ## Esta función no se utiliza aun, ya que aun no contamos con
 ## una pool de HP variable.
 func notify_healed(amount: int) -> void:
 	current_state.handle_event("healed", amount)
+
+func notify_mana(amount) -> void:
+	current_state.handle_event("mana", amount)

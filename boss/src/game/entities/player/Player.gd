@@ -8,8 +8,10 @@ class_name Player
 ## por ejemplo, con el entorno del nivel.
 signal hit(amount)
 signal healed(amount)
+signal mana(amount)
 signal hp_changed(current_hp, max_hp)
 signal dead()
+signal mana_changed(amount)
 
 const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION: Vector2 = Vector2.DOWN
@@ -40,9 +42,12 @@ export (int) var jump_speed: int
 export (float) var FRICTION_WEIGHT: float = 0.1
 export (int) var gravity: int = 10
 export (int) var life: int
+export (int) var mana: int
 export (int) var MAX_LIFE: int = 30
+export (int) var MAX_MANA: int = 30
 
 var projectile_container: Node
+var force_plane = false
 
 var velocity: Vector2 = Vector2.ZERO
 var snap_vector: Vector2 = SNAP_DIRECTION * SNAP_LENGTH
@@ -61,7 +66,9 @@ func _ready() -> void:
 
 func initialize(projectile_container: Node = get_parent()) -> void:
 	life = MAX_LIFE
+	mana = MAX_MANA
 	emit_signal("hp_changed", life, MAX_LIFE)
+	emit_signal("mana_changed", mana, MAX_MANA)
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
 	missile.projectile_container =  projectile_container
@@ -75,6 +82,7 @@ func _handle_weapon_actions() -> void:
 		weapon.fire()
 	if Input.is_action_just_pressed("mana"):
 		missile.fire()
+		emit_signal("mana", 2)
 		
 
 ## Se extrae el comportamiento del manejo del movimiento horizontal
@@ -138,9 +146,13 @@ func notify_hit(amount: int = 1) -> void:
 func _handle_hit(amount: int = 1) -> void:
 	life = max(0, life - amount)
 	dead = true if life == 0 else false
-	print(life)
 	emit_signal("hp_changed", life, MAX_LIFE)
-
+	
+	
+func _handle_mana(amount: int = 1) -> void:
+	print("_handle_mana")
+	mana = max(0, mana - amount)
+	emit_signal("mana_changed", mana, MAX_MANA)
 
 # El llamado a remove final
 func _remove() -> void:
@@ -171,3 +183,5 @@ func _is_plane_mode() -> bool:
 func _is_robot_mode() -> bool:
 	return mode == MODE_ROBOT
 	
+func force_plane_mode(force: bool) -> void:
+	force_plane = force

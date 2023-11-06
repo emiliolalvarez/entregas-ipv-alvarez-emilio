@@ -282,4 +282,4 @@ show_behind_parent = true
 position = Vector2( -8, -1.8332e-12 )
 rotation = 1.5708
 scale = Vector2( 0.408829, 0.362919 )
-texture = SubResource( 7 )
+texture = SubResource( 12 )

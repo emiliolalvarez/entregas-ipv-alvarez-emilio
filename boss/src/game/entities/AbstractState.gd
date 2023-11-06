@@ -50,3 +50,5 @@ func handle_event(event: String, value = null) -> void:
 			character._handle_hit(value)
 			if character.dead:
 				emit_signal("finished", "dead")
+		"mana":
+			character._handle_mana(value)

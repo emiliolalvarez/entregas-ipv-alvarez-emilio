@@ -22,6 +22,28 @@ func fire() -> void:
 	
 	projectile_scene.instance().initialize(
 		projectile_container,
+		weapon_tip.global_position  - Vector2(20, 0),
+		direction
+	)
+	
+	projectile_scene.instance().initialize(
+		projectile_container,
+		weapon_tip.global_position - Vector2(10, 0),
+		direction
+	)
+	
+	projectile_scene.instance().initialize(
+		projectile_container,
 		weapon_tip.global_position,
+		direction
+	)
+	projectile_scene.instance().initialize(
+		projectile_container,
+		weapon_tip.global_position + Vector2(10, 0),
+		direction
+	)
+	projectile_scene.instance().initialize(
+		projectile_container,
+		weapon_tip.global_position + Vector2(20, 0),
 		direction
 	)

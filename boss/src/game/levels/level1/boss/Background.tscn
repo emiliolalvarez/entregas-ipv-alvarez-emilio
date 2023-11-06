@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/textures/background/space-background/Stars-Big_1_2_PC.png" type="Texture" id=2]
+[ext_resource path="res://assets/textures/background/space-background/Stars Small_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/background/space-background/Nebula Blue.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/background/space-background/Stars Small_1.png" type="Texture" id=5]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.2, 1 )
+motion_offset = Vector2( 50, 0 )
+motion_mirroring = Vector2( 272, 0 )
+
+[node name="Sprite" type="Sprite" parent="Sky"]
+position = Vector2( 136, 79.6511 )
+scale = Vector2( 0.0664062, 0.040701 )
+texture = ExtResource( 4 )
+
+[node name="SmallStars" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_offset = Vector2( -112, 0 )
+motion_mirroring = Vector2( 272, 0 )
+
+[node name="Sprite" type="Sprite" parent="SmallStars"]
+position = Vector2( 136, 80 )
+scale = Vector2( 0.0664062, 0.0390625 )
+texture = ExtResource( 5 )
+
+[node name="SmallStars2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_offset = Vector2( -112, 0 )
+motion_mirroring = Vector2( 272, 0 )
+
+[node name="Sprite" type="Sprite" parent="SmallStars2"]
+position = Vector2( 132, 89.2391 )
+scale = Vector2( 0.0605469, 0.0384575 )
+texture = ExtResource( 3 )
+
+[node name="BigStarts1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 272, 0 )
+
+[node name="Sprite" type="Sprite" parent="BigStarts1"]
+position = Vector2( 136, 80.3121 )
+scale = Vector2( 0.0664062, 0.0414474 )
+texture = ExtResource( 2 )

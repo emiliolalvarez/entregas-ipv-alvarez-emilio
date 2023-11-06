@@ -5,6 +5,7 @@ var original_h_speed: float
 
 
 func enter() -> void:
+	print("enter plane mode")
 	original_h_speed = character.H_SPEED_LIMIT
 	character.H_SPEED_LIMIT += original_h_speed * 1.25
 	character.snap_vector = Vector2.ZERO
@@ -13,6 +14,7 @@ func enter() -> void:
 	do_move_up()
 	
 func exit() -> void:
+	print("exit plane mode")
 	collision_shape.scale.y = 1
 	character._set_robot_mode()
 	character.H_SPEED_LIMIT = original_h_speed
@@ -27,7 +29,7 @@ func do_move_down() -> void:
 func handle_input(event:InputEvent) -> void:
 	if event.is_action_pressed("fire_weapon") && character.is_on_floor():
 		character._handle_weapon_actions()
-	if event.is_action_pressed("change_mode"):
+	if event.is_action_pressed("change_mode") && !character.force_plane:
 		character._set_robot_mode()
 		character._play_animation("robot")
 	

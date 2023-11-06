@@ -63,10 +63,10 @@ func _set_character(_character: Node) -> void:
 
 # Pone en marcha la state machine con un primer estado asignado
 func initialize(start_state) -> void:
-	set_active(true)
 	current_state = start_state
 	current_state.enter()
-
+	set_active(true)
+	
 # Función toggle que activa o desactiva la state machine
 func set_active(active: bool) -> void:
 	_active = active
@@ -95,7 +95,9 @@ func _on_animation_finished(anim_name: String = "") -> void:
 
 # Función de cambio de estado
 func _change_state(state_name: String) -> void:
+	print("changing state to " + state_name)
 	if !_active || !state_name in states_map.keys():
+		print("invalid state")
 		return
 	# Sale del estado actual activo
 	current_state.exit()

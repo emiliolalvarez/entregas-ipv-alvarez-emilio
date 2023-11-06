@@ -4,7 +4,8 @@ class_name GameLevel
 
 
 ## Esta escena no debería cargarse de manera directa en runtime,
-## solo para testeo mediante "Reproducir Escena" (F6).
+## solo para testeo mediante "Reproducir Escena" (F6.
+## solo para testeo mediante "Reproducir Escena" (F6.
 ## En versión final, el LevelManager debería encargarse de ello.
 
 ## Este script y su clase deberían ser el mismo para todos los niveles.
