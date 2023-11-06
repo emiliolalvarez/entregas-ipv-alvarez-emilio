@@ -8,6 +8,8 @@ const directions = {
 	NONE="none"
 }
 
+const MAX_LIFE = 50
+
 export (float) var ACCELERATION: float = 25
 export (float) var H_SPEED_LIMIT: float = 50
 export (float) var FRICTION_WEIGHT: float = 0.1
@@ -15,16 +17,19 @@ export (float) var FRICTION_WEIGHT: float = 0.1
 var velocity: Vector2 = Vector2.ZERO
 var direction: String = directions.DOWN
 
+
 onready var down_ray_cast: RayCast2D = $DownRayCast
 onready var up_ray_cast: RayCast2D = $UpRayCast
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var life_progress_bar = $HUD/Control/LifeProgressBar
+onready var hud = $HUD
+export (int) var life: int = MAX_LIFE
 
 signal hit()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	life_progress_bar.max_value = MAX_LIFE
+	life_progress_bar.value = life
 
 func _handle_move() -> void:
 	var move_horizontal_direction = 1 if direction == directions.RIGHT else (-1 if direction == directions.RIGHT else 0)
