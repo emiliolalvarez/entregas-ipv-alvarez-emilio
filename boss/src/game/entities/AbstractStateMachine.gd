@@ -95,10 +95,11 @@ func _on_animation_finished(anim_name: String = "") -> void:
 
 # Función de cambio de estado
 func _change_state(state_name: String) -> void:
-	print("changing state to " + state_name)
 	if !_active || !state_name in states_map.keys():
 		print("invalid state")
 		return
+	if (current_state == states_map[state_name]):
+		return 
 	# Sale del estado actual activo
 	current_state.exit()
 	# Reemplaza el estado actual por el indicado

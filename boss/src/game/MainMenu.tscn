@@ -60,5 +60,5 @@ size_flags_vertical = 0
 text = "Menu"
 align = 1
 
-[connection signal="pressed" from="Container/Buttons/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Container/Buttons/StartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="Container/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]

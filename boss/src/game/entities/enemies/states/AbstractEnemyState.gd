@@ -9,6 +9,8 @@ func handle_event(event: String, value = null) -> void:
 			_handle_body_exited(value)
 		"damage_received":
 			_handle_damage_recieved(value)
+		"fire_start":
+			_handle_fire_start()
 
 func _handle_body_entered(body: Node) -> void:
 	if character.target == null:
@@ -25,3 +27,7 @@ func _handle_damage_recieved(amount) -> void:
 	character.life_progress_bar.value -= amount
 	if character.life == 0:
 		emit_signal("finished", "die")
+
+func _handle_fire_start() -> void:
+	print("emit fire_start")
+	emit_signal("finished", "fire_start")

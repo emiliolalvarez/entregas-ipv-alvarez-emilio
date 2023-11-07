@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/states/AlertState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=2]
@@ -8,18 +8,172 @@
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierStateMachine.gd" type="Script" id=6]
 [ext_resource path="res://src/game/entities/enemies/soldier/Soldier.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=8]
-[ext_resource path="res://src/game/entities/enemies/soldier/SoldierProjectile.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/textures/enemies/golem/Golem_AttackB_FX.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/green_circle.png" type="Texture" id=10]
+[ext_resource path="res://src/game/entities/Projectile.tscn" type="PackedScene" id=11]
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Fx:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fire_loop"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fire_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ), Vector2( -2, -4 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_remove"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Fx:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Fx:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="StreamTexture" id=9]
+flags = 4
+load_path = "res://.import/beams.png-d7314f9a6e24e29f31592b163c5bbaa7.stex"
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = SubResource( 9 )
+region = Rect2( 117.735, 60.5337, 17.2737, 30.0413 )
+
+[sub_resource type="PackedScene" id=33]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PoolIntArray(  ),
+"editable_instances": [  ],
+"names": PoolStringArray( "SoldierProjectile", "VELOCITY", "LifetimeTimer", "wait_time", "ProjectileAnimations", "anims/RESET", "anims/fire_loop", "anims/fire_start", "anims/hit", "Hitbox", "collision_mask", "CollisionShape2D", "CollisionShape2D", "scale", "shape", "Body", "Node2D", "Sprite", "Sprite", "rotation", "scale", "texture", "Fx", "Sprite", "visible", "self_modulate", "position", "scale", "texture", "hframes", "vframes" ),
+"node_count": 8,
+"node_paths": [ NodePath("."), NodePath("."), NodePath("."), NodePath("./Hitbox"), NodePath("."), NodePath("./Body"), NodePath(".") ],
+"nodes": PoolIntArray( -1, -1, 2147483647, 0, -1, 1, 1, 1, 0, 1073741824, -1, 2147483647, 262146, -1, 1, 3, 2, 0, 1073741825, -1, 2147483647, 524292, -1, 4, 5, 3, 6, 4, 7, 5, 8, 6, 0, 1073741826, -1, 2147483647, 786441, -1, 1, 10, 7, 0, 1073741827, 0, 12, 262155, -1, 2, 13, 8, 14, 9, 0, 1073741828, 0, 16, 1048591, -1, 0, 0, 1073741829, 0, 18, 262161, -1, 3, 19, 10, 20, 11, 21, 12, 0, 1073741830, 0, 23, 1310742, -1, 7, 24, 13, 25, 14, 26, 15, 27, 16, 28, 17, 29, 18, 30, 19, 0 ),
+"variants": [ ExtResource( 11 ), 150.0, 3.0, SubResource( 8 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), 3, Vector2( 0.5, 0.5 ), SubResource( 1 ), 1.5708, Vector2( 0.4, 0.4 ), SubResource( 10 ), false, Color( 1, 0.968627, 0.619608, 1 ), Vector2( -2, -5 ), Vector2( 0.75, 0.75 ), ExtResource( 9 ), 3, 2 ],
+"version": 2
+}
+
+[sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 8 )
 region = Rect2( 64, 128, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 128, 64, 64 )
 
@@ -105,12 +259,12 @@ region = Rect2( 64, 128, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 34 ), SubResource( 35 ) ],
 "loop": false,
 "name": "alert",
 "speed": 3.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 36 ), SubResource( 11 ) ],
 "loop": false,
 "name": "attack",
 "speed": 10.0
@@ -151,10 +305,10 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 9.5, 12.5 )
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=38]
 radius = 192.0
 
 [sub_resource type="StyleBoxFlat" id=31]
@@ -173,7 +327,7 @@ collision_layer = 4
 collision_mask = 5
 script = ExtResource( 7 )
 max_life = 10.0
-projectile_scene = ExtResource( 9 )
+projectile_scene = SubResource( 33 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -211,12 +365,11 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 7 )
 animation = "walk_alert"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, -12.5 )
-shape = SubResource( 1 )
+shape = SubResource( 37 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 0.0428963, -18.0659 )
@@ -237,7 +390,7 @@ texture = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 38 )
 
 [node name="Pivot" type="Node2D" parent="."]
 

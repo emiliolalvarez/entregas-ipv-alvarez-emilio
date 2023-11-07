@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/textures/enemies/ship/zentraedi-ship.png" type="Texture" id=1]
 [ext_resource path="res://src/game/levels/level1/boss/ShipStateMachine.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://src/game/levels/level1/boss/states/UpState.gd" type="Script" id=5]
 [ext_resource path="res://src/game/levels/level1/boss/states/IdleState.gd" type="Script" id=6]
 [ext_resource path="res://src/game/entities/enemies/pod/DieState.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/fx/bean/beams.png" type="Texture" id=8]
+[ext_resource path="res://src/game/levels/level1/boss/states/FireStart.gd" type="Script" id=9]
+[ext_resource path="res://src/game/levels/level1/boss/states/FireState.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.72549, 0.109804, 0.345098, 1 )
@@ -60,6 +63,64 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0.788235, 0.960784, 0.0666667, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("ShipStateMachine/Die")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "" ],
+"method": "_on_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "fire"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bean:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bean:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.670588 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.596078 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.596078 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fire_start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BeanSource:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -91,6 +152,16 @@ tracks/1/keys = {
 "values": [ Vector2( 4.76837e-07, -1.19209e-07 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, -1 ) ]
 }
 
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 37, 116, 17, 17 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 39, 171, 15, 28 )
+
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 15
@@ -100,9 +171,9 @@ script = ExtResource( 4 )
 script = ExtResource( 2 )
 character_path = NodePath("..")
 START_STATE = NodePath("Down")
-STATES_LIST = [ NodePath("Idle"), NodePath("Down"), NodePath("Up"), NodePath("Die") ]
+STATES_LIST = [ NodePath("Idle"), NodePath("Down"), NodePath("Up"), NodePath("Die"), NodePath("FireStart"), NodePath("Fire") ]
 
-[node name="Timer" type="Timer" parent="ShipStateMachine"]
+[node name="BeanStartTimer" type="Timer" parent="ShipStateMachine"]
 
 [node name="Idle" type="Node" parent="ShipStateMachine"]
 script = ExtResource( 6 )
@@ -118,6 +189,14 @@ state_id = "up"
 [node name="Die" type="Node" parent="ShipStateMachine"]
 script = ExtResource( 7 )
 state_id = "die"
+
+[node name="FireStart" type="Node" parent="ShipStateMachine"]
+script = ExtResource( 9 )
+state_id = "fire_start"
+
+[node name="Fire" type="Node" parent="ShipStateMachine"]
+script = ExtResource( 10 )
+state_id = "fire"
 
 [node name="HUD" type="Node2D" parent="."]
 position = Vector2( 0, -5.36442e-07 )
@@ -146,6 +225,7 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( 4.76837e-07, -1.19209e-07 )
 scale = Vector2( 0.105483, 0.121362 )
 polygon = PoolVector2Array( -448, -128, -304, -152, -192, -128, -152, -152, -64, -152, -16, -128, -8, -104, 16, -128, 232, -80, 488, -32, 496, 0, 440, 0, 312, -8, 288, 16, 192, 0, 216, 40, 488, 80, 488, 112, 448, 136, 32, 112, -216, 176, -304, 144, -344, 80, -424, 32, -448, 8, -488, 8, -488, -32, -488, -80, -467.375, -93.4751, -467.375, -93.4751, -458.08, -110.039 )
@@ -153,6 +233,8 @@ polygon = PoolVector2Array( -448, -128, -304, -152, -192, -128, -152, -152, -64,
 [node name="BodyAnimations" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
 anims/die = SubResource( 5 )
+anims/fire = SubResource( 9 )
+anims/fire_start = SubResource( 6 )
 anims/idle = SubResource( 2 )
 
 [node name="DownRayCast" type="RayCast2D" parent="."]
@@ -164,4 +246,23 @@ enabled = true
 cast_to = Vector2( 0, -33 )
 collide_with_areas = true
 
+[node name="BeanTipStart" type="Position2D" parent="."]
+position = Vector2( -55, -6 )
+
+[node name="BeanTipTarget" type="Position2D" parent="."]
+position = Vector2( -68, -6 )
+
+[node name="BeanSource" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -49, -5 )
+texture = SubResource( 7 )
+
+[node name="Bean" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -167.102, -6 )
+rotation = 1.5708
+scale = Vector2( 1, 11.8344 )
+texture = SubResource( 8 )
+
 [connection signal="hit" from="." to="ShipStateMachine" method="_on_damage_received"]
+[connection signal="animation_finished" from="BodyAnimations" to="ShipStateMachine" method="_on_animation_finished"]

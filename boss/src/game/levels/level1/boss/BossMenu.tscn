@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+signal restart_requested
+signal exit_requested
+
+func _on_RestartButton_pressed():
+	emit_signal(\"restart_requested\")
+	
+
+func _on_ExitButton_pressed():
+	emit_signal(\"exit_requested\")
+"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = SubResource( 1 )
+
+[node name="Container" type="Control" parent="."]
+margin_left = 64.0
+margin_top = 56.0
+margin_right = 192.0
+margin_bottom = 120.0
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+margin_left = -31.0
+margin_top = -41.0
+margin_right = 160.0
+margin_bottom = 89.0
+color = Color( 0, 0, 0, 0.807843 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+margin_top = 11.0
+margin_right = 128.0
+margin_bottom = 21.0
+
+[node name="RestartButton" type="Button" parent="Container/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 20.0
+text = "Restart"
+
+[node name="ExitButton" type="Button" parent="Container/VBoxContainer"]
+margin_top = 24.0
+margin_right = 128.0
+margin_bottom = 44.0
+text = "Exit"
+
+[node name="Title" type="Label" parent="Container"]
+margin_top = -16.0
+margin_right = 131.0
+text = "Level accomplished!"
+
+[connection signal="pressed" from="Container/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

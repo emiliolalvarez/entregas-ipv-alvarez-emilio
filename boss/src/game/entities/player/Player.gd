@@ -150,7 +150,6 @@ func _handle_hit(amount: int = 1) -> void:
 	
 	
 func _handle_mana(amount: int = 1) -> void:
-	print("_handle_mana")
 	mana = max(0, mana - amount)
 	emit_signal("mana_changed", mana, MAX_MANA)
 

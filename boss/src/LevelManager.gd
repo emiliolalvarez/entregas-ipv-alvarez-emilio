@@ -54,3 +54,9 @@ func _restart_called() -> void:
 func _next_called() -> void:
 	level = min(level + 1, levels.size() - 1)
 	_setup_level(level)
+	
+func _pause() -> void:
+	get_tree().paused = true
+
+func _resume() -> void:
+	get_tree().paused = false

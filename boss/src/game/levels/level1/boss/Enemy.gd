@@ -26,6 +26,7 @@ onready var hud = $HUD
 export (int) var life: int = MAX_LIFE
 
 signal hit()
+signal die()
 
 func _ready():
 	life_progress_bar.max_value = MAX_LIFE
@@ -57,11 +58,13 @@ func _remove() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	set_physics_process(false)
+	$CollisionPolygon2D.get_parent().remove_child($CollisionPolygon2D)
 	for n in get_children():
 		remove_child(n)
 		n.queue_free()
 	get_parent().remove_child(self)
 	queue_free()
+	emit_signal("die")
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)

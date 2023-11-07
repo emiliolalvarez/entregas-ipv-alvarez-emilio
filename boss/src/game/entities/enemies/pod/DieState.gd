@@ -1,6 +1,7 @@
 extends AbstractEnemyState
 
 func enter() -> void:
+	print("Die state")
 	character.hud.hide()
 	character._play_animation("die")
 	
