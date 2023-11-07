@@ -6,8 +6,10 @@ extends Node
 
 export (Array, PackedScene) var levels: Array
 export (String) var main_menu_path: String
+onready var animation_player = $AnimationPlayer
 
 onready var current_level_container: Node = $CurrentLevelContainer
+var current: GameLevel
 
 var level: int = 0
 
@@ -29,13 +31,17 @@ func _setup_level(id: int) -> void:
 				child.queue_free()
 		
 		# Inicializa el nivel nuevo y lo agrega al árbol
-		var level_instance: GameLevel = levels[id].instance()
-		current_level_container.add_child(level_instance)
-		level_instance.connect("return_requested", self, "_return_called")
-		level_instance.connect("restart_requested", self, "_restart_called")
-		level_instance.connect("next_level_requested", self, "_next_called")
+		current = levels[id].instance()
+		animation_player.play("fade_in")
+		
 
-
+func _add_scene() -> void:
+	current_level_container.add_child(current)
+	current.connect("return_requested", self, "_return_called")
+	current.connect("restart_requested", self, "_restart_called")
+	current.connect("next_level_requested", self, "_next_called")
+	animation_player.play("fade_out")
+	
 # Callback de regreso al MainMenu.
 func _return_called() -> void:
 	GameState.weapons_available = []
