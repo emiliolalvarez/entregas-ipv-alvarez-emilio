@@ -55,7 +55,7 @@ levels = [ ExtResource( 2 ), ExtResource( 3 ) ]
 [node name="OverLayLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="OverLayLayer"]
-self_modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 264.0
 margin_bottom = 168.0
 color = Color( 0, 0, 0, 1 )

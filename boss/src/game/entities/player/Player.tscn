@@ -932,6 +932,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -971,6 +972,8 @@ remote_path = NodePath("../../../WeaponContainer")
 position = Vector2( 20.3333, 34.3333 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
 [connection signal="hit" from="." to="StateMachine" method="notify_hit"]

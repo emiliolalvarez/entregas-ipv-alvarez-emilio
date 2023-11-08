@@ -136,7 +136,9 @@ func is_on_floor() -> bool:
 ## los casos de estados en los cuales no se manejan hits
 func notify_hit(amount: int = 1) -> void:
 	emit_signal("hit", amount)
-
+	if !$Tween.is_processing():
+		$Tween.interpolate_property($BodyPivot/Body, "modulate:", Color(246, 126, 110, 0), Color(1, 1, 1, 1), 0.4)
+		$Tween.start()
 
 ## Y acá se maneja el hit final. Como aun no tenemos una "cantidad" de HP,
 ## sino una flag, el hit nos mata instantaneamente y tiramos una notificación.

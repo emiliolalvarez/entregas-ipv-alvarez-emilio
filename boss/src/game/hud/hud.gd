@@ -12,3 +12,4 @@ func _on_hp_changed(current_hp, max_hp):
 func _on_mana_changed(current_mana, max_mana):
 	mana_progress.max_value = max_mana
 	mana_progress.value = current_mana
+

@@ -23,7 +23,12 @@ onready var up_ray_cast: RayCast2D = $UpRayCast
 onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var life_progress_bar = $HUD/Control/LifeProgressBar
 onready var hud = $HUD
+onready var bean_damage_timer = $BeanDamageTimer
+
 export (int) var life: int = MAX_LIFE
+export (int) var bean_hit_damage: int = 5
+
+var target: Node2D
 
 signal hit()
 signal die()
@@ -78,3 +83,21 @@ func _stop_animation(reset:bool) -> void:
 
 func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
+
+func is_attacking() -> bool:
+	return body_animations.current_animation == "fire"
+	
+func _on_body_entered(body):
+	target = body
+	bean_damage_timer.start()
+	bean_damage_timer.connect("timeout", self, "_on_damage_timer_timeout")
+	_on_damage_timer_timeout()
+
+func _on_body_exited(body):
+	target = null
+	bean_damage_timer.stop()
+
+func _on_damage_timer_timeout() -> void:
+	if is_attacking() && target != null && target.has_method("notify_hit"):
+		print("Bean attack!")
+		target.notify_hit(bean_hit_damage)
