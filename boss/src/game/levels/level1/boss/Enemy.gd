@@ -107,5 +107,4 @@ func _on_body_exited(body):
 
 func _on_damage_timer_timeout() -> void:
 	if is_attacking() && target != null && target.has_method("notify_hit"):
-		print("Bean attack!")
 		target.notify_hit(bean_hit_damage)
