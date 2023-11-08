@@ -60,8 +60,10 @@ func _remove() -> void:
 	get_parent().remove_child(self)
 	queue_free()
 
+func get_projectile_damage() -> int:
+	return 1
 
 func _on_Hitbox_body_entered(body: Node) -> void:
 	if body.has_method("notify_hit"):
-		body.notify_hit()
+		body.notify_hit(get_projectile_damage())
 	remove()

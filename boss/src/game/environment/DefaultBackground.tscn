@@ -57,7 +57,7 @@ texture = ExtResource( 3 )
 
 [node name="Buildings5" type="ParallaxLayer" parent="."]
 z_as_relative = false
-motion_scale = Vector2( 0.5, 1.4 )
+motion_scale = Vector2( 0.5, 1 )
 motion_offset = Vector2( 49, 0 )
 motion_mirroring = Vector2( 262, 0 )
 

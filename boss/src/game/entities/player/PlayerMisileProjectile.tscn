@@ -201,7 +201,7 @@ tracks/3/keys = {
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 72.0
+radius = 282.399
 
 [node name="PlayerMisileProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 11 )

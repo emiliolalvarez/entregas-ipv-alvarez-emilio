@@ -35,4 +35,6 @@ func _physics_process(delta: float) -> void:
 func _on_direction_timer_timeout():
 	#print("direction timer timeout")
 	update = true
-	
+
+func get_projectile_damage() -> int:
+	return 5
