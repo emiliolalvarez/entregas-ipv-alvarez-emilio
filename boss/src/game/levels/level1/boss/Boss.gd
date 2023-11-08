@@ -17,3 +17,5 @@ func _on_restart_requested() -> void:
 
 func _on_boss_die():
 	menu.show()
+	get_tree().paused = true
+	

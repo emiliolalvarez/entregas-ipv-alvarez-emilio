@@ -47,6 +47,8 @@ func _handle_move() -> void:
 		if (direction == directions.DOWN && !down_ray_cast.is_colliding()) || (direction == directions.UP && !up_ray_cast.is_colliding()):
 			velocity.y = clamp(velocity.y + (move_vertical_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
 	velocity = move_and_slide(velocity)
+	
+	
 
 ## Se extrae el comportamiento del manejo de la aplicación de fricción
 ## a una función para ser llamada apropiadamente desde la state machine
@@ -60,6 +62,9 @@ func _handle_vertical_deacceleration() -> void:
 
 
 func _remove() -> void:
+	body_animations.stop()
+	$BeanSource.hide()
+	$Bean.hide()
 	collision_layer = 0
 	collision_mask = 0
 	set_physics_process(false)
@@ -83,6 +88,9 @@ func _stop_animation(reset:bool) -> void:
 
 func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
+	if !$Tween.is_processing():
+		$Tween.interpolate_property($Body, "modulate:", Color(246, 126, 110, 0), Color(1, 1, 1, 1), 0.1)
+		$Tween.start()
 
 func is_attacking() -> bool:
 	return body_animations.current_animation == "fire"

@@ -276,6 +276,8 @@ shape = SubResource( 10 )
 
 [node name="BeanDamageTimer" type="Timer" parent="."]
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="hit" from="." to="ShipStateMachine" method="_on_damage_received"]
 [connection signal="animation_finished" from="BodyAnimations" to="ShipStateMachine" method="_on_animation_finished"]
 [connection signal="body_entered" from="Bean/Area2D" to="." method="_on_body_entered"]
