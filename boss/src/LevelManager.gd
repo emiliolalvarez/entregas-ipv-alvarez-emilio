@@ -44,14 +44,12 @@ func _add_scene() -> void:
 	
 # Callback de regreso al MainMenu.
 func _return_called() -> void:
-	GameState.weapons_available = []
 	get_tree().paused = false
 	get_tree().change_scene(main_menu_path)
 
 
 # Callback de reinicio del nivel.
 func _restart_called() -> void:
-	GameState.weapons_available = []
 	_setup_level(level)
 	get_tree().paused = false
 

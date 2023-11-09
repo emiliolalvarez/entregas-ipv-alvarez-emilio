@@ -45,12 +45,4 @@ func _on_animation_finished(anim_name: String) -> void:
 
 # Callback genérico para eventos manejados como strings.
 func handle_event(event: String, value = null) -> void:
-	match event:
-		"hit":
-			character._handle_hit(value)
-			if character.dead:
-				emit_signal("finished", "dead")
-		"healed":
-			character._handle_healed(value)
-		"mana":
-			character._handle_mana(value)
+	pass

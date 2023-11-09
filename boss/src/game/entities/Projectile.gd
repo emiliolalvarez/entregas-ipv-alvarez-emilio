@@ -66,4 +66,4 @@ func get_projectile_damage() -> int:
 func _on_Hitbox_body_entered(body: Node) -> void:
 	if body.has_method("notify_hit"):
 		body.notify_hit(get_projectile_damage())
-	remove()
+	projectile_animations.play("hit")

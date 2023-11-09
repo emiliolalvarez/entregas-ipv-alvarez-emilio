@@ -975,7 +975,4 @@ position = Vector2( 20.3333, 34.3333 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="healed" from="." to="StateMachine" method="notify_healed"]
-[connection signal="hit" from="." to="StateMachine" method="notify_hit"]
-[connection signal="mana" from="." to="StateMachine" method="notify_mana"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]

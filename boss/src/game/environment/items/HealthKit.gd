@@ -10,7 +10,7 @@ func _ready():
 func _on_HitBox_body_entered(body: Node) -> void:
 	if body.has_method("notify_healed"):
 		body.notify_healed(HEAL_POINTS)
-	remove()
+	player.play("hit")
 
 
 func remove() -> void:
@@ -19,4 +19,3 @@ func remove() -> void:
 	#projectile_animations.play("hit")
 	get_parent().remove_child(self)
 	queue_free()
-

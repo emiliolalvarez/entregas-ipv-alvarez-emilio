@@ -1,17 +1,9 @@
 extends KinematicBody2D
 class_name Player
 
-## Señales que sirven para comunicar el estado del Player
-## a los elementos conectados. Se puede utilizar tanto para
-## comunicar estados a la State Machine (sin incluir código
-## de la state machine directamente) como para comunicarse,
-## por ejemplo, con el entorno del nivel.
-signal hit(amount)
-signal healed(amount)
-signal mana(amount)
 signal hp_changed(current_hp, max_hp)
-signal dead()
 signal mana_changed(amount)
+signal dead()
 
 const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION: Vector2 = Vector2.DOWN
@@ -132,13 +124,16 @@ func is_on_floor() -> bool:
 
 
 func notify_healed(amount: int = 1) -> void:
-	emit_signal("healed", amount)
+	_handle_healed(amount)
+	
+func notify_mana_recover(amount: int = 1) -> void:
+	_handle_mana_recover(amount)
 
 ## Esta función ya no llama directamente a remove, sino que deriva
 ## el handleo a la state machine emitiendo una señal. Esto es para
 ## los casos de estados en los cuales no se manejan hits
 func notify_hit(amount: int = 1) -> void:
-	emit_signal("hit", amount)
+	_handle_hit(amount)
 	if !$Tween.is_processing():
 		$Tween.interpolate_property($BodyPivot/Body, "modulate:", Color(246, 126, 110, 0), Color(1, 1, 1, 1), 0.4)
 		$Tween.start()
@@ -157,6 +152,10 @@ func _handle_hit(amount: int = 1) -> void:
 func _handle_healed(amount: int = 1) -> void:
 	life = min(MAX_LIFE, life + amount)
 	emit_signal("hp_changed", life, MAX_LIFE)
+	
+func _handle_mana_recover(amount: int = 1) -> void:
+	life = min(MAX_MANA, mana + amount)
+	emit_signal("mana_changed", mana, MAX_MANA)	
 	
 	
 func _handle_mana(amount: int = 1) -> void:
