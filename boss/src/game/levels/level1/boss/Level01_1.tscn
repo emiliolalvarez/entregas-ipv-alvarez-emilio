@@ -52,6 +52,7 @@ visible = false
 
 [connection signal="die" from="Enemy" to="." method="_on_boss_die"]
 [connection signal="hp_changed" from="Player" to="HUD" method="_on_hp_changed"]
+[connection signal="mana_changed" from="Player" to="HUD" method="_on_mana_changed"]
 [connection signal="exit_requested" from="Menu" to="." method="_on_exit_requested"]
 [connection signal="restart_requested" from="Menu" to="." method="_on_restart_requested"]
 
