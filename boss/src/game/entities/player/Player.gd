@@ -158,7 +158,7 @@ func _handle_healed(amount: int = 1) -> void:
 	emit_signal("hp_changed", life, MAX_LIFE)
 	
 func _handle_mana_recover(amount: int = 1) -> void:
-	life = min(MAX_MANA, mana + amount)
+	mana = min(MAX_MANA, mana + amount)
 	emit_signal("mana_changed", mana, MAX_MANA)	
 	
 	

@@ -16,6 +16,5 @@ func _on_HitBox_body_entered(body: Node) -> void:
 func remove() -> void:
 	hitbox.collision_mask = 0
 	set_physics_process(false)
-	#projectile_animations.play("hit")
 	get_parent().remove_child(self)
 	queue_free()
