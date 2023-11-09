@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/2 Background/Night/3.png" type="Texture" id=1]
-[ext_resource path="res://assets/textures/background/abandoned_valley/6_fg.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/2 Background/Night/4.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/2 Background/Night/2.png" type="Texture" id=4]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/2 Background/Night/5.png" type="Texture" id=5]
@@ -65,11 +64,3 @@ motion_mirroring = Vector2( 262, 0 )
 position = Vector2( 135.5, 80 )
 scale = Vector2( 0.473958, 0.493827 )
 texture = ExtResource( 5 )
-
-[node name="Foreground" type="ParallaxLayer" parent="."]
-visible = false
-motion_mirroring = Vector2( 262, 0 )
-
-[node name="Sprite" type="Sprite" parent="Foreground"]
-position = Vector2( 287, 162 )
-texture = ExtResource( 2 )

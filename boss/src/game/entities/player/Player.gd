@@ -131,6 +131,9 @@ func is_on_floor() -> bool:
 	return is_colliding
 
 
+func notify_healed(amount: int = 1) -> void:
+	emit_signal("healed", amount)
+
 ## Esta función ya no llama directamente a remove, sino que deriva
 ## el handleo a la state machine emitiendo una señal. Esto es para
 ## los casos de estados en los cuales no se manejan hits
@@ -148,6 +151,11 @@ func notify_hit(amount: int = 1) -> void:
 func _handle_hit(amount: int = 1) -> void:
 	life = max(0, life - amount)
 	dead = true if life == 0 else false
+	emit_signal("hp_changed", life, MAX_LIFE)
+	
+
+func _handle_healed(amount: int = 1) -> void:
+	life = min(MAX_LIFE, life + amount)
 	emit_signal("hp_changed", life, MAX_LIFE)
 	
 	
