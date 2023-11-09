@@ -74,7 +74,7 @@ func _handle_weapon_actions() -> void:
 		weapon.fire()
 	if Input.is_action_just_pressed("mana") && mana > 0:
 		missile.fire()
-		emit_signal("mana", 2)
+		_handle_mana(2)
 		
 
 ## Se extrae el comportamiento del manejo del movimiento horizontal
@@ -128,6 +128,10 @@ func notify_healed(amount: int = 1) -> void:
 	
 func notify_mana_recover(amount: int = 1) -> void:
 	_handle_mana_recover(amount)
+	
+func notify_mana(amount: int = 1) -> void:
+	_handle_mana(amount)
+
 
 ## Esta función ya no llama directamente a remove, sino que deriva
 ## el handleo a la state machine emitiendo una señal. Esto es para

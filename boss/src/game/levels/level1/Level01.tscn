@@ -1,4 +1,4 @@
-[gd_scene load_steps=334 format=2]
+[gd_scene load_steps=335 format=2]
 
 [ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
@@ -231,6 +231,7 @@
 [ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/3 Objects/9.png" type="Texture" id=229]
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierProjectile.tscn" type="PackedScene" id=230]
 [ext_resource path="res://src/game/environment/items/HealthKit.tscn" type="PackedScene" id=231]
+[ext_resource path="res://src/game/environment/items/ManaKit.tscn" type="PackedScene" id=232]
 
 [sub_resource type="NavigationPolygon" id=8]
 vertices = PoolVector2Array( 1176, 320, 1176, 248, 1304, 248, 1304, 320 )
@@ -4954,6 +4955,15 @@ position = Vector2( 1133, 359 )
 
 [node name="HealthKit3" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 3236, 327 )
+
+[node name="ManaKit" parent="Environment/Objects" instance=ExtResource( 232 )]
+position = Vector2( 1381, 398 )
+
+[node name="ManaKit2" parent="Environment/Objects" instance=ExtResource( 232 )]
+position = Vector2( 2349, 406 )
+
+[node name="ManaKit3" parent="Environment/Objects" instance=ExtResource( 232 )]
+position = Vector2( 229, 406 )
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]
