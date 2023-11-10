@@ -41,7 +41,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 18, 34 ) ]
+"values": [ Vector2( 18, 7.33333 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -53,7 +53,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ 31.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -90,7 +90,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.1, 0, 0.1 ),
+"times": PoolRealArray( 0.0021449, 0.101881, 0.203918 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 15, 18, 19 ]
@@ -102,10 +102,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.00407522, 0.0101881, 0.112069, 0.113887, 0.226489, 0.228212 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 23, 15 ), Vector2( 16, 7 ), Vector2( 16, 7 ), Vector2( 17, -22 ) ]
+"values": [ Vector2( 20, 8.33333 ), Vector2( 20, 8.33333 ), Vector2( 23.3333, -11.6667 ), Vector2( 16, -21 ), Vector2( 16, 7 ), Vector2( 16.6667, -21.6667 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -114,10 +114,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0107277, 0.112069, 0.113887, 0.228212, 0.228527 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -22.0, -51.0, -51.0, -51.0 ]
+"values": [ 0.0, -24.2, -55.0, -51.0821, -51.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -235,7 +235,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
+"times": PoolRealArray( 0, 0.130564, 0.222571 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 20, 8 ), Vector2( 24, -4 ), Vector2( 23, 2 ) ]
@@ -271,10 +271,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
+"times": PoolRealArray( 0, 0.130564, 0.220533 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ -54.0, 0.0, 0.0 ]
+"values": [ 27.5, 0.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -300,7 +300,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0.0264889, 0.242947 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 21, 24 ), Vector2( 24.3333, -5.33333 ) ]
@@ -312,7 +312,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0.0285266, 0.242947 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0 ]
@@ -351,7 +351,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.1, 0.1, 0.3 ),
+"times": PoolRealArray( 0.00391816, 0.1, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 15, 17, 17 ]
@@ -363,7 +363,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.5 ),
+"times": PoolRealArray( 0.0264889, 0.1, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 20, 8 ), Vector2( 23, -4 ), Vector2( 24, -4 ), Vector2( 22, -4 ) ]
@@ -375,7 +375,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.5 ),
+"times": PoolRealArray( 0.0244513, 0.1, 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 30.0, 0.0, 0.0, 0.0 ]
@@ -507,10 +507,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.104075, 0.105956, 0.197648, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 20, 7 ), Vector2( 7, 34 ), Vector2( 11, 17 ), Vector2( 25, -13 ) ]
+"values": [ Vector2( 20, 7 ), Vector2( 7, 34 ), Vector2( 16.6667, 6.66667 ), Vector2( 15, 6.66667 ), Vector2( 11, 17 ), Vector2( 25, -13 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -543,10 +543,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.105956, 0.197648, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 29.0, -22.3 ]
+"values": [ 29.0, 29.0, 30.8, -22.3 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -613,10 +613,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 24, 4 ) ]
+"values": [ Vector2( 18.3333, 6.66667 ), Vector2( 24, 31 ), Vector2( 16.6667, 16.6667 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -625,10 +625,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+"values": [ 28.1, 0.0, 58.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -933,6 +933,8 @@ anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2( -1.00471, 4.99686 )
+scale = Vector2( 1.99843, 0.65055 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -952,6 +954,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
+position = Vector2( -1.00471, 4.99686 )
+scale = Vector2( 1.99843, 0.65055 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -959,9 +963,10 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 8
+frame = 8
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 18, 34 )
+position = Vector2( 24.0085, 3.99434 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -969,7 +974,7 @@ position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 20.3333, 34.3333 )
+position = Vector2( 26.3418, 4.32767 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
