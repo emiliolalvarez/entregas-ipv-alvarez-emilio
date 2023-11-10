@@ -3,7 +3,7 @@ class_name Player
 
 signal hp_changed(current_hp, max_hp)
 signal mana_changed(amount)
-signal dead()
+signal notify_die()
 
 const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION: Vector2 = Vector2.DOWN
@@ -151,6 +151,8 @@ func _handle_hit(amount: int = 1) -> void:
 	life = max(0, life - amount)
 	dead = true if life == 0 else false
 	emit_signal("hp_changed", life, MAX_LIFE)
+	if dead:
+		emit_signal("notify_die")
 	
 
 func _handle_healed(amount: int = 1) -> void:

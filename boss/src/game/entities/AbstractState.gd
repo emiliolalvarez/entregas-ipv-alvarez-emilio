@@ -45,4 +45,7 @@ func _on_animation_finished(anim_name: String) -> void:
 
 # Callback genérico para eventos manejados como strings.
 func handle_event(event: String, value = null) -> void:
-	pass
+	match event:
+		"die":
+			emit_signal("finished", "dead")
+		
