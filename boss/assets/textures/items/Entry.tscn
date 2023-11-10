@@ -44,7 +44,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
-length = 3.0
+length = 3.8
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -54,10 +54,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 1, 2, 3, 4, 5, 1, 0 ]
+"values": [ 0, 1, 2, 3, 4, 4, 5, 1, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Area2D/Collision1:position")
@@ -66,10 +66,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 1.04462 ), Vector2( 0, 1 ), Vector2( 0, 8 ), Vector2( 0, 28.1892 ), Vector2( 0, 31.3988 ), Vector2( 0, 28.9413 ), Vector2( 0, 1 ), Vector2( 0, 1.04462 ) ]
+"values": [ Vector2( 0, 1.04462 ), Vector2( 0, 1 ), Vector2( 0, 8 ), Vector2( 0, 28.1892 ), Vector2( 0, 31.3988 ), Vector2( 0, 31.3988 ), Vector2( 0, 28.9413 ), Vector2( 0, 1 ), Vector2( 0, 1.04462 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area2D/Collision2:position")
@@ -78,10 +78,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ), Vector2( 0, -30.0083 ), Vector2( 0, -2 ), Vector2( 0, -3.467 ) ]
+"values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ), Vector2( 0, -34.8209 ), Vector2( 0, -30.0083 ), Vector2( 0, -2 ), Vector2( 0, -3.467 ) ]
 }
 
 [node name="Entry" type="Node2D"]
