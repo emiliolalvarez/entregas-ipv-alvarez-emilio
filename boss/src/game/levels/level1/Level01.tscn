@@ -4883,7 +4883,7 @@ extents = Vector2( 250, 61 )
 pathfinding_path = NodePath("../AstarTilemap")
 
 [node name="SoldierSpawner3" type="Position2D" parent="Environment/Entities/Enemies"]
-position = Vector2( 2592, 523 )
+position = Vector2( 2576, 555 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )
 amount = 6

@@ -28,8 +28,11 @@ gravity = 0
 [node name="StateMachine" parent="Player" index="0"]
 START_STATE = NodePath("Plane")
 
+[node name="CollisionShape2D" parent="Player" index="2"]
+position = Vector2( -1.00471, 4.99686 )
+
 [node name="WeaponContainer" parent="Player" index="5"]
-position = Vector2( 20.3333, 34.3333 )
+position = Vector2( 26.3418, 4.32767 )
 
 [node name="Roof" parent="." instance=ExtResource( 2 )]
 
