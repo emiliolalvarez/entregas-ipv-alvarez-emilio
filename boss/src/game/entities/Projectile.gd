@@ -11,6 +11,7 @@ onready var hitbox: Area2D = $Hitbox
 onready var projectile_animations: AnimationPlayer = $ProjectileAnimations
 
 export (float) var VELOCITY: float = 800.0
+export (int) var DAMAGE: int = 1
 
 var direction: Vector2
 
@@ -57,13 +58,14 @@ func remove() -> void:
 
 ## Esta función se llamaría desde "hit" al terminar la animación
 func _remove() -> void:
+	projectile_animations.stop()
 	emit_signal("removed")
 	get_parent().remove_child(self)
 	queue_free()
 	
 
 func get_projectile_damage() -> int:
-	return 1
+	return DAMAGE
 
 func _on_Hitbox_body_entered(body: Node) -> void:
 	if body.has_method("notify_hit"):

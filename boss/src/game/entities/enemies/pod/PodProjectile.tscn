@@ -204,7 +204,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "hit"
-length = 0.1
+length = 0.3
 step = 0.001
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -213,7 +213,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.104044 ),
+"times": PoolRealArray( 0.293 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -227,7 +227,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.00459085, 0.0188085, 0.0299119, 0.0407889, 0.0543852, 0.0716072 ),
+"times": PoolRealArray( 0.005, 0.051, 0.102, 0.153, 0.203, 0.263 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), null ]
