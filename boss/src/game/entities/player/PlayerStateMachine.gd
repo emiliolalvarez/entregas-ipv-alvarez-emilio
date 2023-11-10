@@ -7,5 +7,4 @@ extends AbstractStateMachine
 
 
 func notify_die() -> void:
-	print("notify die!!!")
 	current_state.handle_event("die")
