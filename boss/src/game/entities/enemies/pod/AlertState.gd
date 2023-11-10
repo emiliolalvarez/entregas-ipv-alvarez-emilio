@@ -1,6 +1,6 @@
 extends AbstractEnemyState
 onready var timer:Timer = $Timer
-var attack_distance_threshold:int = 100
+var attack_distance_threshold:int = 20
 
 func enter() -> void:
 	character.velocity = Vector2.ZERO

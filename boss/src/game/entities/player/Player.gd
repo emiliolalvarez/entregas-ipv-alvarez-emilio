@@ -72,7 +72,7 @@ func _handle_weapon_actions() -> void:
 	weapon.process_input()
 	if Input.is_action_just_pressed("fire_weapon"):
 		weapon.fire()
-	if Input.is_action_just_pressed("mana") && mana > 0:
+	if Input.is_action_just_pressed("mana") && mana > 0 && missile.can_fire():
 		missile.fire()
 		_handle_mana(2)
 		

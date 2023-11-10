@@ -14,6 +14,8 @@ export (float) var VELOCITY: float = 800.0
 
 var direction: Vector2
 
+signal removed()
+
 
 func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2 ) -> void:
 	container.add_child(self)
@@ -48,17 +50,17 @@ func _on_lifetime_timer_timeout() -> void:
 func remove() -> void:
 	hitbox.collision_mask = 0
 	set_physics_process(false)
-	
 	## Acá, como hicimos con Turret y Player, delegamos la "muerte"
 	## a una animación de golpe.
 	projectile_animations.play("hit")
-	_remove()
-
+	
 
 ## Esta función se llamaría desde "hit" al terminar la animación
 func _remove() -> void:
+	emit_signal("removed")
 	get_parent().remove_child(self)
 	queue_free()
+	
 
 func get_projectile_damage() -> int:
 	return 1
