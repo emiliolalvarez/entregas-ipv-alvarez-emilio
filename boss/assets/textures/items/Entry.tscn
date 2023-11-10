@@ -44,8 +44,9 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
-length = 2.0
+length = 3.0
 loop = true
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -53,10 +54,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.20666, 0.41332, 0.613706, 0.807818, 1.02075, 1.19604, 1.41525, 1.62191, 1.87249 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7, 7 ]
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5, 1, 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Area2D/Collision1:position")
@@ -65,10 +66,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.050193, 0.236066, 0.420891, 0.620077, 0.819333, 1.02744, 1.20244, 1.42001, 1.62728, 1.87938 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 1.04462 ), Vector2( 0, 1 ), Vector2( 0, 8 ), Vector2( 0, 28.1892 ), Vector2( 0, 31.3988 ), Vector2( 0, 28.9413 ), Vector2( 0, 8.91164 ), Vector2( 0, 1.19824 ), Vector2( 0, 1.14219 ), Vector2( 0, 1.08563 ) ]
+"values": [ Vector2( 0, 1.04462 ), Vector2( 0, 1 ), Vector2( 0, 8 ), Vector2( 0, 28.1892 ), Vector2( 0, 31.3988 ), Vector2( 0, 28.9413 ), Vector2( 0, 1 ), Vector2( 0, 1.04462 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Area2D/Collision2:position")
@@ -77,10 +78,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.050193, 0.236066, 0.420891, 0.620077, 0.819333, 1.02744, 1.20244, 1.42001, 1.62728, 1.87938 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6, 2, 2.4, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ), Vector2( 0, -30.0083 ), Vector2( 0, -11.9666 ), Vector2( 0, -4.80814 ), Vector2( 0, -5.01412 ), Vector2( 0, -4.81516 ) ]
+"values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ), Vector2( 0, -30.0083 ), Vector2( 0, -2 ), Vector2( 0, -3.467 ) ]
 }
 
 [node name="Entry" type="Node2D"]
