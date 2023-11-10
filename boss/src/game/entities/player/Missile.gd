@@ -44,7 +44,6 @@ func fire() -> void:
 		
 	
 func _on_projectile_removed():
-	print("projetile removed")
 	projectiles_count-=1
 
 
