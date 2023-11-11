@@ -855,7 +855,7 @@ extents = Vector2( 10.8333, 20 )
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 2
-collision_mask = 3
+collision_mask = 13
 script = ExtResource( 1 )
 ACCELERATION = 15.0
 jump_speed = 200
@@ -958,7 +958,6 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 8
-frame = 33
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
 position = Vector2( 18, 7.33333 )

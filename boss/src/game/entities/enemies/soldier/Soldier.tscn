@@ -262,7 +262,7 @@ animations = [ {
 "frames": [ SubResource( 34 ), SubResource( 35 ) ],
 "loop": false,
 "name": "alert",
-"speed": 3.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 36 ), SubResource( 11 ) ],
 "loop": false,
@@ -326,6 +326,7 @@ corner_radius_bottom_left = 1
 collision_layer = 4
 collision_mask = 5
 script = ExtResource( 7 )
+max_speed = 60.0
 max_life = 10.0
 projectile_scene = SubResource( 33 )
 
@@ -353,6 +354,8 @@ max_speed = 100.0
 script = ExtResource( 1 )
 state_id = "alert"
 
+[node name="FireTimer" type="Timer" parent="StateMachine/Alert"]
+
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 state_id = "die"
@@ -365,6 +368,7 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 7 )
 animation = "walk_alert"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -232,7 +232,7 @@
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierProjectile.tscn" type="PackedScene" id=230]
 [ext_resource path="res://src/game/environment/items/HealthKit.tscn" type="PackedScene" id=231]
 [ext_resource path="res://src/game/environment/items/ManaKit.tscn" type="PackedScene" id=232]
-[ext_resource path="res://assets/textures/items/Hammer.tscn" type="PackedScene" id=233]
+[ext_resource path="res://src/game/environment/items/Hammer.tscn" type="PackedScene" id=233]
 [ext_resource path="res://assets/textures/items/Entry.tscn" type="PackedScene" id=234]
 
 [sub_resource type="NavigationPolygon" id=8]
@@ -4933,7 +4933,7 @@ position = Vector2( 672, 707 )
 position = Vector2( 2032, 699 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 137, 330 )
+position = Vector2( 212, 447 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]
@@ -5003,7 +5003,7 @@ position = Vector2( 668, 339 )
 scale = Vector2( 1.02, 0.86 )
 
 [node name="Hammer" parent="Environment/Objects" instance=ExtResource( 233 )]
-position = Vector2( 1405, 348 )
+position = Vector2( 1398, 348 )
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]

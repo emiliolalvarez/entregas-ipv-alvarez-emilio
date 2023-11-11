@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Hammer.png" type="Texture" id=1]
+[ext_resource path="res://src/game/environment/items/Hammer.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.001, 0.00725137 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -32 ), Vector2( 0, -10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 2.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 7, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0260356, 0.0347141, 0.0390534, 0.330375, 0.334123, 0.338463, 0.64655, 0.647732, 0.65089, 0.94162, 0.943393, 0.944097, 0.950299, 1.24103, 1.24773, 1.39724, 1.4, 1.40158, 1.53176, 1.5361, 1.53905, 1.69231, 1.7, 1.70099, 1.84419, 1.84773, 1.84853, 2.12624, 2.13905, 2.13926, 2.26076, 2.26509, 2.44735, 2.45207, 2.7294, 2.73374, 2.73808, 2.73905 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -34 ), Vector2( 64, -33 ), Vector2( 0, -25 ), Vector2( -1, -13 ), Vector2( -0.53653, -4.29224 ), Vector2( 0, -5 ), Vector2( 0, 6 ), Vector2( 0, -3 ), Vector2( 0, 6 ), Vector2( 0, 4 ), Vector2( 0, -4 ), Vector2( 1, 4 ), Vector2( 0, 5 ), Vector2( 0, 6 ), Vector2( -0.5, -2.5 ), Vector2( 1, 5 ), Vector2( 0, -2 ), Vector2( 1, 6 ), Vector2( 1, -4 ), Vector2( 0, -4 ), Vector2( 0, -13 ), Vector2( 0, -4 ), Vector2( 0, -19 ), Vector2( 0, -5 ), Vector2( 0, -13 ), Vector2( 0, -22 ), Vector2( 0, -13 ), Vector2( 0.955906, -23.6913 ), Vector2( 1, -20 ), Vector2( 1, -23 ), Vector2( 0, -23 ), Vector2( 0, -32 ), Vector2( 0, -23 ), Vector2( 0, -32 ), Vector2( 0, -24 ), Vector2( 0, -25 ), Vector2( 0, -23 ), Vector2( 0, -32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.0390534, 0.338463, 0.64655, 0.950299, 1.24537, 1.40158, 1.5361, 1.70099, 1.85287, 2.13492, 2.26076, 2.44735, 2.7294 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 18 ), Vector2( 0, 28 ), Vector2( 0, 27 ), Vector2( 0, 28 ), Vector2( 0, 28 ), Vector2( 0, 18 ), Vector2( 0, 17.4689 ), Vector2( 0, 8.87082 ), Vector2( 0, -1.23827 ), Vector2( 0, -1.3744 ), Vector2( 0, -1.57625 ), Vector2( 0, -1.88137 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12.5, 4 )
+
+[node name="Hammer" type="StaticBody2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -32 )
+polygon = PoolVector2Array( -12.5531, 3.61609, -12.5531, 23.6161, 11.4469, 23.6161, 11.4469, 4.61609, 7.44685, 3.61609, 7.44685, -6.38391, 7.44685, -23.3839, -8.55315, -23.3839, -8.55315, 2.61609, -10.5531, 2.61609 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 8
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -2 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
