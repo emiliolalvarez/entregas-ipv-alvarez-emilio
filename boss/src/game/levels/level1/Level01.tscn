@@ -4895,6 +4895,7 @@ tile_data = PoolIntArray( 983080, 0, 0, 983081, 0, 0, 983082, 0, 0, 983083, 0, 0
 
 [node name="Soldier" parent="Environment/Entities/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 3392, 611 )
+collision_mask = 7
 max_life = 20.0
 projectile_scene = ExtResource( 230 )
 
@@ -4910,7 +4911,7 @@ pathfinding_path = NodePath("../AstarTilemap")
 position = Vector2( 1312, 627 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )
-amount = 6
+amount = 3
 extents = Vector2( 180, 61 )
 pathfinding_path = NodePath("../AstarTilemap")
 
@@ -4918,7 +4919,7 @@ pathfinding_path = NodePath("../AstarTilemap")
 position = Vector2( 2576, 555 )
 script = ExtResource( 5 )
 turret_scene = ExtResource( 7 )
-amount = 6
+amount = 3
 extents = Vector2( 250, 61 )
 pathfinding_path = NodePath("../AstarTilemap")
 
@@ -5006,7 +5007,6 @@ position = Vector2( 1405, 348 )
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]
-[connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
 
 [editable path="Environment/Objects/Obstacles/Obstacle3"]
