@@ -382,7 +382,4 @@ region_rect = Rect2( 206, 112, 12, 12 )
 
 [node name="Loop" type="Sprite" parent="Body" index="1"]
 physics_interpolation_mode = 1
-visible = false
-position = Vector2( -80, 0 )
-texture = ExtResource( 7 )
-offset = Vector2( 20, 0 )
+texture = SubResource( 13 )

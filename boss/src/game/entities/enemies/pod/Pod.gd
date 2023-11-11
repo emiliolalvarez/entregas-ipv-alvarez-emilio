@@ -21,6 +21,7 @@ export (float) var max_speed:float = 100.0
 export (int) var gravity: int = 10
 export (int) var life: int = MAX_LIFE
 export (PackedScene) var projectile_scene: PackedScene
+onready var animation_player = $AnimationPlayer
 
 
 var target: Node2D
@@ -37,6 +38,9 @@ func _ready():
 	life_progress_bar.value = life
 	
 func _fire() -> void:
+	animation_player.play('fire_start')
+		
+func _do_fire() -> void:
 	if target != null:
 		var proj_instance: Node = projectile_scene.instance()
 		if projectile_container == null:

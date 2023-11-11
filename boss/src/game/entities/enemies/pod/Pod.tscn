@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/pod/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/pod/PodStateMachine.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/game/entities/enemies/pod/PodProjectile.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=6]
 [ext_resource path="res://src/game/entities/enemies/pod/WalkState.gd" type="Script" id=7]
+[ext_resource path="res://assets/textures/fx/bean/beams.png" type="Texture" id=8]
 [ext_resource path="res://src/game/entities/enemies/pod/AlertState.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=81]
@@ -22,6 +23,11 @@ corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
+
+[sub_resource type="AtlasTexture" id=105]
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 203.354, 110.004, 17.5241, 16.022 )
 
 [sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 6 )
@@ -130,6 +136,74 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=82]
 radius = 226.874
 
+[sub_resource type="Animation" id=106]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/FireStart:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/FireStart:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=107]
+resource_name = "fire_start"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/FireStart:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot/FireStart:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.470588 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_do_fire"
+} ]
+}
+
 [node name="Pod" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 8
@@ -192,8 +266,15 @@ value = 5.0
 rounded = true
 percent_visible = false
 
+[node name="FireStart" type="Sprite" parent="Pivot"]
+visible = false
+position = Vector2( -16, -14 )
+scale = Vector2( 1.2, 1.2 )
+z_index = 1
+texture = SubResource( 105 )
+
 [node name="FirePosition" type="Position2D" parent="Pivot"]
-position = Vector2( -16, -14.0339 )
+position = Vector2( -22, -14.0339 )
 
 [node name="RayCast2D" type="RayCast2D" parent="Pivot"]
 position = Vector2( 0, 1 )
@@ -214,6 +295,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/DetectionArea"]
 position = Vector2( 0, 1 )
 shape = SubResource( 82 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 106 )
+anims/fire_start = SubResource( 107 )
 
 [connection signal="hit" from="." to="StateMachine" method="_on_damage_received"]
 [connection signal="animation_finished" from="Pivot/Body" to="StateMachine" method="_on_animation_finished"]
