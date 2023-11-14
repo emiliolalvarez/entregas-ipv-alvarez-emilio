@@ -14,14 +14,15 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_ExitButton_pressed() -> void:
+	get_tree().quit()
 	hide()
 
 
 func _on_show_commands_button_pressed():
 	$Main.hide()
-	$Commands.show()
+	$OptionsMenu.show()
 
 
 func _on_commands_cancel_pressed():
-	$Commands.hide()
+	$OptionsMenu.hide()
 	$Main.show()

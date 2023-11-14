@@ -5,6 +5,7 @@ script/source = "extends CanvasLayer
 
 signal restart_requested
 signal exit_requested
+onready var label = $Container/Title
 
 func _on_RestartButton_pressed():
 	emit_signal(\"restart_requested\")
@@ -12,6 +13,9 @@ func _on_RestartButton_pressed():
 
 func _on_ExitButton_pressed():
 	emit_signal(\"exit_requested\")
+
+func set_title(title: String) -> void:
+	label.text = title 
 "
 
 [node name="CanvasLayer" type="CanvasLayer"]

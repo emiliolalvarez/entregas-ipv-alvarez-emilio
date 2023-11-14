@@ -1,4 +1,4 @@
-[gd_scene load_steps=340 format=2]
+[gd_scene load_steps=342 format=2]
 
 [ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
@@ -234,6 +234,7 @@
 [ext_resource path="res://src/game/environment/items/ManaKit.tscn" type="PackedScene" id=232]
 [ext_resource path="res://src/game/environment/items/Hammer.tscn" type="PackedScene" id=233]
 [ext_resource path="res://assets/textures/items/Entry.tscn" type="PackedScene" id=234]
+[ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.tscn" type="PackedScene" id=235]
 
 [sub_resource type="NavigationPolygon" id=8]
 vertices = PoolVector2Array( 1176, 320, 1176, 248, 1304, 248, 1304, 320 )
@@ -1447,6 +1448,9 @@ points = PoolVector2Array( 32, 8, 0, 8, 0, 0, 32, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=102]
 points = PoolVector2Array( 32, 8, 0, 8, 0, 0, 32, 0 )
 
+[sub_resource type="ConvexPolygonShape2D" id=108]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
 [sub_resource type="ConvexPolygonShape2D" id=105]
 points = PoolVector2Array( 32, 16, 0, 16, 0, 0, 32, 0 )
 
@@ -2632,9 +2636,16 @@ points = PoolVector2Array( 32, 8, 0, 8, 0, 0, 32, 0 )
 70/navigation_offset = Vector2( 0, 0 )
 70/shape_offset = Vector2( 0, 0 )
 70/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+70/shape = SubResource( 108 )
 70/shape_one_way = false
-70/shape_one_way_margin = 0.0
-70/shapes = [  ]
+70/shape_one_way_margin = 1.0
+70/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 108 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 70/z_index = 0
 71/name = "IndustrialTile_72.png 71"
 71/texture = ExtResource( 66 )
@@ -4899,13 +4910,7 @@ collision_mask = 7
 max_life = 20.0
 projectile_scene = ExtResource( 230 )
 
-[node name="SoldierSpawner" type="Position2D" parent="Environment/Entities/Enemies"]
-position = Vector2( 824, 571 )
-script = ExtResource( 5 )
-turret_scene = ExtResource( 7 )
-amount = 3
-extents = Vector2( 300, 50 )
-pathfinding_path = NodePath("../AstarTilemap")
+[node name="SoldierSpawner" parent="Environment/Entities/Enemies" instance=ExtResource( 235 )]
 
 [node name="SoldierSpawner2" type="Position2D" parent="Environment/Entities/Enemies"]
 position = Vector2( 1312, 627 )
@@ -5007,6 +5012,7 @@ position = Vector2( 1398, 348 )
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]
+[connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
 
 [editable path="Environment/Objects/Obstacles/Obstacle3"]

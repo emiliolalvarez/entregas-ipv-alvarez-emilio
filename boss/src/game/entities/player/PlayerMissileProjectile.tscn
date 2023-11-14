@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/textures/items/space-shooter-game-objects/PNG/Sprites/Missile/Missile_1_Explosion_003.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/items/space-shooter-game-objects/PNG/Sprites/Missile/Missile_1_Explosion_006.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/items/space-shooter-game-objects/PNG/Sprites/Missile/Missile_1_Explosion_000.png" type="Texture" id=10]
-[ext_resource path="res://src/game/entities/player/PlayerMisileProjectile.gd" type="Script" id=11]
+[ext_resource path="res://src/game/entities/player/PlayerMissileProjectile.gd" type="Script" id=11]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -201,7 +201,7 @@ tracks/3/keys = {
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 282.399
+radius = 75.9276
 
 [node name="PlayerMisileProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 11 )

@@ -29,5 +29,4 @@ func _handle_damage_recieved(amount) -> void:
 		emit_signal("finished", "die")
 
 func _handle_fire_start() -> void:
-	print("emit fire_start")
 	emit_signal("finished", "fire_start")

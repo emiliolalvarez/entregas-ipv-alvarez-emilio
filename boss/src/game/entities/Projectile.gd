@@ -63,7 +63,6 @@ func _remove() -> void:
 	get_parent().remove_child(self)
 	queue_free()
 	
-
 func get_projectile_damage() -> int:
 	return DAMAGE
 

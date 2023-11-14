@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Projectile",
 "class": "PlayerMissileProjectile",
 "language": "GDScript",
-"path": "res://src/game/entities/player/PlayerMisileProjectile.gd"
+"path": "res://src/game/entities/player/PlayerMissileProjectile.gd"
 }, {
 "base": "AbstractStateMachine",
 "class": "PodStateMachine",
@@ -73,6 +73,11 @@ _global_script_classes=[ {
 "class": "ShipStateMachine",
 "language": "GDScript",
 "path": "res://src/game/levels/level1/boss/ShipStateMachine.gd"
+}, {
+"base": "Node2D",
+"class": "SolderSpawner",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/soldier/SoldierSpawner.gd"
 } ]
 _global_script_class_icons={
 "AbstractEnemyState": "",
@@ -87,7 +92,8 @@ _global_script_class_icons={
 "PlayerMissileProjectile": "",
 "PodStateMachine": "",
 "Projectile": "",
-"ShipStateMachine": ""
+"ShipStateMachine": "",
+"SolderSpawner": ""
 }
 
 [application]

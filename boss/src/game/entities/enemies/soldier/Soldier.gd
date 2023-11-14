@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name EnemySoldier
 
 signal hit(amount)
+signal die()
 
 onready var fire_position: Node2D = $FirePosition
 onready var raycast: RayCast2D = $RayCast2D
@@ -76,6 +77,7 @@ func notify_hit(amount:int = 1) -> void:
 func _remove() -> void:
 	get_parent().remove_child(self)
 	queue_free()
+	emit_signal("die")
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)

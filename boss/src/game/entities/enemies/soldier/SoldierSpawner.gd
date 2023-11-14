@@ -1,9 +1,12 @@
+extends Node2D
+class_name SolderSpawner
 
 ## Primera aparición de esta keyword. Esto va como freebie.
 ## La keyword "tool" denota scripts que se pueden ejecutar
 ## tanto en runtime como en el editor.
 tool
-extends Node2D
+
+signal soldier_die()
 
 export (PackedScene) var turret_scene: PackedScene
 export (int) var amount: int
@@ -31,6 +34,7 @@ func _initialize() -> void:
 		var turret_pos: Vector2 = Vector2(rand_range(global_position.x, global_position.x + extents.x), rand_range(global_position.y, global_position.y + extents.y))
 		turret_instance.initialize(self, turret_pos, self)
 		turret_instance.pathfinding = pathfinding
+		turret_instance.connect("die", self, "on_soldier_die")
 
 
 ## Al definir el setter, se pueden asignar las variables en contexto de
@@ -47,3 +51,6 @@ func _set_extents(value: Vector2) -> void:
 func _draw() -> void:
 	if Engine.editor_hint:
 		draw_rect(Rect2(Vector2.ZERO, extents), Color.blue, false)
+
+func on_soldier_die() -> void:
+	emit_signal("soldier_die")

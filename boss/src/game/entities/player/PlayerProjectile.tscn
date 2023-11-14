@@ -276,7 +276,8 @@ position = Vector2( -8, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
-self_modulate = Color( 100, 0, 0, 0.16 )
+self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
+position = Vector2( -8, -1.8332e-12 )
 rotation = 1.5708
 scale = Vector2( 0.408829, 0.362919 )

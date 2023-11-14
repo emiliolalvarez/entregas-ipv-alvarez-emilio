@@ -4,6 +4,7 @@ class_name Player
 signal hp_changed(current_hp, max_hp)
 signal mana_changed(amount)
 signal notify_die()
+signal dead()
 
 const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION: Vector2 = Vector2.DOWN

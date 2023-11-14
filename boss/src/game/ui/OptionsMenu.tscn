@@ -1,0 +1,136 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/game/ui/ActionInput.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/game/ui/OptionsMenu.gd" type="Script" id=3]
+
+[node name="OptionsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.247
+margin_left = 1.0
+margin_top = 9.0
+margin_right = -9.0
+margin_bottom = -39.014
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -10.0
+margin_right = 7.0
+margin_bottom = -6.0
+color = Color( 0.0352941, 0.0352941, 0.0352941, 0.25098 )
+
+[node name="MainPanel" type="Panel" parent="."]
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel"]
+anchor_left = 0.04
+anchor_top = 0.2
+anchor_right = 1.9
+anchor_bottom = 1.2
+rect_scale = Vector2( 0.5, 0.5 )
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/ScrollContainer"]
+anchor_right = 1.0
+margin_bottom = 300.0
+
+[node name="ActionInputLeft" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_right = 0.0
+margin_bottom = 34.0
+rect_scale = Vector2( 1, 1 )
+action_id = "move_left"
+action_name = "Move left"
+
+[node name="ActionInputRight" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 38.0
+margin_right = 0.0
+margin_bottom = 72.0
+rect_scale = Vector2( 1, 1 )
+action_id = "move_right"
+action_name = "Move right"
+
+[node name="ActionInputUp" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 76.0
+margin_right = 0.0
+margin_bottom = 110.0
+rect_scale = Vector2( 1, 1 )
+action_id = "move_up"
+action_name = "Move up"
+
+[node name="ActionInputDown" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 114.0
+margin_right = 0.0
+margin_bottom = 148.0
+rect_scale = Vector2( 1, 1 )
+action_id = "move_down"
+action_name = "Move down"
+
+[node name="ActionInputFireWeapon" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 152.0
+margin_right = 0.0
+margin_bottom = 186.0
+rect_scale = Vector2( 1, 1 )
+action_id = "fire_weapon"
+action_name = "Fire weapon"
+
+[node name="ActionInputChangeMode" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 190.0
+margin_right = 0.0
+margin_bottom = 224.0
+rect_scale = Vector2( 1, 1 )
+action_id = "change_mode"
+action_name = "Change mode"
+
+[node name="ActionInputChangeMana" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 228.0
+margin_right = 0.0
+margin_bottom = 262.0
+rect_scale = Vector2( 1, 1 )
+action_id = "mana"
+action_name = "Mana"
+
+[node name="ActionInputJump" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 1.0
+margin_top = 266.0
+margin_right = 0.0
+margin_bottom = 300.0
+rect_scale = Vector2( 1, 1 )
+action_id = "jump"
+action_name = "Jump"
+
+[node name="Label" type="Label" parent="MainPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_right = 65.0
+margin_bottom = -100.006
+rect_scale = Vector2( 0.7, 0.7 )
+text = "Options"
+align = 1
+
+[node name="ReturnButton" type="Button" parent="MainPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -15.0
+margin_top = -16.006
+margin_right = 39.0
+margin_bottom = 3.994
+grow_horizontal = 2
+rect_scale = Vector2( 0.5, 0.5 )
+text = "Return"
+
+[connection signal="pressed" from="MainPanel/ReturnButton" to="." method="hide"]

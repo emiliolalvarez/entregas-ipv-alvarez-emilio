@@ -2,7 +2,6 @@ extends AbstractEnemyState
 onready var bean_start_timer = $"../BeanStartTimer"
 
 func enter() -> void:
-	print("FIRE START")
 	bean_start_timer.paused = true
 	character.direction = character.directions.NONE
 	character._play_animation("fire_start")

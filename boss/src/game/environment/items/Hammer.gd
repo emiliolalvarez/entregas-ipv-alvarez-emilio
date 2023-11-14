@@ -8,7 +8,6 @@ func _ready():
 
 	
 func _on_body_entered(body):
-	print("hammer detected body")
 	if body.has_method("notify_hit"):
 		body.notify_hit(body.life)
 		

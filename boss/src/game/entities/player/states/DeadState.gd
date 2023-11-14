@@ -5,7 +5,6 @@ extends AbstractState
 ## a ningun otro estado), vamos a procesar todo lo necesario
 ## en el enter
 func enter() -> void:
-	character.emit_signal("dead")
 	character._play_animation("die")
 
 
@@ -22,3 +21,5 @@ func update(delta) -> void:
 ## animación a esta función
 func _on_animation_finished(anim_name:String) -> void:
 	character._remove()
+	character.emit_signal("dead")
+	

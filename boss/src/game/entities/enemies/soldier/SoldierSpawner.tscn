@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.gd" type="Script" id=1]
+[ext_resource path="res://src/game/entities/enemies/soldier/Soldier.tscn" type="PackedScene" id=2]
+
+[node name="SoldierSpawner" type="Position2D"]
+position = Vector2( 824, 571 )
+script = ExtResource( 1 )
+turret_scene = ExtResource( 2 )
+amount = 3
+extents = Vector2( 300, 50 )
+pathfinding_path = NodePath("../AstarTilemap")
