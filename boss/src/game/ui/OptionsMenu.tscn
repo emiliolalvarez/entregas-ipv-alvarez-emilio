@@ -5,112 +5,94 @@
 
 [node name="OptionsMenu" type="Control"]
 anchor_right = 1.0
-anchor_bottom = 1.247
-margin_left = 1.0
-margin_top = 9.0
-margin_right = -9.0
-margin_bottom = -39.014
+anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -10.0
-margin_right = 7.0
-margin_bottom = -6.0
-color = Color( 0.0352941, 0.0352941, 0.0352941, 0.25098 )
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0.737255 )
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 1.1
+anchor_bottom = 1.1
+rect_scale = Vector2( 0.5, 0.5 )
 
-[node name="MainPanel" type="Panel" parent="."]
-anchor_left = 0.2
-anchor_top = 0.1
-anchor_right = 0.8
-anchor_bottom = 0.8
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 anchor_left = 0.04
 anchor_top = 0.2
 anchor_right = 1.9
-anchor_bottom = 1.2
+anchor_bottom = 1.4
 rect_scale = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/ScrollContainer"]
-anchor_right = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+margin_right = 124.0
 margin_bottom = 300.0
 
-[node name="ActionInputLeft" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
-margin_right = 0.0
+[node name="ActionInputLeft" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 124.0
 margin_bottom = 34.0
 rect_scale = Vector2( 1, 1 )
 action_id = "move_left"
 action_name = "Move left"
 
-[node name="ActionInputRight" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputRight" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 38.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 72.0
 rect_scale = Vector2( 1, 1 )
 action_id = "move_right"
 action_name = "Move right"
 
-[node name="ActionInputUp" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputUp" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 76.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 110.0
 rect_scale = Vector2( 1, 1 )
 action_id = "move_up"
 action_name = "Move up"
 
-[node name="ActionInputDown" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputDown" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 114.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 148.0
 rect_scale = Vector2( 1, 1 )
 action_id = "move_down"
 action_name = "Move down"
 
-[node name="ActionInputFireWeapon" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputFireWeapon" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 152.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 186.0
 rect_scale = Vector2( 1, 1 )
 action_id = "fire_weapon"
 action_name = "Fire weapon"
 
-[node name="ActionInputChangeMode" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputChangeMode" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 190.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 224.0
 rect_scale = Vector2( 1, 1 )
 action_id = "change_mode"
 action_name = "Change mode"
 
-[node name="ActionInputChangeMana" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputChangeMana" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 228.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 262.0
 rect_scale = Vector2( 1, 1 )
 action_id = "mana"
 action_name = "Mana"
 
-[node name="ActionInputJump" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 1.0
+[node name="ActionInputJump" parent="Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 266.0
-margin_right = 0.0
+margin_right = 124.0
 margin_bottom = 300.0
 rect_scale = Vector2( 1, 1 )
 action_id = "jump"
 action_name = "Jump"
 
-[node name="Label" type="Label" parent="MainPanel"]
+[node name="Label" type="Label" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 4.0
@@ -120,7 +102,7 @@ rect_scale = Vector2( 0.7, 0.7 )
 text = "Options"
 align = 1
 
-[node name="ReturnButton" type="Button" parent="MainPanel"]
+[node name="ReturnButton" type="Button" parent="Panel"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -133,4 +115,4 @@ grow_horizontal = 2
 rect_scale = Vector2( 0.5, 0.5 )
 text = "Return"
 
-[connection signal="pressed" from="MainPanel/ReturnButton" to="." method="hide"]
+[connection signal="pressed" from="Panel/ReturnButton" to="." method="_on_commands_cancel_pressed"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://src/game/levels/level1/Level01.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/levels/level1/boss/Level01_1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/ui/MainMenu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -65,3 +66,11 @@ color = Color( 0, 0, 0, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+start_button_title = "Resume"
+
+[connection signal="start_button_pressed" from="CanvasLayer/MainMenu" to="." method="_on_MainMenu_start_button_pressed"]

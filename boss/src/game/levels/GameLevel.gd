@@ -20,6 +20,8 @@ signal return_requested()
 signal restart_requested()
 # Inicia el siguiente nivel
 signal next_level_requested()
+# Muestra el main menu
+signal menu_requested()
 
 
 func _ready() -> void:
@@ -28,6 +30,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action("reset"):
 		get_tree().reload_current_scene()
+	if event.is_action("ui_cancel"):
+		emit_signal("menu_requested")
+		
 
 # Funciones que hacen de interfaz para las señales
 func _on_level_won() -> void:
