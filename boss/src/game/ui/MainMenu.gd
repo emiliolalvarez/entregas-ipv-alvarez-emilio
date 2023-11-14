@@ -8,7 +8,7 @@ export (String) var start_button_title: String = "Start"
 func _ready():
 	start_button.text = start_button_title
 
-func _on_ExitButton_pressed() -> void:
+func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 	hide()
 

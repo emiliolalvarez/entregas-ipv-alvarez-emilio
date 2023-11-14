@@ -78,7 +78,7 @@ margin_bottom = 140.0
 
 [connection signal="pressed" from="Main/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Main/Buttons/ShowCommands" to="." method="_on_show_commands_button_pressed"]
-[connection signal="pressed" from="Main/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="Main/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="options_menu_return" from="OptionsMenu" to="." method="_on_commands_cancel_pressed"]
 
 [editable path="OptionsMenu"]
