@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1 04 Zentraedi Theme.ogg-ba0ec9e4f0bc5eb0aa9eae531db0bdf0.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/1 04 Zentraedi Theme.ogg"
+dest_files=[ "res://.import/1 04 Zentraedi Theme.ogg-ba0ec9e4f0bc5eb0aa9eae531db0bdf0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

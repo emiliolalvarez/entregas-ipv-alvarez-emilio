@@ -10,7 +10,6 @@ onready var label = $Container/Title
 func _on_RestartButton_pressed():
 	emit_signal(\"restart_requested\")
 	
-
 func _on_ExitButton_pressed():
 	emit_signal(\"exit_requested\")
 
@@ -22,10 +21,10 @@ func set_title(title: String) -> void:
 script = SubResource( 1 )
 
 [node name="Container" type="Control" parent="."]
-margin_left = 64.0
-margin_top = 56.0
-margin_right = 192.0
-margin_bottom = 120.0
+anchor_left = 0.3
+anchor_top = 0.35
+anchor_right = 0.35
+anchor_bottom = 0.35
 
 [node name="ColorRect" type="ColorRect" parent="Container"]
 margin_left = -31.0
@@ -34,26 +33,32 @@ margin_right = 160.0
 margin_bottom = 89.0
 color = Color( 0, 0, 0, 0.807843 )
 
+[node name="Title" type="Label" parent="Container"]
+anchor_right = 9.455
+margin_right = 55.303
+margin_bottom = 14.0
+rect_scale = Vector2( 0.7, 0.7 )
+text = "Level accomplished!"
+align = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Container"]
-margin_top = 11.0
+anchor_left = 1.8
+anchor_right = 4.0
+margin_top = 23.0
 margin_right = 128.0
 margin_bottom = 21.0
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="RestartButton" type="Button" parent="Container/VBoxContainer"]
-margin_right = 128.0
+margin_right = 157.0
 margin_bottom = 20.0
 text = "Restart"
 
 [node name="ExitButton" type="Button" parent="Container/VBoxContainer"]
 margin_top = 24.0
-margin_right = 128.0
+margin_right = 157.0
 margin_bottom = 44.0
 text = "Exit"
-
-[node name="Title" type="Label" parent="Container"]
-margin_top = -16.0
-margin_right = 131.0
-text = "Level accomplished!"
 
 [connection signal="pressed" from="Container/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="Container/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

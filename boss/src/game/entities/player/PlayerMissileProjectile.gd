@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 		#rotation = deg2rad(120)
 
 func _on_direction_timer_timeout():
-	print ("DIRECTION TIMER TIMEOUT")
 	update = true
 	detection_area.collision_mask = collision_mask
 

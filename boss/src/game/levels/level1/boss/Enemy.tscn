@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/textures/enemies/ship/zentraedi-ship.png" type="Texture" id=1]
 [ext_resource path="res://src/game/levels/level1/boss/ShipStateMachine.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/textures/fx/bean/beams.png" type="Texture" id=8]
 [ext_resource path="res://src/game/levels/level1/boss/states/FireStart.gd" type="Script" id=9]
 [ext_resource path="res://src/game/levels/level1/boss/states/FireState.gd" type="Script" id=10]
+[ext_resource path="res://assets/sounds/distorted_laser.wav" type="AudioStream" id=11]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.72549, 0.109804, 0.345098, 1 )
@@ -277,6 +278,9 @@ shape = SubResource( 10 )
 [node name="BeanDamageTimer" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="BeanSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
 
 [connection signal="hit" from="." to="ShipStateMachine" method="_on_damage_received"]
 [connection signal="animation_finished" from="BodyAnimations" to="ShipStateMachine" method="_on_animation_finished"]

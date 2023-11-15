@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1-42-end-title.ogg-65c9db6125c52f377688ba5184218c6a.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/1-42-end-title.ogg"
+dest_files=[ "res://.import/1-42-end-title.ogg-65c9db6125c52f377688ba5184218c6a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/2-05-we-will-win-minmei.ogg-31eae55eaa466697279d5f7c3554ff5b.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/2-05-we-will-win-minmei.ogg"
+dest_files=[ "res://.import/2-05-we-will-win-minmei.ogg-31eae55eaa466697279d5f7c3554ff5b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

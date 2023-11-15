@@ -1,4 +1,4 @@
-[gd_scene load_steps=342 format=2]
+[gd_scene load_steps=343 format=2]
 
 [ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
@@ -235,6 +235,7 @@
 [ext_resource path="res://src/game/environment/items/Hammer.tscn" type="PackedScene" id=233]
 [ext_resource path="res://assets/textures/items/Entry.tscn" type="PackedScene" id=234]
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.tscn" type="PackedScene" id=235]
+[ext_resource path="res://assets/music/robotech/1-32-alien-attack.ogg" type="AudioStream" id=236]
 
 [sub_resource type="NavigationPolygon" id=8]
 vertices = PoolVector2Array( 1176, 320, 1176, 248, 1304, 248, 1304, 320 )
@@ -5009,6 +5010,10 @@ scale = Vector2( 1.02, 0.86 )
 
 [node name="Hammer" parent="Environment/Objects" instance=ExtResource( 233 )]
 position = Vector2( 1398, 348 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="Environment"]
+stream = ExtResource( 236 )
+autoplay = true
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]

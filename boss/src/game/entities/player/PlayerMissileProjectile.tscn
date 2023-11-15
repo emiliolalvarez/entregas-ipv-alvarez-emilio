@@ -206,6 +206,7 @@ radius = 75.9276
 [node name="PlayerMisileProjectile" instance=ExtResource( 1 )]
 script = ExtResource( 11 )
 VELOCITY = 60.0
+damage = 5
 
 [node name="MissileTip" type="Position2D" parent="." index="0"]
 position = Vector2( 0, -4 )

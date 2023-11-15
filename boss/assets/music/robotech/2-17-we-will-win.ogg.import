@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/2-17-we-will-win.ogg-03197df18ea6db12445f2855f97d060c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/2-17-we-will-win.ogg"
+dest_files=[ "res://.import/2-17-we-will-win.ogg-03197df18ea6db12445f2855f97d060c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

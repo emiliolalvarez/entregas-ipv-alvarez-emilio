@@ -55,6 +55,7 @@ func _restart_called() -> void:
 	
 # Callback para mostrar main menu.
 func _menu_requested_called() -> void:
+	print("MENU REQUESTeD LEVEL MANAGER")
 	main_menu.show()
 	_pause()
 	

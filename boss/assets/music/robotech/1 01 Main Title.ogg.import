@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1 01 Main Title.ogg-193c0ca55d4c1bf473300739e8541b64.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/1 01 Main Title.ogg"
+dest_files=[ "res://.import/1 01 Main Title.ogg-193c0ca55d4c1bf473300739e8541b64.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

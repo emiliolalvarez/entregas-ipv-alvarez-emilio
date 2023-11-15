@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1 03 The Mysterious Ship.ogg-0973683cd3992c9abc5124c56685c2dc.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/1 03 The Mysterious Ship.ogg"
+dest_files=[ "res://.import/1 03 The Mysterious Ship.ogg-0973683cd3992c9abc5124c56685c2dc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/1-17-the-15th-squadron.ogg-9a262540ac55f86b167efc60575b6de7.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/1-17-the-15th-squadron.ogg"
+dest_files=[ "res://.import/1-17-the-15th-squadron.ogg-9a262540ac55f86b167efc60575b6de7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

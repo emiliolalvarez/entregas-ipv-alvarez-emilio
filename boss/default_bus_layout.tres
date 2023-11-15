@@ -1,0 +1,14 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
+
+[sub_resource type="AudioEffectEQ21" id=3]
+resource_name = "EQ21"
+
+[sub_resource type="AudioEffectChorus" id=4]
+resource_name = "Chorus"
+
+[resource]
+bus/0/volume_db = -15.7883
+bus/0/effect/0/effect = SubResource( 3 )
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource( 4 )
+bus/0/effect/1/enabled = true
