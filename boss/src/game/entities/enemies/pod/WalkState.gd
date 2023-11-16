@@ -7,12 +7,13 @@ export (float) var max_speed:float
 
 
 func enter() -> void:
-	print("POD enter walk state")
+	#print("POD enter walk state")
 	character._play_animation("walk")
 
 
 func exited() -> void:
-	print("POD exited walk state")
+	#print("POD exited walk state")
+	pass
 	
 func update(delta:float) -> void:
 	

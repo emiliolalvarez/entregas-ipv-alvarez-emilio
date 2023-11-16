@@ -13,7 +13,6 @@ export (float) var max_speed:float = 100.0
 export (int) var life: int = MAX_LIFE
 export (PackedScene) var projectile_scene: PackedScene
 
-
 onready var fire_position: Position2D = $Pivot/FirePosition
 onready var raycast: RayCast2D = $Pivot/RayCast2D
 onready var body: Sprite = $Pivot/Body
@@ -22,6 +21,7 @@ onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
 onready var hud:Node2D = $Pivot/HUD
 onready var pivot:Node2D = $Pivot
 onready var animation_player = $AnimationPlayer
+onready var collision = $CollisionShape2D
 
 signal hit(amount)
 
@@ -83,9 +83,6 @@ func notify_hit(amount:int = 1) -> void:
 
 	
 func _remove() -> void:
-	dead = true
-	collision_layer = 0
-	collision_mask = 0
 	set_physics_process(false)
 	for n in get_children():
 		remove_child(n)

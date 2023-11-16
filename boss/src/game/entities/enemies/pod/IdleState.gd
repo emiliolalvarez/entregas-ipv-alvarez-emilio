@@ -1,13 +1,13 @@
 extends AbstractEnemyState
 
 func enter() -> void:
-	print("POD enter Idle state")
+	#print("POD enter Idle state")
 	character.velocity = Vector2.ZERO
 	character._play_animation("idle")
 
 func exit() -> void: 
-	print("POD exited Idle state")	
-	
+	#print("POD exited Idle state")	
+	pass
 func update(delta:float) -> void:
 	if (character.target):
 		character.look_at(character.target)
