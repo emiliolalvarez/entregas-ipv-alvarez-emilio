@@ -5017,7 +5017,6 @@ autoplay = true
 
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]
-[connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
 
 [editable path="Environment/Objects/Obstacles/Obstacle3"]

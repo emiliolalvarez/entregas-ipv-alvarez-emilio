@@ -10,7 +10,7 @@ signal hit(amount)
 
 onready var fire_position: Position2D = $Pivot/FirePosition
 onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body_anim: AnimatedSprite = $Pivot/Body
+onready var body: Sprite = $Pivot/Body
 onready var navigation_agent = $NavigationAgent2D
 onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
 onready var hud:Node2D = $Pivot/HUD
@@ -97,8 +97,8 @@ func _remove() -> void:
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
 func _play_animation(animation: String) -> void:
-	if body_anim.frames.has_animation(animation):
-		body_anim.play(animation)
+	if animation_player.has_animation(animation):
+		animation_player.play(animation)
 
 func get_current_animation() -> String:
-	return body_anim.animation
+	return animation_player.get_current_animation()
