@@ -1,13 +1,18 @@
 extends KinematicBody2D
+
 class_name EnemyPod
 
+export (int) var gravity: int = 10
+export (int) var MAX_LIFE:int = 5
 export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:int = 100
+export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
+export (float) var speed:float  = 10.0
+export (float) var max_speed:float = 100.0
 
-const MAX_LIFE = 5
+export (int) var life: int = MAX_LIFE
+export (PackedScene) var projectile_scene: PackedScene
 
-signal hit(amount)
 
 onready var fire_position: Position2D = $Pivot/FirePosition
 onready var raycast: RayCast2D = $Pivot/RayCast2D
@@ -16,20 +21,13 @@ onready var navigation_agent = $NavigationAgent2D
 onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
 onready var hud:Node2D = $Pivot/HUD
 onready var pivot:Node2D = $Pivot
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-export (int) var gravity: int = 10
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
 onready var animation_player = $AnimationPlayer
 
+signal hit(amount)
 
 var target: Node2D
 var projectile_container: Node
-
 var velocity: Vector2 = Vector2.ZERO
-
 ## Flag de ayuda para saber identificar el estado de actividad
 var dead: bool = false
 

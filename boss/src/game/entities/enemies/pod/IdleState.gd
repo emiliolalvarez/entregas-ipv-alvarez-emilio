@@ -9,6 +9,7 @@ func exit() -> void:
 	print("POD exited Idle state")	
 	
 func update(delta:float) -> void:
-	character._apply_movement()
+	if (character.target):
+		character.look_at(character.target)
 	if character._can_see_target():
 		emit_signal("finished", "walk")
