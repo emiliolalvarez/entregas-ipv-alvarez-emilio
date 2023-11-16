@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/pod/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/pod/PodStateMachine.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/textures/enemies/battlepod/battlepod.png" type="Texture" id=6]
 [ext_resource path="res://src/game/entities/enemies/pod/WalkState.gd" type="Script" id=7]
 [ext_resource path="res://src/game/entities/enemies/pod/AlertState.gd" type="Script" id=9]
+[ext_resource path="res://assets/sounds/toy_robot_walk_001.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/pewpew_4.wav" type="AudioStream" id=12]
 
 [sub_resource type="RectangleShape2D" id=81]
@@ -64,6 +65,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Walk:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 11 ) ]
 }
 
 [sub_resource type="Animation" id=106]
@@ -202,6 +215,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 1, 2, 3, 4 ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Walk")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 11 )
+} ],
+"times": PoolRealArray( 0.0199348 )
+}
 
 [node name="Pod" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -296,6 +323,10 @@ anims/walk = SubResource( 111 )
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+max_distance = 1000.0
 
 [connection signal="hit" from="." to="StateMachine" method="_on_damage_received"]
 [connection signal="body_entered" from="Pivot/DetectionArea" to="StateMachine" method="_on_DetectionArea_body_entered"]
