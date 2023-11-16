@@ -224,17 +224,16 @@ state_id = "idle"
 script = ExtResource( 3 )
 state_id = "die"
 
-[node name="Walk" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
-state_id = "walk"
-
 [node name="Alert" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 state_id = "alert"
 
 [node name="Timer" type="Timer" parent="StateMachine/Alert"]
 wait_time = 2.0
-one_shot = true
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+state_id = "walk"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

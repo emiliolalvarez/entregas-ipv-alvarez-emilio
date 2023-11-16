@@ -1,31 +1,28 @@
 extends AbstractEnemyState
 onready var timer:Timer = $Timer
-var attack_distance_threshold:int = 20
 
 func enter() -> void:
+	print("POD enter alert state")
 	character.velocity = Vector2.ZERO
 	character._play_animation("alert")
-	_do_fire()
 	timer.connect("timeout", self, "_on_timer_timeout")
 	timer.start()
+	_do_fire()
 	
 func update(delta:float) -> void:
 	character._look_at_target()
 	
 func exit() -> void:
+	print("POD exited alert state")
 	timer.stop()
 		
 func _should_fire() -> bool:
 	var abs_position_diff = abs(character.target.global_position.x - character.global_position.x)
-	return abs_position_diff <= attack_distance_threshold
+	return abs_position_diff <= character.ATTACK_DISTANCE_THRESHOLD
 
 func _do_fire() -> void:
 	character._fire()
-	timer.start()
 		
 func _on_timer_timeout() -> void:
-	if !_should_fire():
-		timer.stop()
-		emit_signal("finished", "walk")
-	else:
+	if _should_fire():
 		_do_fire()

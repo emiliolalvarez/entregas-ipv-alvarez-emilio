@@ -3,6 +3,7 @@ class_name EnemyPod
 
 export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
+export (float) var ATTACK_DISTANCE_THRESHOLD:int = 100
 
 const MAX_LIFE = 5
 
