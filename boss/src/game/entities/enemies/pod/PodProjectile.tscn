@@ -393,9 +393,11 @@ shape = SubResource( 9 )
 [node name="Body" type="Node2D" parent="." index="3"]
 
 [node name="Start" type="Sprite" parent="Body" index="0"]
+self_modulate = Color( 1, 1, 1, 0.462745 )
 texture = SubResource( 15 )
 region_rect = Rect2( 206, 112, 12, 12 )
 
 [node name="Loop" type="Sprite" parent="Body" index="1"]
 physics_interpolation_mode = 1
+visible = false
 texture = SubResource( 13 )

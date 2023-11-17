@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/gate_metal_flimsy_close_001_16639.mp3-61381b170ea3e91df5991c1cc45f5331.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/gate_metal_flimsy_close_001_16639.mp3"
+dest_files=[ "res://.import/gate_metal_flimsy_close_001_16639.mp3-61381b170ea3e91df5991c1cc45f5331.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

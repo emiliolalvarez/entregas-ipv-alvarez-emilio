@@ -174,7 +174,7 @@ func _remove() -> void:
 	mode = MODE_ROBOT
 	set_physics_process(false)
 	collision_layer = 0
-
+	collision_mask = 0
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/game/entities/player/MissileContainer.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/PlayerProjectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sounds/pewpew_4.wav" type="AudioStream" id=3]
 [ext_resource path="res://src/game/entities/player/Cannon.gd" type="Script" id=8]
 
 [node name="WeaponContainer" type="Node2D"]
@@ -15,3 +16,6 @@ projectile_scene = ExtResource( 2 )
 
 [node name="WeaponTip" type="Position2D" parent="Weapon"]
 position = Vector2( -0.0425491, 9.39857 )
+
+[node name="Fire" type="AudioStreamPlayer" parent="Weapon"]
+stream = ExtResource( 3 )

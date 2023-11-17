@@ -222,11 +222,11 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "clips": [ {
-"end_offset": 4.11499,
+"end_offset": 0.0,
 "start_offset": 0.3,
 "stream": ExtResource( 17 )
 } ],
-"times": PoolRealArray( -0.0111022 )
+"times": PoolRealArray( 0.0274523 )
 }
 
 [sub_resource type="Animation" id=18]
@@ -994,7 +994,7 @@ rotation = 0.541052
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 
 [connection signal="notify_die" from="." to="StateMachine" method="notify_die"]
