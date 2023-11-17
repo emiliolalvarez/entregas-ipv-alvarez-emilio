@@ -15,9 +15,8 @@ var soldiers: int
 func _ready():
 	player.force_plane_mode(true)
 	soldier_spawner_timer.start()
-	soldiers = soldier_spawner.amount
+	soldiers = 0
 
-		
 func _on_exit_requested() -> void:
 	get_tree().quit()
 

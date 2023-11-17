@@ -21,7 +21,7 @@ margin_top = -2.0
 margin_bottom = 160.0
 
 [node name="SoldierSpawnerTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 10.0
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
@@ -32,6 +32,7 @@ FRICTION_WEIGHT = 0.0
 [node name="SoldierSpawner" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, 0 )
 amount = 2
+auto_init = false
 extents = Vector2( 177, 157 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
@@ -41,8 +42,11 @@ gravity = 0
 [node name="StateMachine" parent="Player" index="0"]
 START_STATE = NodePath("Plane")
 
+[node name="CollisionShape2D" parent="Player" index="2"]
+position = Vector2( -4.00001, 3 )
+
 [node name="WeaponContainer" parent="Player" index="5"]
-position = Vector2( 19.8284, 8.82082 )
+position = Vector2( 23.3333, -4.66667 )
 
 [node name="Roof" parent="." instance=ExtResource( 2 )]
 
