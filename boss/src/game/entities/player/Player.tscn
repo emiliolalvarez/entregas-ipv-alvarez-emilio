@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/game/entities/player/states/IdleState.gd" type="Script" id=14]
 [ext_resource path="res://src/game/entities/player/states/DeadState.gd" type="Script" id=15]
 [ext_resource path="res://src/game/entities/player/states/JumpState.gd" type="Script" id=16]
+[ext_resource path="res://assets/sounds/bomb-explossion.mp3" type="AudioStream" id=17]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -188,6 +189,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=8]
 resource_name = "die"
 length = 0.9
+step = 0.0333333
 tracks/0/type = "value"
 tracks/0/path = NodePath("WeaponContainer:visible")
 tracks/0/interp = 1
@@ -207,10 +209,24 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0240043, 0.0460847, 0.0691271, 0.0892835, 0.111364, 0.128009, 0.145496, 0.164049, 0.184037, 0.205541, 0.226168, 0.249997, 0.274165, 0.292661, 0.315232, 0.337802, 0.358336, 0.378869, 0.409108, 0.454956, 0.502192, 0.578817, 0.656555, 0.712118, 0.826633 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 30, 31, 32, 33, 34 ]
+"values": [ 39, 40, 41, 42, 43, 44, 45, 46, 47, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 39 ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("Explosion")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 4.11499,
+"start_offset": 0.3,
+"stream": ExtResource( 17 )
+} ],
+"times": PoolRealArray( -0.0111022 )
 }
 
 [sub_resource type="Animation" id=18]
@@ -957,7 +973,8 @@ remote_path = NodePath("../../CollisionShape2D")
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
-vframes = 8
+vframes = 16
+frame = 39
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
 position = Vector2( 18, 7.33333 )
@@ -976,6 +993,9 @@ rotation = 0.541052
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
 
 [connection signal="notify_die" from="." to="StateMachine" method="notify_die"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]
