@@ -38,6 +38,7 @@ export (int) var life: int
 export (int) var mana: int
 export (int) var MAX_LIFE: int = 30
 export (int) var MAX_MANA: int = 30
+export (int) var MANA_REQUIRED: int = 5
 
 var projectile_container: Node
 var force_plane = false
@@ -75,7 +76,7 @@ func _handle_weapon_actions() -> void:
 		weapon.fire()
 	if Input.is_action_just_pressed("mana") && mana > 0 && missile.can_fire():
 		missile.fire()
-		_handle_mana(2)
+		_handle_mana(MANA_REQUIRED)
 		
 
 ## Se extrae el comportamiento del manejo del movimiento horizontal

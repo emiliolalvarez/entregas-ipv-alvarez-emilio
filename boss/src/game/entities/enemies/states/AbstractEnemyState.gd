@@ -23,7 +23,7 @@ func _handle_body_exited(body: Node) -> void:
 	emit_signal("finished", "idle")
 
 func _handle_damage_recieved(amount) -> void:
-	character.life = max(0, character.life - 1)
+	character.life = max(0, character.life - amount)
 	character.life_progress_bar.value = character.life
 	if character.life == 0:
 		emit_signal("finished", "die")
