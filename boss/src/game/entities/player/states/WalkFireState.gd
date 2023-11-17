@@ -1,9 +1,15 @@
 extends AbstractState
 
+var can_fire = false
 
 func enter() -> void:
 	character._play_animation("walk_fire")
-	character._handle_weapon_actions()
+	$WalkFireTimer.wait_time = 0.2
+	$WalkFireTimer.connect("timeout", self, "on_walkfire_timer_timeout")
+	$WalkFireTimer.start()
+	
+func exit() -> void:
+	can_fire = false
 
 func handle_input(event:InputEvent) -> void:
 	if event.is_action_pressed("move_down") && character._is_robot_mode():
@@ -18,7 +24,8 @@ func handle_input(event:InputEvent) -> void:
 	
 
 func update(delta: float) -> void:
-	character._handle_weapon_actions()
+	if (can_fire):
+		character._handle_weapon_actions()
 	# Vamos a manejar los inputs de movimiento
 	character._handle_move_input()
 	# Aplicar ese movimiento, sin desacelerar
@@ -36,3 +43,8 @@ func update(delta: float) -> void:
 				character._play_animation("fall")
 			else:
 				character._play_animation("jump")
+
+func on_walkfire_timer_timeout() -> void:
+	character.weapon.fire()
+	can_fire = true
+	
