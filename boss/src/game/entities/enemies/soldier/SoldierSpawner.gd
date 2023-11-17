@@ -10,6 +10,7 @@ signal soldier_die()
 
 export (PackedScene) var turret_scene: PackedScene
 export (int) var amount: int
+export (bool) var auto_init: bool = 1
 export (Vector2) var extents: Vector2 setget _set_extents ## Definicion de setter para variable
 
 export (NodePath) var pathfinding_path: NodePath
@@ -23,7 +24,8 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		update()
 	else:
-		call_deferred("_initialize")
+		if (auto_init):
+			call_deferred("_initialize")
 
 
 ## Fijarse como esta función se ejecuta tranquilamente, ya que controlamos
