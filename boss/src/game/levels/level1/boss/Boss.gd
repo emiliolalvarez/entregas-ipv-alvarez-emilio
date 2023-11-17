@@ -8,6 +8,7 @@ onready var soldier_spawner_timer = $SoldierSpawnerTimer
 onready var background_music = $BackgroundMusic
 onready var level_accomplished_music = $LevelAccomplishedMusic
 onready var defeated_music = $DefeatedMusic
+onready var intro = $Intro
 
 var soldiers: int
 
@@ -16,6 +17,8 @@ func _ready():
 	player.force_plane_mode(true)
 	soldier_spawner_timer.start()
 	soldiers = 0
+	intro.show()
+	get_tree().paused = true
 
 func _on_exit_requested() -> void:
 	get_tree().quit()
@@ -40,3 +43,9 @@ func _on_Player_dead():
 	menu.set_title("Game Over")
 	menu.show()
 	get_tree().paused = true
+
+func _on_intro_accept():
+	print("On intro accept")
+	intro.hide()
+	get_tree().paused = false
+

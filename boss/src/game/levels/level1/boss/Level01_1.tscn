@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/game/levels/level1/boss/Boss.gd" type="Script" id=1]
 [ext_resource path="res://src/game/environment/Floor.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/music/robotech/2-05-we-will-win-minmei.ogg" type="AudioStream" id=10]
 [ext_resource path="res://assets/music/robotech/1-41-mission-accomplished.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/music/robotech/1 04 Zentraedi Theme.ogg" type="AudioStream" id=12]
+[ext_resource path="res://src/game/levels/level1/boss/Intro.tscn" type="PackedScene" id=13]
 
 [node name="Level1_1" type="Node"]
 script = ExtResource( 1 )
@@ -92,6 +93,9 @@ stream = ExtResource( 11 )
 pause_mode = 2
 stream = ExtResource( 12 )
 
+[node name="Intro" parent="." instance=ExtResource( 13 )]
+visible = false
+
 [connection signal="timeout" from="SoldierSpawnerTimer" to="." method="_on_SoldierSpawnerTimer_timeout"]
 [connection signal="die" from="Enemy" to="." method="_on_boss_die"]
 [connection signal="soldier_die" from="SoldierSpawner" to="." method="_on_soldier_die"]
@@ -100,6 +104,7 @@ stream = ExtResource( 12 )
 [connection signal="mana_changed" from="Player" to="HUD" method="_on_mana_changed"]
 [connection signal="exit_requested" from="Menu" to="." method="_on_exit_requested"]
 [connection signal="restart_requested" from="Menu" to="." method="_on_restart_requested"]
+[connection signal="on_intro_accept" from="Intro" to="." method="_on_intro_accept"]
 
 [editable path="Enemy"]
 [editable path="SoldierSpawner"]
