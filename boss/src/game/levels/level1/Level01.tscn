@@ -5023,6 +5023,7 @@ position = Vector2( 1398, 348 )
 stream = ExtResource( 236 )
 autoplay = true
 
+[connection signal="dead" from="Environment/Player" to="." method="_on_game_over"]
 [connection signal="hp_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_hp_changed"]
 [connection signal="mana_changed" from="Environment/Player" to="Environment/Entities/HudCanvasLayer/HUD" method="_on_mana_changed"]
 [connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]

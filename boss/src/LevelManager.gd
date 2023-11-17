@@ -7,6 +7,7 @@ extends Node
 export (Array, PackedScene) var levels: Array
 onready var animation_player = $AnimationPlayer
 onready var main_menu = $CanvasLayer/MainMenu
+onready var game_over_menu = $CanvasLayer/GameOverMenu
 
 onready var current_level_container: Node = $CurrentLevelContainer
 var current: GameLevel
@@ -41,6 +42,7 @@ func _add_scene() -> void:
 	current.connect("restart_requested", self, "_restart_called")
 	current.connect("next_level_requested", self, "_next_called")
 	current.connect("menu_requested", self, "_menu_requested_called")
+	current.connect("game_over_menu_requested", self, "game_over_menu_requested_called")
 	animation_player.play("fade_out")
 	
 # Callback de regreso al MainMenu.
@@ -55,9 +57,16 @@ func _restart_called() -> void:
 	
 # Callback para mostrar main menu.
 func _menu_requested_called() -> void:
-	print("MENU REQUESTeD LEVEL MANAGER")
 	main_menu.show()
+	game_over_menu.hide()
 	_pause()
+	
+func game_over_menu_requested_called() -> void:
+	print("game_over_menu_requested_called")
+	main_menu.hide()
+	game_over_menu.show()
+	_pause()
+	
 	
 # Callback de nivel siguiente.
 func _next_called() -> void:

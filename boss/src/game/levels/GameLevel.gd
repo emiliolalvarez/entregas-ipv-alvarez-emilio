@@ -22,6 +22,8 @@ signal restart_requested()
 signal next_level_requested()
 # Muestra el main menu
 signal menu_requested()
+# Muestra game over menu
+signal game_over_menu_requested()
 
 
 func _ready() -> void:
@@ -43,4 +45,7 @@ func _on_return_requested() -> void:
 
 func _on_restart_requested() -> void:
 	emit_signal("restart_requested")
+	
+func _on_game_over() -> void:
+	emit_signal("game_over_menu_requested")
 
