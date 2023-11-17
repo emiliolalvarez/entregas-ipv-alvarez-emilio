@@ -2,6 +2,7 @@ extends AbstractEnemyState
 
 var can_fire = true
 onready var fire_timer = $FireTimer
+onready var fire_sound = $"../../Fire"
 
 func enter() -> void:
 	character.velocity = Vector2.ZERO
@@ -17,6 +18,8 @@ func fire() -> void:
 	if (can_fire):
 		can_fire = false
 		character._fire()
+		fire_sound.play()
+		
 	character._play_animation("attack")
 		
 

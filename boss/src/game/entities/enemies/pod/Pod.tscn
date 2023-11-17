@@ -126,7 +126,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=108]
 resource_name = "die"
-length = 2.7
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -134,20 +134,20 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.635356, 0.706069, 0.81029, 0.897889, 0.997889, 1.09789, 1.19789, 1.29789, 1.39789, 1.49789, 1.59789, 1.69789, 1.79472, 1.89472, 1.99472, 2.09472, 2.19472, 2.29472, 2.39472 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0420452, 0.0718894, 0.104784, 0.140729, 0.164472, 0.205271, 0.227179, 0.261244, 0.290888, 0.317682, 0.353627, 0.380421, 0.410265, 0.440109, 0.469953, 0.505898, 0.541843, 0.571571, 0.586164, 0.612958, 0.639752, 0.735111 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 12, 13, 14, 15, 16, 17, 19, 21, 31, 34, 35, 36, 37, 38, 39, 40, 41, 44, 46, 47, 48, 49, 50, 51, 52 ]
+"values": [ 12, 13, 14, 15, 16, 17, 19, 21, 31, 34, 35, 36, 37, 38, 39, 40, 41, 44, 46, 47, 48, 49, 51 ]
 }
 tracks/1/type = "audio"
-tracks/1/path = NodePath("Explossion")
+tracks/1/path = NodePath("Explosion")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "clips": [ {
-"end_offset": 0.0,
+"end_offset": 3.97,
 "start_offset": 0.3,
 "stream": ExtResource( 8 )
 } ],
