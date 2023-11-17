@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/slam_hit_impact.mp3-979206d84c5a652b11af490498a6be5b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/slam_hit_impact.mp3"
+dest_files=[ "res://.import/slam_hit_impact.mp3-979206d84c5a652b11af490498a6be5b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
