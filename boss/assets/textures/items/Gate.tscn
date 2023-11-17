@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Entry.png" type="Texture" id=1]
-[ext_resource path="res://assets/textures/items/Entry.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Gate.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/items/Gate.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/gate_metal_flimsy_close_001_16639.mp3" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -83,8 +84,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ), Vector2( 0, -34.8209 ), Vector2( 0, -30.0083 ), Vector2( 0, -2 ), Vector2( 0, -3.467 ) ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Gate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.72901,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 3.1807 )
+}
 
-[node name="Entry" type="Node2D"]
+[node name="Gate" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -105,5 +120,10 @@ polygon = PoolVector2Array( -15, 1, -15, 31, 16, 31, 16, 1, 7, 1, 5, 5, -1, -3, 
 [node name="Collision2" type="CollisionPolygon2D" parent="Area2D"]
 position = Vector2( 0, -2 )
 polygon = PoolVector2Array( -15, 2, -15, -32, 16, -32, 16, 1, 11, 1, 9, 6, 3, 6, -5, -2, -9, 2 )
+
+[node name="Gate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 600.0
+bus = "Items"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

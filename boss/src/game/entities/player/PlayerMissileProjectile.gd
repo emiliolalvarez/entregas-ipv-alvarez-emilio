@@ -6,6 +6,7 @@ onready var direction_timer = $DirectionTimer
 onready var missile_tip = $MissileTip
 onready var detection_area = $DetectionArea
 export (int) var damage: int = 5
+onready var missile_sound = $MissileLaunch
 
 var target:Node2D
 var update = false
@@ -19,6 +20,8 @@ func initialize(container: Node, spawn_position: Vector2, target_direction: Vect
 	direction_timer.wait_time = lifetime_timer.wait_time / 8 / VELOCITY
 	direction_timer.connect("timeout", self, "_on_direction_timer_timeout")
 	direction_timer.start()
+	missile_sound.play()
+	
 	
 func _on_DetectionArea_body_entered(body: Node2D):
 	if (target == null):

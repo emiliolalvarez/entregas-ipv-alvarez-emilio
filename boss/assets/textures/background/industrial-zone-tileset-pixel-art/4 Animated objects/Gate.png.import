@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Entry.png-beed427f078bb599c07771c9e58b98b2.stex"
+path="res://.import/Gate.png-1b0c8f59dcc1e09d0140fc49183662a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Entry.png"
-dest_files=[ "res://.import/Entry.png-beed427f078bb599c07771c9e58b98b2.stex" ]
+source_file="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Gate.png"
+dest_files=[ "res://.import/Gate.png-1b0c8f59dcc1e09d0140fc49183662a8.stex" ]
 
 [params]
 

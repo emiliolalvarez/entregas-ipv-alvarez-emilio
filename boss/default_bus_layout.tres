@@ -1,9 +1,26 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+[gd_resource type="AudioBusLayout" load_steps=3 format=2]
 
 [sub_resource type="AudioEffectEQ21" id=3]
 resource_name = "EQ21"
 
+[sub_resource type="AudioEffectEQ21" id=4]
+resource_name = "EQ21"
+
 [resource]
-bus/0/volume_db = -18.9844
+bus/0/volume_db = -9.63278
 bus/0/effect/0/effect = SubResource( 3 )
 bus/0/effect/0/enabled = true
+bus/1/name = "Items"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -4.25003
+bus/1/send = "Master"
+bus/1/effect/0/effect = SubResource( 4 )
+bus/1/effect/0/enabled = true
+bus/2/name = "Background"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -18.3165
+bus/2/send = "Master"

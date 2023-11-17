@@ -491,10 +491,12 @@ percent_visible = false
 [node name="Fire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
 max_distance = 600.0
+bus = "Items"
 
 [node name="Explosion" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 14 )
 max_distance = 600.0
+bus = "Items"
 
 [connection signal="hit" from="." to="StateMachine" method="_on_damage_received"]
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_IdleTimer_timeout"]

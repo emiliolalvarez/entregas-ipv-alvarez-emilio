@@ -20,5 +20,6 @@ offset = Vector2( 0, 36 )
 
 [node name="introMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+bus = "Background"
 
 [connection signal="start_button_pressed" from="MainMenu" to="." method="_on_start_requested"]

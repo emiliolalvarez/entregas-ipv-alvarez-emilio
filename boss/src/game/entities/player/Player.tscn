@@ -998,6 +998,7 @@ position = Vector2( 23.3333, -4.66667 )
 
 [node name="Explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
+bus = "Items"
 
 [connection signal="dead" from="." to="." method="_on_Player_dead"]
 [connection signal="notify_die" from="." to="StateMachine" method="notify_die"]

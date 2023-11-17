@@ -19,3 +19,4 @@ position = Vector2( -0.0425491, 9.39857 )
 
 [node name="Fire" type="AudioStreamPlayer" parent="Weapon"]
 stream = ExtResource( 3 )
+bus = "Items"
