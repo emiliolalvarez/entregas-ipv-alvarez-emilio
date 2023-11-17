@@ -18,7 +18,7 @@ anchor_bottom = 0.35
 margin_left = -31.0
 margin_top = -41.0
 margin_right = 160.0
-margin_bottom = 89.0
+margin_bottom = 96.0
 color = Color( 0, 0, 0, 0.807843 )
 
 [node name="Info" type="RichTextLabel" parent="Container"]
@@ -28,16 +28,17 @@ margin_right = 151.0
 margin_bottom = 50.0
 custom_fonts/normal_font = ExtResource( 3 )
 text = "This is the final battle... We can't loose!
-Beware the Zentraedi spaceship main weapon. There are also many soldiers guarding the ship."
+Beware the Zentraedi spaceship main weapon. There are also many soldiers guarding the ship.
+Be careful and good luck commander!"
 fit_content_height = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container"]
 anchor_left = 1.8
 anchor_right = 4.0
 margin_left = 1.33514e-05
-margin_top = 63.0
+margin_top = 78.0
 margin_right = 128.0
-margin_bottom = 83.0
+margin_bottom = 81.0
 rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="GoButton" type="Button" parent="Container/VBoxContainer"]
