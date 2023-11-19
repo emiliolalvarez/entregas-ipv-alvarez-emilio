@@ -978,7 +978,7 @@ remote_path = NodePath("../../CollisionShape2D")
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
-vframes = 16
+vframes = 24
 frame = 21
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
