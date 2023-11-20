@@ -106,10 +106,13 @@ func _handle_vertical_deacceleration() -> void:
 ## a una función para ser llamada apropiadamente desde la state machine
 func _apply_movement() -> void:
 	velocity.y += (gravity if mode == MODE_ROBOT else 0)
-	velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, stop_on_slope, 4, SLOPE_THRESHOLD)
-	if mode == MODE_ROBOT && is_on_floor() && snap_vector == Vector2.ZERO:
-		snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-
+	if mode == MODE_ROBOT: 
+		velocity = move_and_slide_with_snap(velocity, snap_vector, FLOOR_NORMAL, stop_on_slope, 4, SLOPE_THRESHOLD)
+		if is_on_floor() && snap_vector == Vector2.ZERO:
+			snap_vector = SNAP_DIRECTION * SNAP_LENGTH
+	else:
+		_handle_deacceleration()
+		velocity = move_and_slide(velocity)
 
 ## Función que pisa la función is_on_floor() ya existente
 ## y le agrega el chequeo de raycasts para expandir la ventana
