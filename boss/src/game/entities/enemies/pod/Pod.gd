@@ -84,6 +84,7 @@ func notify_hit(amount:int = 1) -> void:
 	
 func _remove() -> void:
 	set_physics_process(false)
+	hide()
 	for n in get_children():
 		remove_child(n)
 		n.queue_free()

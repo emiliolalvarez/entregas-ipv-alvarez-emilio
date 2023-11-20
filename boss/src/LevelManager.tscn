@@ -9,7 +9,7 @@
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
 tracks/0/type = "value"
-tracks/0/path = NodePath("OverLayLayer/ColorRect:self_modulate")
+tracks/0/path = NodePath("OverayLayer/ColorRect:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -38,7 +38,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=2]
 resource_name = "fade_out"
 tracks/0/type = "value"
-tracks/0/path = NodePath("OverLayLayer/ColorRect:self_modulate")
+tracks/0/path = NodePath("OverayLayer/ColorRect:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -54,11 +54,11 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 levels = [ ExtResource( 2 ), ExtResource( 3 ) ]
 
-[node name="OverLayLayer" type="CanvasLayer" parent="."]
+[node name="OverayLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="OverLayLayer"]
+[node name="ColorRect" type="ColorRect" parent="OverayLayer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 264.0
+margin_right = 272.0
 margin_bottom = 168.0
 color = Color( 0, 0, 0, 1 )
 
