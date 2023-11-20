@@ -11,5 +11,5 @@ dest_files=[ "res://.import/rocket_launch.mp3-0799a1feeccc72d32c7502c802109e3a.m
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
