@@ -639,10 +639,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0964509, 0.188673, 0.294112, 0.394112 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 5, 6, 7, 8 ]
+"values": [ 70, 5, 6, 7, 8 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
@@ -973,8 +973,8 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 5, 1.66667 )
-scale = Vector2( 1.2, 1 )
+position = Vector2( -1, 5 )
+scale = Vector2( 2, 0.65 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -994,8 +994,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( 5, 1.66667 )
-scale = Vector2( 1.2, 1 )
+position = Vector2( -1, 5 )
+scale = Vector2( 2, 0.65 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1004,11 +1004,10 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 24
-frame = 74
+frame = 8
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( -32.669, -25.333 )
-rotation = 3.49066
+position = Vector2( 24, 4 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1016,8 +1015,7 @@ position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( -34.7476, -26.4443 )
-rotation = -2.79253
+position = Vector2( 26.3333, 4.33333 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
