@@ -651,10 +651,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0508566, 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 18.3333, 6.66667 ), Vector2( 24, 31 ), Vector2( 16.6667, 16.6667 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 4 ) ]
+"values": [ Vector2( 12.37, -16.174 ), Vector2( 18.3333, 6.66667 ), Vector2( 24, 31 ), Vector2( 16.6667, 16.6667 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -663,10 +663,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0508566, 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 28.1, 0.0, 58.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+"values": [ -30.0, 28.1, 0.0, 58.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -973,8 +973,8 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 5 )
-scale = Vector2( 2, 0.65 )
+position = Vector2( -3.69486, 3.20343 )
+scale = Vector2( 1.10171, 0.9644 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -994,8 +994,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -1, 5 )
-scale = Vector2( 2, 0.65 )
+position = Vector2( -3.69486, 3.20343 )
+scale = Vector2( 1.10171, 0.9644 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1004,10 +1004,11 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 24
-frame = 8
+frame = 70
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 24, 4 )
+position = Vector2( 12.37, -16.174 )
+rotation = -0.523599
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1015,7 +1016,8 @@ position = Vector2( 2.33333, 0.333332 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 26.3333, 4.33333 )
+position = Vector2( 14.5574, -17.052 )
+rotation = -0.523599
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
