@@ -5,6 +5,7 @@ signal hp_changed(current_hp, max_hp)
 signal mana_changed(amount)
 signal notify_die()
 signal dead()
+signal enemy_collied()
 
 const FLOOR_NORMAL: Vector2 = Vector2.UP  # Igual a Vector2(0, -1)
 const SNAP_DIRECTION: Vector2 = Vector2.DOWN
@@ -89,7 +90,13 @@ func _handle_move_input() -> void:
 		body_pivot.scale.x = 1 - 2 * float(move_direction < 0)
 	if mode == MODE_PLANE && move_vertical_direction != 0:
 		velocity.y = clamp(velocity.y + (move_vertical_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
-	
+
+func _handle_collide() -> void:
+	#velocity.x = clamp(velocity.x + (move_direction * ACCELERATION), -H_SPEED_LIMIT, H_SPEED_LIMIT)
+	velocity.x += (10 *  self.get_direction())
+
+func get_direction() -> int:
+	return -1 if body_pivot.scale.x < 0 else 1
 
 ## Se extrae el comportamiento del manejo de la aplicación de fricción
 ## a una función para ser llamada apropiadamente desde la state machine
@@ -112,6 +119,7 @@ func _apply_movement() -> void:
 			snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 	else:
 		_handle_deacceleration()
+		_handle_vertical_deacceleration()
 		velocity = move_and_slide(velocity)
 
 ## Función que pisa la función is_on_floor() ya existente
@@ -137,6 +145,9 @@ func notify_mana_recover(amount: int = 1) -> void:
 func notify_mana(amount: int = 1) -> void:
 	_handle_mana(amount)
 
+func notify_enemy_collision(amount: int) -> void:
+	notify_hit(amount)
+	emit_signal("enemy_collied")
 
 ## Esta función ya no llama directamente a remove, sino que deriva
 ## el handleo a la state machine emitiendo una señal. Esto es para
@@ -189,6 +200,9 @@ func _play_animation(animation: String) -> void:
 func _stop_animation(reset:bool) -> void:
 	if body_animations.is_playing():
 		body_animations.stop(reset)
+		
+func _is_playing_animation() -> bool:
+	return body_animations.is_playing()
 
 func _set_plane_mode():
 	mode = MODE_PLANE
@@ -204,3 +218,8 @@ func _is_robot_mode() -> bool:
 	
 func force_plane_mode(force: bool) -> void:
 	force_plane = force
+
+func _on_CollisionArea_body_entered(body) -> void:	
+	if _is_plane_mode():
+		print ("Enemy collied on plane mode")
+		emit_signal("enemy_collied")

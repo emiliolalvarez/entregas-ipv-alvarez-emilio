@@ -48,4 +48,6 @@ func handle_event(event: String, value = null) -> void:
 	match event:
 		"die":
 			emit_signal("finished", "dead")
+		"enemy_collied":
+			emit_signal("finished", "collide")
 		

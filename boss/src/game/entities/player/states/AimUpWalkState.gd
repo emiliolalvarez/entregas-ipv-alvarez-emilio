@@ -9,6 +9,8 @@ func handle_input(event:InputEvent) -> void:
 		emit_signal("finished", "down")
 	if (event.is_action_released("move_up") && (Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"))):
 		emit_signal("finished", "walk")
+	if (event.is_action_pressed("move_up") && (Input.is_action_released("move_left") && Input.is_action_released("move_right"))):
+		emit_signal("finished", "aim_up")	
 	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished", "jump")
 	if event.is_action_pressed("change_mode"):

@@ -5,16 +5,16 @@ var original_h_speed: float
 
 
 func enter() -> void:
+	character._set_plane_mode()
 	original_h_speed = character.H_SPEED_LIMIT
 	character.H_SPEED_LIMIT += original_h_speed * 1.25
 	character.snap_vector = Vector2.ZERO
-	character._set_plane_mode()
-	character._play_animation("plane")
-	do_move_up()
+	if (character._is_robot_mode()):
+		character._play_animation("plane")
+		do_move_up()
 	
 func exit() -> void:
 	collision_shape.scale.y = 1
-	character._set_robot_mode()
 	character.H_SPEED_LIMIT = original_h_speed
 	
 	

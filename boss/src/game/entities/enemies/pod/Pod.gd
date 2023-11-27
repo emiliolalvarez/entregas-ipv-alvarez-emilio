@@ -7,6 +7,8 @@ export (int) var MAX_LIFE:int = 5
 export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
 export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
+export (float) var COLLISION_DAMAGE:float = 3
+
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
 
@@ -84,6 +86,8 @@ func notify_hit(amount:int = 1) -> void:
 	
 func _remove() -> void:
 	set_physics_process(false)
+	collision_layer = 0
+	collision_mask = 0
 	hide()
 	for n in get_children():
 		remove_child(n)
@@ -99,3 +103,8 @@ func _play_animation(animation: String) -> void:
 
 func get_current_animation() -> String:
 	return animation_player.get_current_animation()
+
+
+func _on_collision_area_body_enter(body):
+	if body.has_method('notify_enemy_collision'):
+		body.notify_enemy_collision(self.COLLISION_DAMAGE)

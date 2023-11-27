@@ -16,7 +16,7 @@ func handle_input(event:InputEvent) -> void:
 		character._set_plane_mode()
 		emit_signal("finished", "plane")
 	if event.is_action_pressed("fire_weapon"):
-		emit_signal("finished", "walk_fire")	
+		character._handle_weapon_actions()	
 
 # En esta función vamos a manejar las acciones apropiadas para este estado
 func update(delta: float) -> void:

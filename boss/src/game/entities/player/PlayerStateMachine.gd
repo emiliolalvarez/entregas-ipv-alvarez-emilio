@@ -8,3 +8,7 @@ extends AbstractStateMachine
 
 func notify_die() -> void:
 	current_state.handle_event("die")
+
+
+func _on_enemy_collied():
+	current_state.handle_event("enemy_collied")

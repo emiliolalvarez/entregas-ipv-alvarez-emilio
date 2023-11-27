@@ -12,10 +12,12 @@ func exit() -> void:
 	can_fire = false
 
 func handle_input(event:InputEvent) -> void:
+	if (event.is_action_released("move_left") && event.is_action_released("move_right")) &&  event.is_action_pressed("move_up") && character._is_robot_mode():
+		emit_signal("finished", "aim_up")
+	if (event.is_action_pressed("move_left") || event.is_action_pressed("move_right")) &&  event.is_action_pressed("move_up") && character._is_robot_mode():
+		emit_signal("finished", "aim_up_walk")
 	if event.is_action_pressed("move_down") && character._is_robot_mode():
 		emit_signal("finished", "down")
-	if event.is_action_pressed("move_up") && character.is_on_floor():
-		emit_signal("finished", "aim_up")
 	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished", "jump")
 	if event.is_action_pressed("change_mode"):

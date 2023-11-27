@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://src/game/entities/player/states/FireState.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/player/states/PlaneState.gd" type="Script" id=5]
 [ext_resource path="res://src/game/entities/player/states/DownState.gd" type="Script" id=6]
-[ext_resource path="res://src/game/entities/player/states/WalkFireState.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/player/varitek-sprites.png" type="Texture" id=8]
 [ext_resource path="res://src/game/entities/player/WeaponContainer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/game/entities/player/MissileContainer.tscn" type="PackedScene" id=10]
@@ -17,6 +16,7 @@
 [ext_resource path="res://src/game/entities/player/states/DeadState.gd" type="Script" id=15]
 [ext_resource path="res://src/game/entities/player/states/JumpState.gd" type="Script" id=16]
 [ext_resource path="res://assets/sounds/bomb-explossion.mp3" type="AudioStream" id=17]
+[ext_resource path="res://src/game/entities/player/states/CollideState.gd" type="Script" id=18]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -27,10 +27,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 6.25e-05 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0, 72 ]
+"values": [ 70 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
@@ -39,10 +39,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.000101563 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 18, 7.33333 ), Vector2( 17, -8.667 ) ]
+"values": [ Vector2( 17, -8.667 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -51,37 +51,37 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 9.56026e-05 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 31.0, 0.0 ]
+"values": [ 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
+tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.001 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.000184624 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -8, 0 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
+tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.00016427 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( -8, 3 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:position")
+tracks/5/path = NodePath("BodyPivot/Body:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -90,12 +90,12 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.33333, 1.66667 ) ]
+"values": [ Vector2( -5, 0 ) ]
 }
 
 [sub_resource type="Animation" id=14]
 resource_name = "aim_up"
-length = 0.3
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
 tracks/0/interp = 1
@@ -103,58 +103,34 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.00288594, 0.1, 0.195216 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.00210657, 0.068888 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 70, 71, 70 ]
+"values": [ 90, 70 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
+tracks/1/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.0989946, 0.102316, 0.1968, 0.198266 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.00482582, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 12.065, -16.062 ), Vector2( 15.1892, -16.6609 ), Vector2( 15.294, -16.681 ), Vector2( 12.7071, -15.6825 ), Vector2( 12.667, -15.667 ) ]
+"values": [ -36.6946, -36.6946 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
+tracks/2/path = NodePath("BodyPivot/WeaponPivot:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.0989946, 0.102517, 0.1968, 0.19811 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.00573225, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -30.0, -30.0, -30.0, -30.0, -30.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -7, 0 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 16, -19 ), Vector2( 16, -19 ) ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -208,6 +184,38 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -3.33333, 1.66667 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "collide"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.177586, 0.344985, 0.530564 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 91, 93, 94, 95 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "collide_plane"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.502195 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 100, 101, 102, 103, 104, 102 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -382,7 +390,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=12]
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
 tracks/0/interp = 1
@@ -390,7 +398,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.0531349 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 70, 72 ]
@@ -402,10 +410,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.0264889, 0.0274523, 0.1, 0.100658, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.0509403, 0.102195 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 20, 8 ), Vector2( 20.039, -20.168 ), Vector2( 23, -4 ), Vector2( 25.98, -9.034 ), Vector2( 20, -9 ) ]
+"values": [ Vector2( 15.248, -17.02 ), Vector2( 18.056, -8.6 ), Vector2( 20, -9 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -414,10 +422,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.0244513, 0.1, 0.2 ),
+"times": PoolRealArray( 0, 0.0531349, 0.100157 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 30.0, 0.0, 0.0 ]
+"values": [ -27.0, 0.0, 0.0 ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath("WeaponContainer")
@@ -426,7 +434,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0.0981195 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -440,10 +448,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [  ]
+"values": [ Vector2( -5, 3 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
@@ -452,10 +460,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [  ]
+"values": [ Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -703,10 +711,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.40956 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 8, 7, 6, 5 ]
+"values": [ 8, 7, 6, 5, 70 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
@@ -718,7 +726,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 19, 8 ) ]
+"values": [ Vector2( 13, -16 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -754,12 +762,12 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 31.0 ]
+"values": [ -25.0 ]
 }
 
 [sub_resource type="Animation" id=6]
 resource_name = "walk"
-length = 0.8
+length = 0.75
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
@@ -780,7 +788,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.00305025, 0.805267 ),
+"times": PoolRealArray( 0.00138778, 0.733 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 20, -9 ), Vector2( 20, -9 ) ]
@@ -792,10 +800,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.00305025, 0.796116 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.734135 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -4, 3 ), Vector2( 1, 3 ), Vector2( 1, 3 ) ]
+"values": [ Vector2( -4, 3 ), Vector2( -4, 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
@@ -804,10 +812,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.793066, 0.796116 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.734135 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -816,10 +824,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.00305025, 0.802217 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.00138778, 0.733258 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 31.0, 0.0, 0.0 ]
+"values": [ 0.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -845,10 +853,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.00305025, 1.09504, 1.09587, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.150783, 0.372883, 0.629622, 0.896549, 1.04326, 1.09012 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 21, -10 ), Vector2( 7.66668, -10 ), Vector2( 17.665, -11 ), Vector2( 21, -5 ), Vector2( 27, -10 ) ]
+"values": [ Vector2( 16.667, -9.5 ), Vector2( 16.667, -10 ), Vector2( 23.667, -10 ), Vector2( 23.667, -9 ), Vector2( 23.667, -8.7 ), Vector2( 23.667, -9.7 ), Vector2( 16.667, -9.5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -857,10 +865,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.00305025, 1.09892 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.150783, 0.372883, 0.625547, 0.896549, 1.04326, 1.09216 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 0.0 ]
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -890,6 +898,10 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 10.8333, 20 )
 
+[sub_resource type="CapsuleShape2D" id=22]
+radius = 11.6667
+height = 36.6666
+
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 2
@@ -905,22 +917,21 @@ mana = 30
 script = ExtResource( 12 )
 character_path = NodePath("..")
 START_STATE = NodePath("Idle")
-STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("WalkFire"), NodePath("AimUp"), NodePath("AimUpWalk"), NodePath("Down"), NodePath("Missile") ]
+STATES_LIST = [ NodePath("Idle"), NodePath("Walk"), NodePath("Jump"), NodePath("Dead"), NodePath("Fire"), NodePath("Plane"), NodePath("AimUp"), NodePath("AimUpWalk"), NodePath("Down"), NodePath("Missile"), NodePath("Collide") ]
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 14 )
 state_id = "idle"
 
+[node name="Collide" type="Node" parent="StateMachine"]
+script = ExtResource( 18 )
+state_id = "collide"
+
+[node name="CollideTimer" type="Timer" parent="StateMachine/Collide"]
+
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 state_id = "walk"
-
-[node name="WalkFire" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
-state_id = "walk_fire"
-
-[node name="WalkFireTimer" type="Timer" parent="StateMachine/WalkFire"]
-one_shot = true
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
@@ -960,6 +971,8 @@ reset_on_save = false
 anims/RESET = SubResource( 3 )
 anims/aim_up = SubResource( 14 )
 anims/aim_up_walk = SubResource( 16 )
+anims/collide = SubResource( 20 )
+anims/collide_plane = SubResource( 21 )
 anims/die = SubResource( 8 )
 anims/down = SubResource( 18 )
 anims/fall = SubResource( 7 )
@@ -973,8 +986,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.69486, 3.20343 )
-scale = Vector2( 1.10171, 0.9644 )
+position = Vector2( -8, 3 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -994,8 +1006,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -3.69486, 3.20343 )
-scale = Vector2( 1.10171, 0.9644 )
+position = Vector2( -8, 3 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1007,17 +1018,15 @@ vframes = 24
 frame = 70
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 12.37, -16.174 )
-rotation = -0.523599
+position = Vector2( 17, -8.667 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
-position = Vector2( 2.33333, 0.333332 )
+position = Vector2( 2.333, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 14.5574, -17.052 )
-rotation = -0.523599
+position = Vector2( 19.333, -8.334 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 
@@ -1027,6 +1036,16 @@ rotation = -0.523599
 stream = ExtResource( 17 )
 bus = "Items"
 
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2( -5, 5 )
+rotation = 1.57079
+shape = SubResource( 22 )
+
 [connection signal="dead" from="." to="." method="_on_Player_dead"]
+[connection signal="enemy_collied" from="." to="StateMachine" method="_on_enemy_collied"]
 [connection signal="notify_die" from="." to="StateMachine" method="notify_die"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]
+[connection signal="body_entered" from="CollisionArea" to="." method="_on_CollisionArea_body_entered"]
