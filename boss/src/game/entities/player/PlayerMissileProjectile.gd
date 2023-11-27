@@ -11,9 +11,11 @@ onready var missile_sound = $MissileLaunch
 var target:Node2D
 var update = false
 var collision_mask
+var target_enemy:Node2D
 
-func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2 ) -> void:
+func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2, enemy:Node2D = null) -> void:
 	.initialize(container, spawn_position, target_direction)
+	target_enemy = enemy
 	rotation = spawn_position.angle_to(spawn_position + Vector2(0, -1))
 	collision_mask = detection_area.collision_mask
 	detection_area.collision_mask = 0
@@ -41,6 +43,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_direction_timer_timeout():
 	update = true
+	if (target_enemy != null):
+		target = target_enemy
 	detection_area.collision_mask = collision_mask
 
 func get_projectile_damage() -> int:
