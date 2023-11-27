@@ -986,7 +986,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -8, 3 )
+position = Vector2( -4, 3 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -1006,7 +1006,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -8, 3 )
+position = Vector2( -4, 3 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1015,10 +1015,11 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 24
-frame = 70
+frame = 102
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 17, -8.667 )
+position = Vector2( 20.3962, 15.525 )
+rotation = 0.311898
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1026,7 +1027,8 @@ position = Vector2( 2.333, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 19.333, -8.334 )
+position = Vector2( 22.5145, 16.5579 )
+rotation = 0.311898
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 

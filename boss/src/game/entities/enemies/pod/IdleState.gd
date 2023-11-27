@@ -8,6 +8,7 @@ func enter() -> void:
 func exit() -> void: 
 	#print("POD exited Idle state")	
 	pass
+	
 func update(delta:float) -> void:
 	if (character.target):
 		character.look_at(character.target)

@@ -85,13 +85,10 @@ func notify_hit(amount:int = 1) -> void:
 
 	
 func _remove() -> void:
+	hide()
 	set_physics_process(false)
 	collision_layer = 0
 	collision_mask = 0
-	hide()
-	for n in get_children():
-		remove_child(n)
-		n.queue_free()
 	get_parent().remove_child(self)
 	queue_free()
 

@@ -14,7 +14,6 @@ func handle_input(event:InputEvent) -> void:
 	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished", "jump")
 	if event.is_action_pressed("change_mode"):
-		character._set_plane_mode()
 		emit_signal("finished", "plane")
 	
 func update(delta: float) -> void:

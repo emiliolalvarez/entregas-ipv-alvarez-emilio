@@ -13,7 +13,6 @@ func update(delta:float) -> void:
 	character._look_at_target()
 	
 func exit() -> void:
-	#print("POD exited alert state")
 	timer.stop()
 		
 func _should_fire() -> bool:

@@ -13,7 +13,6 @@ func handle_input(event:InputEvent) -> void:
 	if event.is_action_pressed("move_up") && character.is_on_floor():
 		emit_signal("finished", "aim_up_walk")
 	if event.is_action_pressed("change_mode"):
-		character._set_plane_mode()
 		emit_signal("finished", "plane")
 	if event.is_action_pressed("fire_weapon"):
 		character._handle_weapon_actions()	
