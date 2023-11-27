@@ -3,6 +3,7 @@ extends AbstractState
 
 # Al entrar se activa primero la animación "idle"
 func enter() -> void:
+	character._set_robot_mode()
 	character._play_animation("idle")
 
 func handle_input(event: InputEvent) -> void:
