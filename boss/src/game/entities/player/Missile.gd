@@ -24,7 +24,7 @@ func can_fire() -> bool:
 	return projectiles_count == 0
 
 func fire(targets:Array = []) -> void:
-	
+
 	if projectiles_count == 0:
 		var projectiles = [
 			[weapon_tip1, projectile_scene.instance()],
@@ -33,14 +33,15 @@ func fire(targets:Array = []) -> void:
 		]
 		
 		projectiles_count = projectiles.size()
-		
+		var last_target = null;
 		for i in projectiles.size():
+			last_target = (last_target if i + 1 > targets.size() else targets[i])
 			projectiles[i][1].connect("removed", self, "_on_projectile_removed")
 			projectiles[i][1].initialize(
 				projectile_container,
 				projectiles[i][0].global_position,
 				global_position.direction_to(projectiles[i][0].global_position),
-				(null if i + 1 >= targets.size() else targets[i])
+				last_target
 			)
 		
 	

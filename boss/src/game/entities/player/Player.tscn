@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/game/entities/player/states/FireState.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/player/states/PlaneState.gd" type="Script" id=5]
 [ext_resource path="res://src/game/entities/player/states/DownState.gd" type="Script" id=6]
+[ext_resource path="res://src/game/entities/player/WeaponContainer.gd" type="Script" id=7]
 [ext_resource path="res://assets/textures/player/varitek-sprites.png" type="Texture" id=8]
 [ext_resource path="res://src/game/entities/player/WeaponContainer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/game/entities/player/MissileContainer.tscn" type="PackedScene" id=10]
@@ -1031,6 +1032,7 @@ remote_path = NodePath("../../../WeaponContainer")
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 position = Vector2( 18.0041, -15.2714 )
 rotation = -0.610865
+script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
 

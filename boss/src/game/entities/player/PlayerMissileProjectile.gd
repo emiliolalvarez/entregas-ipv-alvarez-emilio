@@ -16,6 +16,8 @@ var target_enemy:Node2D
 func initialize(container: Node, spawn_position: Vector2, target_direction: Vector2, enemy:Node2D = null) -> void:
 	.initialize(container, spawn_position, target_direction)
 	target_enemy = enemy
+	print("Missile target enemy:")
+	print(target_enemy)
 	rotation = spawn_position.angle_to(spawn_position + Vector2(0, -1))
 	collision_mask = detection_area.collision_mask
 	detection_area.collision_mask = 0
@@ -34,6 +36,8 @@ func _on_DetectionArea_body_exited(body: Node2D):
 		target = null
 		
 func _physics_process(delta: float) -> void:
+	if (target!=null && !is_instance_valid(target)):
+		target = null
 	if (target != null && update):
 		direction = global_position.direction_to(target.global_position)
 		rotation = 90 + direction.angle()
