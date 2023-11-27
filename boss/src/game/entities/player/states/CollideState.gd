@@ -10,12 +10,10 @@ onready var collide_timer = $CollideTimer
 
 # Al entrar se activa primero la animación "idle"
 func enter() -> void:
-	print("enter collide state")
 	collide_timer.connect("timeout", self, "on_collide_timer_timeout")
 	collide_timer.wait_time = 1
 	direction = character.get_direction()
 	collide_timer.start()
-	print("is robot mode: " + String(character._is_robot_mode()))
 	if character._is_robot_mode():
 		character._play_animation("collide")	
 	else: 

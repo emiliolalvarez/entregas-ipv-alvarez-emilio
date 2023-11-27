@@ -6,7 +6,6 @@ var original_collision_shape_scale_y: float
 
 
 func enter() -> void:
-	print("Enter plane mode => is robot mode: " + String(character._is_robot_mode()))
 	original_h_speed = character.H_SPEED_LIMIT
 	original_collision_shape_scale_y = collision_shape.scale.y
 	character.snap_vector = Vector2.ZERO
