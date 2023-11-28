@@ -33,19 +33,11 @@ func handle_input(event:InputEvent) -> void:
 
 # En esta función vamos a manejar las acciones apropiadas para este estado
 func update(delta: float) -> void:
-#	var move_speed = PLANE_MOVE_SPEED if character._is_plane_mode() else ROBOT_MOVE_SPEED
-#	var backward_vector = Vector2(-1 if character.get_direction() == 1 else 1, 0)  # Adjust this vector for the backward movement
-#	var movement = backward_vector * move_speed * delta
-#	character.position += movement
 	var move_speed = PLANE_MOVE_SPEED if character._is_plane_mode() else ROBOT_MOVE_SPEED
 	var backward_vector = Vector2(-1 if character.get_direction() == 1 else 1, 0)  # Adjust this vector for the backward movement
 	var movement = backward_vector * move_speed
-
-	# Modify the character's velocity instead of directly changing position
 	character.velocity = movement
-
-	# Apply the velocity using move_and_slide()
-	character.velocity = move_and_slide(character.velocity)
+	character.velocity = character.move_and_slide(character.velocity)
 
 func on_collide_timer_timeout() -> void:
 	if character._is_robot_mode():
