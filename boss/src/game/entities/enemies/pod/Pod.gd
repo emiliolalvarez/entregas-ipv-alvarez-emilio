@@ -7,7 +7,7 @@ export (int) var MAX_LIFE:int = 5
 export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
 export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (float) var COLLISION_DAMAGE:float = 3
+export (int) var COLLISION_DAMAGE:int = 3
 export (int) var POINTS:int = 10
 
 export (float) var speed:float  = 10.0
@@ -85,7 +85,6 @@ func _play_animation(animation: String) -> void:
 
 func get_current_animation() -> String:
 	return animation_player.get_current_animation()
-
-func _on_collision_area_body_enter(body):
-	if body.has_method('notify_enemy_collision'):
-		body.notify_enemy_collision(self.COLLISION_DAMAGE)
+		
+func _get_collision_damage() -> int:
+	return self.COLLISION_DAMAGE

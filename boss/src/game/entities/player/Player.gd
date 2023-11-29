@@ -221,5 +221,4 @@ func force_plane_mode(force: bool) -> void:
 
 func _on_CollisionArea_body_entered(body) -> void:	
 	if _is_plane_mode():
-		print ("Enemy collied on plane mode")
 		emit_signal("enemy_collied")

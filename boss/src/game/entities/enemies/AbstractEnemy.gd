@@ -19,8 +19,12 @@ func _remove() -> void:
 func _get_points() -> int:
 	return 1
 
-## Esta función ya no llama directamente a remove, sino que inhabilita las
-## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
-## dependiendo de si el enemigo esta o no alerta
 func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
+
+func _on_collision_area_body_enter(body):
+	if body.has_method('notify_enemy_collision'):
+		body.notify_enemy_collision(_get_collision_damage())
+		
+func _get_collision_damage() -> int:
+	return 1

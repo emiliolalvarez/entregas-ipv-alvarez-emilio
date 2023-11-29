@@ -15,7 +15,10 @@ func enter() -> void:
 	direction = character.get_direction()
 	collide_timer.start()
 	if character._is_robot_mode():
-		character._play_animation("collide")	
+		if (character.is_on_floor()):
+			character._play_animation("collide")
+		else: 
+			character._play_animation("fall")
 	else: 
 		character._play_animation("collide_plane")
 	
@@ -34,10 +37,10 @@ func handle_input(event:InputEvent) -> void:
 # En esta función vamos a manejar las acciones apropiadas para este estado
 func update(delta: float) -> void:
 	var move_speed = PLANE_MOVE_SPEED if character._is_plane_mode() else ROBOT_MOVE_SPEED
-	var backward_vector = Vector2(-1 if character.get_direction() == 1 else 1, 0)  # Adjust this vector for the backward movement
+	var backward_vector = Vector2(-1 if character.get_direction() == 1 else 1, 2.5 if character._is_robot_mode() else 0) 
 	var movement = backward_vector * move_speed
-	character.velocity = movement
-	character.velocity = character.move_and_slide(character.velocity)
+	character.velocity = character.move_and_slide(movement)
+	
 
 func on_collide_timer_timeout() -> void:
 	if character._is_robot_mode():
