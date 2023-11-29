@@ -15,5 +15,4 @@ func _on_mana_changed(current_mana, max_mana):
 	mana_progress.value = current_mana
 
 func _on_score_changed(amount: int): 
-	print("On score changed ")
 	points_label.text = String(int(points_label.text) + amount)
