@@ -8,7 +8,7 @@ export (Array, PackedScene) var levels: Array
 onready var animation_player = $AnimationPlayer
 onready var main_menu = $CanvasLayer/MainMenu
 onready var game_over_menu = $CanvasLayer/GameOverMenu
-
+onready var hud = $HudCanvasLayer/HUD
 onready var current_level_container: Node = $CurrentLevelContainer
 var current: GameLevel
 
@@ -19,12 +19,12 @@ export (Texture) var mouse_cursor: Texture
 
 func _ready() -> void:
 	call_deferred("_setup_level", level)
+	GameState.set_hud(hud)
 
 
 func _setup_level(id: int) -> void:
 	# Chequea que exista un nivel, y el número de nivel dado es correcto
 	if id >= 0 && id < levels.size():
-		
 		# Remueve el nivel activo, si existiese
 		if current_level_container.get_child_count() > 0:
 			for child in current_level_container.get_children():
@@ -43,6 +43,8 @@ func _add_scene() -> void:
 	current.connect("next_level_requested", self, "_next_called")
 	current.connect("menu_requested", self, "_menu_requested_called")
 	current.connect("game_over_menu_requested", self, "game_over_menu_requested_called")
+	current.connect("hp_changed", hud, "_on_hp_changed")
+	current.connect("mana_changed", hud, "_on_mana_changed")
 	animation_player.play("fade_out")
 	
 # Callback de regreso al MainMenu.

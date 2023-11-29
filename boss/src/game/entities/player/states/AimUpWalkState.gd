@@ -5,7 +5,7 @@ func enter() -> void:
 	character._play_animation("aim_up_walk")
 
 func handle_input(event:InputEvent) -> void:
-	if event.is_action_pressed("move_down") && character._is_robot_mode():
+	if event.is_action_pressed("move_down") && character._is_robot_mode() && character.is_on_floor():
 		emit_signal("finished", "down")
 	if (event.is_action_released("move_up") && (Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"))):
 		emit_signal("finished", "walk")

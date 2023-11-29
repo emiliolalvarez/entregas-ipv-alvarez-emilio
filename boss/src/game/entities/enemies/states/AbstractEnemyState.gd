@@ -1,6 +1,8 @@
 extends AbstractState
 class_name  AbstractEnemyState
 
+signal score_changed()
+
 func handle_event(event: String, value = null) -> void:
 	match event:
 		"body_entered":
@@ -30,3 +32,4 @@ func _handle_damage_recieved(amount) -> void:
 
 func _handle_fire_start() -> void:
 	emit_signal("finished", "fire_start")
+

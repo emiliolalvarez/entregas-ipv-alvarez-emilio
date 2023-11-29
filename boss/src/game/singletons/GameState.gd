@@ -21,6 +21,7 @@ signal level_won()
 signal current_player_changed(player)
 
 var current_player: Player
+var hud: Control
 
 func set_current_player(player: Player) -> void:
 	current_player = player
@@ -28,3 +29,9 @@ func set_current_player(player: Player) -> void:
 
 func notify_level_won() -> void:
 	emit_signal("level_won")
+	
+func set_hud(hud: Control) -> void:
+	self.hud = hud
+
+func update_score(amount: int) -> void:
+	hud._on_score_changed(amount)

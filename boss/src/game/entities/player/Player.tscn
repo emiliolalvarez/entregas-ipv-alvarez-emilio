@@ -1015,6 +1015,7 @@ remote_path = NodePath("../../CollisionShape2D")
 [node name="Body" type="Sprite" parent="BodyPivot"]
 position = Vector2( -5, 0 )
 scale = Vector2( 0.5, 0.5 )
+z_index = 2
 texture = ExtResource( 8 )
 hframes = 5
 vframes = 24

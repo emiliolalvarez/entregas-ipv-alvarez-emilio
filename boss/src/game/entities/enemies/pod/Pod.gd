@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends AbstractEnemy
 
 class_name EnemyPod
 
@@ -8,6 +8,7 @@ export (float) var ACCELERATION: float = 10.0
 export (float) var H_SPEED_LIMIT: float = 30.0
 export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
 export (float) var COLLISION_DAMAGE:float = 3
+export (int) var POINTS:int = 10
 
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
@@ -25,13 +26,9 @@ onready var pivot:Node2D = $Pivot
 onready var animation_player = $AnimationPlayer
 onready var collision = $CollisionShape2D
 
-signal hit(amount)
-
 var target: Node2D
 var projectile_container: Node
 var velocity: Vector2 = Vector2.ZERO
-## Flag de ayuda para saber identificar el estado de actividad
-var dead: bool = false
 
 
 func _ready():
@@ -76,19 +73,9 @@ func _apply_movement() -> void:
 	velocity.y += gravity
 	velocity = move_and_slide(velocity)
 	_look_at_target()
-
-## Esta función ya no llama directamente a remove, sino que inhabilita las
-## colisiones con el mundo, pausa todo lo demás y ejecuta una animación de muerte
-## dependiendo de si el enemigo esta o no alerta
-func notify_hit(amount:int = 1) -> void:
-	emit_signal("hit", amount)
-
 	
-func _remove() -> void:
-	hide()
-	set_physics_process(false)
-	get_parent().remove_child(self)
-	queue_free()
+func _get_points() -> int:
+	return POINTS
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
@@ -98,7 +85,6 @@ func _play_animation(animation: String) -> void:
 
 func get_current_animation() -> String:
 	return animation_player.get_current_animation()
-
 
 func _on_collision_area_body_enter(body):
 	if body.has_method('notify_enemy_collision'):

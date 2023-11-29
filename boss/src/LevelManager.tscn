@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://src/game/levels/level1/Level01.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/levels/level1/boss/Level01_1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/ui/MainMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/game/ui/GameOverMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/hud/hud.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -53,6 +54,14 @@ tracks/0/keys = {
 [node name="LevelManager" type="Node"]
 script = ExtResource( 1 )
 levels = [ ExtResource( 2 ), ExtResource( 3 ) ]
+
+[node name="HudCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HudCanvasLayer" instance=ExtResource( 6 )]
+margin_left = 3.0
+margin_top = -3.0
+margin_right = 291.0
+margin_bottom = 159.0
 
 [node name="OverayLayer" type="CanvasLayer" parent="."]
 

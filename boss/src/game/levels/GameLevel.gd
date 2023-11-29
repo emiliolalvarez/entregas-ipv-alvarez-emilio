@@ -24,6 +24,10 @@ signal next_level_requested()
 signal menu_requested()
 # Muestra game over menu
 signal game_over_menu_requested()
+# Cambia hp 
+signal hp_changed(amount, max_value)
+# Cambia mana
+signal mana_changed(amount, max_value)
 
 
 func _ready() -> void:
@@ -48,4 +52,10 @@ func _on_restart_requested() -> void:
 	
 func _on_game_over() -> void:
 	emit_signal("game_over_menu_requested")
+	
+func _on_hp_changed(value, max_hp):
+	emit_signal("hp_changed", value, max_hp)
+
+func _on_mana_changed(value, max_hp):
+	emit_signal("mana_changed", value, max_hp)
 

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "AbstractEnemy",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/AbstractEnemy.gd"
+}, {
 "base": "AbstractState",
 "class": "AbstractEnemyState",
 "language": "GDScript",
@@ -24,12 +29,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/entities/AbstractStateMachine.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "AbstractEnemy",
 "class": "EnemyPod",
 "language": "GDScript",
 "path": "res://src/game/entities/enemies/pod/Pod.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "AbstractEnemy",
 "class": "EnemySoldier",
 "language": "GDScript",
 "path": "res://src/game/entities/enemies/soldier/Soldier.gd"
@@ -80,6 +85,7 @@ _global_script_classes=[ {
 "path": "res://src/game/entities/enemies/soldier/SoldierSpawner.gd"
 } ]
 _global_script_class_icons={
+"AbstractEnemy": "",
 "AbstractEnemyState": "",
 "AbstractState": "",
 "AbstractStateMachine": "",

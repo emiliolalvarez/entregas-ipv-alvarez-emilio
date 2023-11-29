@@ -1,9 +1,6 @@
-extends KinematicBody2D
+extends AbstractEnemy
 
 class_name EnemySoldier
-
-signal hit(amount)
-signal die()
 
 onready var fire_position: Node2D = $FirePosition
 onready var raycast: RayCast2D = $RayCast2D
@@ -17,6 +14,7 @@ export (Vector2) var wander_radius: Vector2 = Vector2(10.0, 10.0)
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
 export (float) var max_life:int = 20
+export (int) var POINTS:int = 30
 
 export (PackedScene) var projectile_scene: PackedScene
 
@@ -28,10 +26,6 @@ var projectile_container: Node
 var life:int = 0
 
 var velocity: Vector2 = Vector2.ZERO
-
-
-## Flag de ayuda para saber identificar el estado de actividad
-var dead: bool = false
 
 func _ready():
 	life = max_life
@@ -55,7 +49,6 @@ func _fire() -> void:
 			fire_position.global_position.direction_to(target.global_position)
 		)
 	
-
 func _look_at_target() -> void:
 	body_anim.flip_h = raycast.cast_to.x > 0
 
@@ -69,15 +62,9 @@ func _can_see_target() -> bool:
 	
 func _apply_movement() -> void: 	
 	velocity = move_and_slide(velocity, Vector2.UP)
-
-
-func notify_hit(amount:int = 1) -> void:
-	emit_signal("hit", amount)
-
-func _remove() -> void:
-	get_parent().remove_child(self)
-	queue_free()
-	emit_signal("die")
+	
+func _get_points() -> int:
+	return POINTS
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
