@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/states/AlertState.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/enemies/DetectionArea.gd" type="Script" id=2]
@@ -213,11 +213,6 @@ flags = 4
 atlas = ExtResource( 12 )
 region = Rect2( 64, 64, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=49]
-flags = 4
-atlas = ExtResource( 12 )
-region = Rect2( 192, 64, 64, 64 )
-
 [sub_resource type="AtlasTexture" id=51]
 flags = 4
 atlas = ExtResource( 12 )
@@ -342,7 +337,7 @@ animations = [ {
 "name": "attack",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 49 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 61 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ],
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 61 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ) ],
 "loop": false,
 "name": "die",
 "speed": 20.0
@@ -436,7 +431,7 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 7 )
 animation = "die"
-frame = 14
+frame = 13
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

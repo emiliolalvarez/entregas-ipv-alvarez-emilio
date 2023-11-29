@@ -4931,6 +4931,12 @@ pathfinding_path = NodePath("../AstarTilemap")
 [node name="Pod" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
 position = Vector2( 144, 707 )
 
+[node name="Pod4" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
+position = Vector2( 399, 706 )
+
+[node name="Pod5" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
+position = Vector2( 208, 657 )
+
 [node name="Pod2" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
 position = Vector2( 672, 707 )
 
