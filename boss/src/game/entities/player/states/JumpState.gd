@@ -1,6 +1,6 @@
 extends AbstractState
 
-export (int) var jumps_limit: int = 1
+export (int) var jumps_limit: int = 2
 
 var jumps = 0
 
@@ -12,7 +12,7 @@ func exit() -> void:
 	jumps = 0
 	
 func handle_input(event:InputEvent) -> void:
-	if event.is_action_pressed("jump") && jumps < jumps_limit:
+	if event.is_action_pressed("jump") && jumps <= jumps_limit:
 		jumps += 1
 		do_jump()
 
