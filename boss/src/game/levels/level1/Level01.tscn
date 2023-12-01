@@ -6339,7 +6339,7 @@ position = Vector2( 685, 341 )
 scale = Vector2( 1.02, 0.8 )
 
 [node name="Gate2" parent="Environment/Objects" instance=ExtResource( 234 )]
-position = Vector2( 797, 342 )
+position = Vector2( 797, 341 )
 scale = Vector2( 1.02, 0.8 )
 
 [node name="Hammer" parent="Environment/Objects" instance=ExtResource( 233 )]
