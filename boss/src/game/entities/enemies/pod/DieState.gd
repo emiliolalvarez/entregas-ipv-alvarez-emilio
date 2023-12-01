@@ -18,7 +18,7 @@ func exit() -> void:
 	pass
 
 func _on_animation_finished(anim_name: String) ->  void:
-	emit_signal("score_changed", _get_score())
+	character.hide()
 	character._remove()
 
 func _get_score() -> int:

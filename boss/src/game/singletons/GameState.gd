@@ -43,12 +43,13 @@ func mana_changed(amount, max_mana) -> void:
 	hud._on_mana_changed(amount, max_mana)
 	
 func add_access_key() -> void:
-	access_keys+=1
+	access_keys = access_keys + 1
 	hud._on_access_keys_changed(access_keys)
 	
 func has_access_key() -> bool:
 	return access_keys > 0
 
 func remove_acces_key() -> void:
-	if (access_keys > 0):
-		access_keys-=1
+	if (has_access_key()):
+		access_keys = access_keys - 1
+		hud._on_access_keys_changed(access_keys)
