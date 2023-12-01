@@ -1,0 +1,233 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Gate.png" type="Texture" id=1]
+[ext_resource path="res://src/game/environment/items/AccessGate.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/gate_metal_flimsy_close_001_16639.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/fonts/Default-Medium.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/textures/items/access-key.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Collision2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "close"
+length = 2.0
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.02, 0.36, 0.72, 1.13, 1.54 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 4, 3, 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.04, 0.42, 0.8, 1.22, 1.59019 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 31.3988 ), Vector2( 0, 28.1892 ), Vector2( 0, 8 ), Vector2( 0, 1 ), Vector2( 0, 1.04462 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Collision2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.03, 0.42, 0.8, 1.2, 1.59019 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -34.8209 ), Vector2( 0, -30.8418 ), Vector2( 0, -12 ), Vector2( 0, -2 ), Vector2( 0, -3.467 ) ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Gate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "open"
+length = 2.0
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1.04462 ), Vector2( 0, 1 ), Vector2( 0, 8 ), Vector2( 0, 28.1892 ), Vector2( 0, 31.3988 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Collision2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.050193, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3.467 ), Vector2( 0, -2 ), Vector2( 0, -12 ), Vector2( 0, -30.8418 ), Vector2( 0, -34.8209 ) ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Gate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 21, 39.5 )
+
+[node name="AccessGate" type="StaticBody2D"]
+pause_mode = 2
+z_index = 3
+script = ExtResource( 2 )
+
+[node name="TipMessage" type="Control" parent="."]
+pause_mode = 2
+margin_left = -176.0
+margin_top = -83.0
+margin_right = -93.0
+margin_bottom = -43.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="TipMessage"]
+self_modulate = Color( 1, 1, 1, 0.737255 )
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.72
+anchor_bottom = 0.7
+margin_left = -0.900002
+margin_top = -3.0
+margin_right = 71.24
+margin_bottom = 22.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.913725 )
+
+[node name="Text" type="RichTextLabel" parent="TipMessage"]
+margin_left = 61.0
+margin_top = 15.0
+margin_right = 129.0
+margin_bottom = 47.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 4 )
+text = "An access key is needed to open the gate!"
+
+[node name="Sprite" type="Sprite" parent="TipMessage"]
+position = Vector2( 43, 24 )
+scale = Vector2( 0.0661476, 0.0661476 )
+texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/close = SubResource( 3 )
+anims/open = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 8
+
+[node name="Gate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 600.0
+bus = "Items"
+
+[node name="Collision1" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, 1 )
+polygon = PoolVector2Array( -15, 1, -15, 31, 16, 31, 16, 1, 7, 1, 5, 5, -1, -3, -7, -3, -9, -3, -12, 1 )
+
+[node name="Collision2" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -2 )
+polygon = PoolVector2Array( -15, 2, -15, -32, 16, -32, 16, 1, 11, 1, 9, 6, 3, 6, -5, -2, -9, 2 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2( 0, -3.5 )
+shape = SubResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

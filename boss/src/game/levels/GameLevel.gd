@@ -39,7 +39,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
 		emit_signal("menu_requested")
 		
-
 # Funciones que hacen de interfaz para las señales
 func _on_level_won() -> void:
 	emit_signal("next_level_requested")
