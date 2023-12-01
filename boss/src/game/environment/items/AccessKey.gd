@@ -8,8 +8,8 @@ func _ready():
 	player.play("idle")
 
 func _on_HitBox_body_entered(body: Node) -> void:
-	if body.has_method("notify_key_found"):
-		body.notify_key_found()
+	if body.has_method("notify_healed"):
+		body.notify_healed(HEAL_POINTS)
 	player.play("hit")
 
 

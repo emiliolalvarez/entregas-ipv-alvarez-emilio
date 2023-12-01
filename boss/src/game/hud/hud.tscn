@@ -1,14 +1,28 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/game/hud/hud.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/HUD_Sharp_backplate.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/Health.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/Center_top.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/Default-Big.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/Roboto-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/textures/items/access-key.png" type="Texture" id=7]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/Mana.png-4f770f359468bfa8dd05b31c3cf849d9.stex"
+
+[sub_resource type="DynamicFont" id=3]
+size = 3
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 6
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
 
 [node name="HUD" type="Control"]
 margin_right = 288.0
@@ -72,3 +86,38 @@ margin_bottom = 14.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
 align = 1
+
+[node name="ControlAccessKeys" type="Control" parent="."]
+anchor_left = 0.3
+anchor_top = 0.1
+anchor_right = 0.3
+anchor_bottom = 0.1
+margin_left = -79.4
+margin_top = 3.8
+margin_right = -39.4
+margin_bottom = 11.8
+
+[node name="Sprite" type="Sprite" parent="ControlAccessKeys"]
+position = Vector2( 14, 4 )
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 7 )
+
+[node name="XLabel" type="Label" parent="ControlAccessKeys"]
+margin_left = 20.0
+margin_top = -4.0
+margin_right = 25.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 3 )
+text = "x"
+align = 1
+valign = 1
+
+[node name="AccessKeysLabel" type="Label" parent="ControlAccessKeys"]
+margin_left = 26.0
+margin_top = -4.0
+margin_right = 31.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+valign = 1

@@ -21,6 +21,7 @@ signal current_player_changed(player)
 
 var current_player: Player
 var hud: Control
+var access_keys: int = 0
 
 func set_current_player(player: Player) -> void:
 	current_player = player
@@ -40,3 +41,14 @@ func hp_changed(amount, max_hp) -> void:
 
 func mana_changed(amount, max_mana) -> void:
 	hud._on_mana_changed(amount, max_mana)
+	
+func add_access_key() -> void:
+	access_keys+=1
+	hud._on_access_keys_changed(access_keys)
+	
+func has_access_key() -> bool:
+	return access_keys > 0
+
+func remove_acces_key() -> void:
+	if (access_keys > 0):
+		access_keys-=1

@@ -58,4 +58,5 @@ func _on_hp_changed(value, max_hp):
 
 func _on_mana_changed(value, max_hp):
 	emit_signal("mana_changed", value, max_hp)
+	
 

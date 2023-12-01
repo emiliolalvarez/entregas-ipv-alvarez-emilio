@@ -1,13 +1,32 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/game/environment/items/AccessKey.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/items/access-key.png" type="Texture" id=1]
 
-[sub_resource type="StreamTexture" id=5]
-flags = 4
-load_path = "res://.import/health.jpg-354ae991dca7cf24d38971f9f5623b8f.stex"
+[sub_resource type="GDScript" id=5]
+script/source = "extends Node2D
+
+const HEAL_POINTS = 50
+onready var hitbox: Area2D = $Container/HitBox
+onready var player:AnimationPlayer = $AnimationPlayer
+
+func _ready():
+	player.play(\"idle\")
+
+func _on_HitBox_body_entered(body: Node) -> void:
+	if body.has_method(\"notify_key_found\"):
+		body.notify_key_found()
+	player.play(\"hit\")
+
+
+func remove() -> void:
+	hitbox.collision_mask = 0
+	set_physics_process(false)
+	get_parent().remove_child(self)
+	queue_free()
+"
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 4 )
+extents = Vector2( 4, 4 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -96,8 +115,8 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
 }
 
-[node name="HealthKit" type="Node2D"]
-script = ExtResource( 2 )
+[node name="AccessKey" type="Node2D"]
+script = SubResource( 5 )
 
 [node name="Container" type="Node2D" parent="."]
 
@@ -105,7 +124,7 @@ script = ExtResource( 2 )
 self_modulate = Color( 1, 1, 1, 0.994207 )
 scale = Vector2( 0.025, 0.025 )
 z_index = -1
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 
 [node name="HitBox" type="Area2D" parent="Container"]
 collision_layer = 0
@@ -113,7 +132,7 @@ collision_mask = 2
 gravity = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Container/HitBox"]
-position = Vector2( 0, -2.38419e-07 )
+position = Vector2( -1.42109e-14, -2.38419e-07 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

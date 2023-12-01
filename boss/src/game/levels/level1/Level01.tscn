@@ -1,4 +1,4 @@
-[gd_scene load_steps=361 format=2]
+[gd_scene load_steps=362 format=2]
 
 [ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://src/game/entities/AstarTilemap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/game/entities/player/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/game/entities/enemies/pod/Pod.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/game/environment/items/AccessKey.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/1 Tiles/Tileset.png" type="Texture" id=16]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/1 Tiles/Tile_74.png" type="Texture" id=17]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/1 Tiles/Tile_52.png" type="Texture" id=18]
@@ -5148,7 +5149,7 @@ position = Vector2( 800, 699 )
 position = Vector2( 2032, 699 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 2873, 458 )
+position = Vector2( 1373, 280 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]
@@ -5228,6 +5229,9 @@ scale = Vector2( 1.02, 0.8 )
 
 [node name="Hammer" parent="Environment/Objects" instance=ExtResource( 233 )]
 position = Vector2( 1398, 348 )
+
+[node name="AccessKey" parent="Environment/Objects" instance=ExtResource( 15 )]
+position = Vector2( 1352, 236 )
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Environment"]
 stream = ExtResource( 236 )

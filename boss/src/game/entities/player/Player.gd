@@ -146,6 +146,9 @@ func notify_mana(amount: int = 1) -> void:
 func notify_enemy_collision(amount: int) -> void:
 	notify_hit(amount)
 	emit_signal("enemy_collied")
+	
+func notify_key_found() -> void:
+	GameState.add_access_key()
 
 ## Esta función ya no llama directamente a remove, sino que deriva
 ## el handleo a la state machine emitiendo una señal. Esto es para
