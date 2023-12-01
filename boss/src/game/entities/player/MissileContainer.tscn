@@ -15,6 +15,7 @@ collision_mask = 12
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+visible = false
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 

@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name Player
 
-signal hp_changed(current_hp, max_hp)
-signal mana_changed(amount)
 signal notify_die()
 signal dead()
 signal enemy_collied()
@@ -166,23 +164,23 @@ func notify_hit(amount: int = 1) -> void:
 func _handle_hit(amount: int = 1) -> void:
 	life = max(0, life - amount)
 	dead = true if life == 0 else false
-	emit_signal("hp_changed", life, MAX_LIFE)
+	GameState.hp_changed(life, MAX_LIFE)
 	if dead:
 		emit_signal("notify_die")
 	
 
 func _handle_healed(amount: int = 1) -> void:
 	life = min(MAX_LIFE, life + amount)
-	emit_signal("hp_changed", life, MAX_LIFE)
+	GameState.hp_changed(life, MAX_LIFE)
 	
 func _handle_mana_recover(amount: int = 1) -> void:
 	mana = min(MAX_MANA, mana + amount)
-	emit_signal("mana_changed", mana, MAX_MANA)	
+	GameState.mana_changed(mana, MAX_MANA)
 	
 	
 func _handle_mana(amount: int = 1) -> void:
 	mana = max(0, mana - amount)
-	emit_signal("mana_changed", mana, MAX_MANA)
+	GameState.mana_changed(mana, MAX_MANA)
 
 # El llamado a remove final
 func _remove() -> void:

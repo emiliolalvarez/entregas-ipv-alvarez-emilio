@@ -16,3 +16,8 @@ func _on_mana_changed(current_mana, max_mana):
 
 func _on_score_changed(amount: int): 
 	points_label.text = String(int(points_label.text) + amount)
+
+func reset() -> void:
+	points_label.text = "0"
+	health_progress.value = health_progress.max_value
+	mana_progress.value = mana_progress.max_value

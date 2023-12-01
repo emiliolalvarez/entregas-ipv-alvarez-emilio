@@ -15,7 +15,6 @@ extends Node
 signal level_won()
 
 
-
 ## Señal y variable de ayuda que permite notificar la existencia
 ## del jugador actual a cualquiera interesado
 signal current_player_changed(player)
@@ -35,3 +34,9 @@ func set_hud(hud: Control) -> void:
 
 func update_score(amount: int) -> void:
 	hud._on_score_changed(amount)
+	
+func hp_changed(amount, max_hp) -> void:
+	hud._on_hp_changed(amount, max_hp)
+
+func mana_changed(amount, max_mana) -> void:
+	hud._on_mana_changed(amount, max_mana)

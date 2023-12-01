@@ -19,7 +19,7 @@ export (Texture) var mouse_cursor: Texture
 
 func _ready() -> void:
 	call_deferred("_setup_level", level)
-	GameState.set_hud(hud)
+	
 
 
 func _setup_level(id: int) -> void:
@@ -34,6 +34,7 @@ func _setup_level(id: int) -> void:
 		# Inicializa el nivel nuevo y lo agrega al árbol
 		current = levels[id].instance()
 		animation_player.play("fade_in")
+		GameState.set_hud(hud)
 		
 
 func _add_scene() -> void:
@@ -45,6 +46,7 @@ func _add_scene() -> void:
 	current.connect("game_over_menu_requested", self, "game_over_menu_requested_called")
 	current.connect("hp_changed", hud, "_on_hp_changed")
 	current.connect("mana_changed", hud, "_on_mana_changed")
+	current.connect("score_changed", hud, "_on_score_changed")
 	animation_player.play("fade_out")
 	
 # Callback de regreso al MainMenu.
@@ -54,6 +56,7 @@ func _return_called() -> void:
 
 # Callback de reinicio del nivel.
 func _restart_called() -> void:
+	hud.reset()
 	_setup_level(level)
 	get_tree().paused = false
 	
@@ -64,7 +67,6 @@ func _menu_requested_called() -> void:
 	_pause()
 	
 func game_over_menu_requested_called() -> void:
-	print("game_over_menu_requested_called")
 	main_menu.hide()
 	game_over_menu.show()
 	_pause()
