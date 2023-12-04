@@ -2,6 +2,7 @@ extends AbstractEnemyState
 onready var explossion = $"../../Explossion"
 onready var body = $"../../Pivot/Body"
 onready var timer = $Timer
+var counter = 0
 
 
 signal die_state_entered()
@@ -17,7 +18,8 @@ func exit() -> void:
 	pass
 	
 func play_explode_alert_animation() -> void:
-	timer.wait_time=1
+	counter = 0
+	timer.wait_time=0.3
 	body.material.set_shader_param("flash_modifier", 0.6)
 	timer.connect("timeout", self, "_on_explode_alert_finished")
 	timer.start()
@@ -32,5 +34,7 @@ func _get_score() -> int:
 
 func _on_explode_alert_finished() -> void:
 	print("_on_explode_alert_finished => notify hit")
-	body.material.set_shader_param("flash_modifier", 0)
-	character.notify_hit(character.life)
+	counter+=1
+	body.material.set_shader_param("flash_modifier", 0 if counter %2 == 0 else 0.6)
+	if (counter == 8):
+		character.notify_hit(character.life)

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/entities/AbstractStateMachine.gd"
 }, {
+"base": "AbstractStateMachine",
+"class": "BattlePodStateMachine",
+"language": "GDScript",
+"path": "res://src/game/entities/enemies/pod/BattlePodStateMachine.gd"
+}, {
 "base": "AbstractEnemy",
 "class": "EnemyPod",
 "language": "GDScript",
@@ -89,6 +94,7 @@ _global_script_class_icons={
 "AbstractEnemyState": "",
 "AbstractState": "",
 "AbstractStateMachine": "",
+"BattlePodStateMachine": "",
 "EnemyPod": "",
 "EnemySoldier": "",
 "GameLevel": "",
