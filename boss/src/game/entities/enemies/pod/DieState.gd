@@ -18,8 +18,8 @@ func exit() -> void:
 	pass
 
 func _on_animation_finished(anim_name: String) ->  void:
-	character.hide()
-	character._remove()
+	print("Is a pod: " + String(character is EnemyPod))
+	##character._remove_me()
 
 func _get_score() -> int:
 	return 10	

@@ -40,6 +40,7 @@ func update(delta: float) -> void:
 
 # Callback cuando finaliza una animación en tiempo del estado actual
 func _on_animation_finished(anim_name: String) -> void:
+	print("AbstractState::_on_animation_finished()")
 	return
 
 

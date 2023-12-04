@@ -12,8 +12,8 @@ func _on_EnemyDetector_body_entered(body):
 	if body is AbstractEnemy && !body is Player:
 		if (!targets.has(body) && targets.size() < 3):
 			targets.append(body)
-	print("Missile targets:")
-	print(targets)
+	#print("Missile targets:")
+	#print(targets)
 
 func _on_EnemyDetector_body_exited(body):
 	if (targets.has(body)):
