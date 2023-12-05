@@ -33,5 +33,4 @@ func _handle_fire_start() -> void:
 	emit_signal("finished", "fire_start")
 
 func _on_animation_finished(anim_name: String) -> void:
-	print("AbstractEnemyState::_on_animation_finished()")
 	._on_animation_finished(anim_name)

@@ -20,8 +20,12 @@ func _should_fire() -> bool:
 	return abs_position_diff <= character.ATTACK_DISTANCE_THRESHOLD
 
 func _should_explode() -> bool:
-	var abs_position_diff = abs(character.target.global_position.x - character.global_position.x)
-	return character.target && abs_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD 
+	var abs_x_position_diff = abs(character.target.global_position.x - character.global_position.x)
+	var abs_y_position_diff = abs(character.target.global_position.y - character.global_position.y)
+	return character.target \
+		&& character.target.is_on_floor() \
+		&& abs_y_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD \
+		&& abs_x_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD 
 
 func _do_fire() -> void:
 	character._fire()

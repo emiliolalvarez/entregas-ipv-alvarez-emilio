@@ -14,7 +14,7 @@
 [ext_resource path="res://src/game/shaders/flash.gdshader" type="Shader" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21, 34 )
+extents = Vector2( 21, 29.5 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.72549, 0.109804, 0.345098, 1 )
@@ -263,7 +263,6 @@ collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -6 )
 shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
@@ -291,7 +290,6 @@ script = ExtResource( 4 )
 state_id = "alert"
 
 [node name="Timer" type="Timer" parent="StateMachine/Alert"]
-wait_time = 2.0
 
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )

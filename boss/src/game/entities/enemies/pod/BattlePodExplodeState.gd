@@ -1,7 +1,10 @@
 extends AbstractEnemyState
+
 onready var explossion = $"../../Explossion"
 onready var body = $"../../Pivot/Body"
 onready var timer = $Timer
+onready var animation_player = $"../../AnimationPlayer"
+
 var counter = 0
 
 
@@ -16,11 +19,24 @@ func enter() -> void:
 func exit() -> void:
 	#print("POD exit alert state")
 	pass
+
+func update(delta:float) -> void:
+	if character.navigation_agent != null:
+		if !character.navigation_agent.is_navigation_finished():
+			animation_player.play("walk")
+			var direction:Vector2 = character.global_position.direction_to(
+				character.navigation_agent.get_next_location()
+			)
+			var desired_velocity = direction * character.H_SPEED_LIMIT * 2
+			var steering = (desired_velocity - character.velocity) * delta * character.ACCELERATION * 2
+			character.velocity += steering 
+			character._apply_movement()
+
 	
 func play_explode_alert_animation() -> void:
 	counter = 0
-	timer.wait_time=0.3
 	body.material.set_shader_param("flash_modifier", 0.6)
+	timer.wait_time=0.3
 	timer.connect("timeout", self, "_on_explode_alert_finished")
 	timer.start()
 	

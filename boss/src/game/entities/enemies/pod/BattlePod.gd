@@ -21,12 +21,12 @@ export (int) var COLLISION_DAMAGE:int = 3
 export (int) var POINTS:int = 10
 export (float) var speed:float  = 10.0
 export (float) var max_speed:float = 100.0
-export (int) var life: int = MAX_LIFE
 export (PackedScene) var projectile_scene: PackedScene
 
 var target: Node2D
 var projectile_container: Node
 var velocity: Vector2 = Vector2.ZERO
+var life: int = MAX_LIFE
 
 func _ready():
 	life_progress_bar.max_value = MAX_LIFE

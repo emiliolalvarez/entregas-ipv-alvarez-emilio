@@ -1,5 +1,5 @@
 extends Node2D
-class_name SolderSpawner
+class_name SoldierSpawner
 
 ## Primera aparición de esta keyword. Esto va como freebie.
 ## La keyword "tool" denota scripts que se pueden ejecutar

@@ -1,4 +1,4 @@
-[gd_scene load_steps=375 format=2]
+[gd_scene load_steps=371 format=2]
 
 [ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/1 Tiles/IndustrialTile_78.png" type="Texture" id=11]
 [ext_resource path="res://src/game/entities/AstarTilemap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/game/entities/player/Player.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/game/entities/enemies/pod/Pod.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/game/entities/enemies/pod/PodProjectile.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/game/environment/items/AccessKey.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/1 Tiles/Tileset.png" type="Texture" id=16]
 [ext_resource path="res://assets/textures/background/exclusion-zone-tileset-pixel-art/1 Tiles/Tile_74.png" type="Texture" id=17]
@@ -237,6 +237,7 @@
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.tscn" type="PackedScene" id=235]
 [ext_resource path="res://assets/music/robotech/1-32-alien-attack.ogg" type="AudioStream" id=236]
 [ext_resource path="res://src/game/environment/items/AccessGate.tscn" type="PackedScene" id=237]
+[ext_resource path="res://src/game/entities/enemies/pod/BattlePod.tscn" type="PackedScene" id=238]
 
 [sub_resource type="NavigationPolygon" id=8]
 vertices = PoolVector2Array( 1176, 320, 1176, 272, 1256, 272, 1256, 320 )
@@ -257,6 +258,21 @@ outlines = [ PoolVector2Array( 136, 488, 264, 483, 288, 484, 584, 480, 584, 560,
 vertices = PoolVector2Array( 1760, 472, 1760, 416, 2289, 410, 2289, 474 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 1760, 472, 1760, 416, 2289, 410, 2289, 474 ) ]
+
+[sub_resource type="NavigationPolygon" id=131]
+vertices = PoolVector2Array( 1864, 479, 1865, 434, 2110, 438, 2110, 473 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 1864, 479, 1865, 434, 2110, 438, 2110, 473 ) ]
+
+[sub_resource type="NavigationPolygon" id=132]
+vertices = PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2110, 473 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2110, 473 ) ]
+
+[sub_resource type="NavigationPolygon" id=133]
+vertices = PoolVector2Array( 1840, 476, 1842, 435, 2006, 436, 2007, 477 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 1840, 476, 1842, 435, 2006, 436, 2007, 477 ) ]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -5204,841 +5220,65 @@ func get_current_animation() -> String:
 	return body_anim.animation
 "
 
-[sub_resource type="GDScript" id=131]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=132]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=133]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
 [sub_resource type="GDScript" id=134]
-script/source = "extends AbstractEnemy
+script/source = "extends Node2D
+class_name SolderSpawner
 
-class_name EnemyPod
+## Primera aparición de esta keyword. Esto va como freebie.
+## La keyword \"tool\" denota scripts que se pueden ejecutar
+## tanto en runtime como en el editor.
+tool
 
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
+signal soldier_die()
 
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
+export (PackedScene) var turret_scene: PackedScene
+export (int) var amount: int
+export (bool) var auto_init: bool = 1
+export (Vector2) var extents: Vector2 setget _set_extents ## Definicion de setter para variable
 
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
+export (NodePath) var pathfinding_path: NodePath
+onready var pathfinding: Node = get_node_or_null(pathfinding_path)
 
 
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
+func _ready() -> void:
+	## \"Engine.editor_hint\" es una flag que le permite al script saber en qué
+	## contexto se está ejecutando, si en runtime del juego o en el contexto
+	## del editor.
+	if Engine.editor_hint:
+		update()
 	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
+		if (auto_init):
+			call_deferred(\"_initialize\")
 
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
+
+## Fijarse como esta función se ejecuta tranquilamente, ya que controlamos
+## de nunca llamarla en contexto del editor, solo en runtime.
+func _initialize() -> void:
+	for i in amount:
+		var turret_instance: EnemySoldier = turret_scene.instance()
+		var turret_pos: Vector2 = Vector2(rand_range(global_position.x, global_position.x + extents.x), rand_range(global_position.y, global_position.y + extents.y))
+		turret_instance.initialize(self, turret_pos, self)
+		turret_instance.pathfinding = pathfinding
+		turret_instance.connect(\"die\", self, \"on_soldier_die\")
+
+
+## Al definir el setter, se pueden asignar las variables en contexto de
+## \"tool\" en el editor y utilizarlas.
+func _set_extents(value: Vector2) -> void:
+	extents = value
 	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=135]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
+	## Aquí decimos \"si estás en contexto del editor, manda un aviso de redibujado\"
+	if Engine.editor_hint:
+		update()
 
 
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
+## Función primitiva de dibujo
+func _draw() -> void:
+	if Engine.editor_hint:
+		draw_rect(Rect2(Vector2.ZERO, extents), Color.blue, false)
 
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=136]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=137]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=138]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
-"
-
-[sub_resource type="GDScript" id=139]
-script/source = "extends AbstractEnemy
-
-class_name EnemyPod
-
-export (int) var gravity: int = 10
-export (int) var MAX_LIFE:int = 5
-export (float) var ACCELERATION: float = 10.0
-export (float) var H_SPEED_LIMIT: float = 30.0
-export (float) var ATTACK_DISTANCE_THRESHOLD:float = 100
-export (int) var COLLISION_DAMAGE:int = 3
-export (int) var POINTS:int = 10
-
-export (float) var speed:float  = 10.0
-export (float) var max_speed:float = 100.0
-
-export (int) var life: int = MAX_LIFE
-export (PackedScene) var projectile_scene: PackedScene
-
-onready var fire_position: Position2D = $Pivot/FirePosition
-onready var raycast: RayCast2D = $Pivot/RayCast2D
-onready var body: Sprite = $Pivot/Body
-onready var navigation_agent = $NavigationAgent2D
-onready var life_progress_bar:ProgressBar = $Pivot/HUD/Control/LifeProgressBar
-onready var hud:Node2D = $Pivot/HUD
-onready var pivot:Node2D = $Pivot
-onready var animation_player = $AnimationPlayer
-onready var collision = $CollisionShape2D
-
-var target: Node2D
-var projectile_container: Node
-var velocity: Vector2 = Vector2.ZERO
-
-
-func _ready():
-	life_progress_bar.max_value = MAX_LIFE
-	life_progress_bar.value = life
-	
-func _fire() -> void:
-	animation_player.play('fire_start')
-		
-func _do_fire() -> void:
-	if target != null:
-		var proj_instance: Node = projectile_scene.instance()
-		if projectile_container == null:
-			projectile_container = get_parent()
-		proj_instance.initialize(
-			projectile_container,
-			fire_position.global_position,
-			#fire_position.global_position.direction_to(target.global_position)
-			fire_position.global_position.direction_to(Vector2(target.global_position.x, fire_position.global_position.y))
-		)
-	
-func _look_at_target() -> void:
-	if target != null:
-		pivot.scale.x = -1 if target.global_position.x > global_position.x else 1
-	else:
-		pivot.scale.x = -1 if velocity.x > 0 else 1
-
-func _can_see_target() -> bool:
-	if target == null:
-		return false
-	raycast.set_cast_to(raycast.to_local(target.global_position))
-	raycast.force_raycast_update()
-	return raycast.is_colliding() && raycast.get_collider() == target
-	
-	
-func _apply_movement() -> void:
-	if navigation_agent != null:
-		if (target!=null):
-			navigation_agent.set_target_location(target.global_position)
-	else:
-		print(\"no navigation agent\")	
-	velocity.y += gravity
-	velocity = move_and_slide(velocity)
-	_look_at_target()
-	
-func _get_points() -> int:
-	return POINTS
-
-## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
-## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
-func _play_animation(animation: String) -> void:
-	if animation_player.has_animation(animation):
-		animation_player.play(animation)
-
-func get_current_animation() -> String:
-	return animation_player.get_current_animation()
-		
-func _get_collision_damage() -> int:
-	return self.COLLISION_DAMAGE
+func on_soldier_die() -> void:
+	emit_signal(\"soldier_die\")
 "
 
 [node name="Level01" type="Node"]
@@ -6075,6 +5315,21 @@ navpoly = SubResource( 7 )
 position = Vector2( 89, 2 )
 z_index = 1
 navpoly = SubResource( 26 )
+
+[node name="PodPowerPlantNavigation2" type="NavigationPolygonInstance" parent="Environment/Ground"]
+position = Vector2( 613, -154 )
+z_index = 1
+navpoly = SubResource( 131 )
+
+[node name="PodPowerPlantNavigation3" type="NavigationPolygonInstance" parent="Environment/Ground"]
+position = Vector2( 808, -4 )
+z_index = 1
+navpoly = SubResource( 132 )
+
+[node name="PodPowerPlantNavigation4" type="NavigationPolygonInstance" parent="Environment/Ground"]
+position = Vector2( 1493, -5 )
+z_index = 1
+navpoly = SubResource( 133 )
 
 [node name="Roof" parent="Environment/Ground" instance=ExtResource( 8 )]
 position = Vector2( -55, 251 )
@@ -6162,7 +5417,7 @@ position = Vector2( 185, -249 )
 position = Vector2( 152, 315 )
 z_index = 0
 cell_size = Vector2( 16, 16 )
-tile_data = PoolIntArray( 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 852071, 0, 0, 852072, 0, 0, 852073, 0, 0, 852074, 0, 0, 852075, 0, 0, 852076, 0, 0, 852077, 0, 0, 852078, 0, 0, 852079, 0, 0, 852080, 0, 0, 852081, 0, 0, 852082, 0, 0, 852083, 0, 0, 852084, 0, 0, 852085, 0, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917607, 0, 0, 917608, 0, 0, 917609, 0, 0, 917610, 0, 0, 917611, 0, 0, 917612, 0, 0, 917613, 0, 0, 917614, 0, 0, 917615, 0, 0, 917616, 0, 0, 917617, 0, 0, 917618, 0, 0, 917619, 0, 0, 917620, 0, 0, 917621, 0, 0, 917655, 536870912, 0, 917656, 536870912, 0, 917657, 536870912, 0, 917658, 536870912, 0, 917668, 536870912, 0, 917669, 536870912, 0, 917670, 536870912, 0, 917671, 536870912, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983080, 0, 0, 983081, 0, 0, 983082, 0, 0, 983083, 0, 0, 983084, 0, 0, 983085, 0, 0, 983086, 0, 0, 983087, 0, 0, 983088, 0, 0, 983089, 0, 0, 983090, 0, 0, 983091, 0, 0, 983092, 0, 0, 983093, 0, 0, 983094, 0, 0, 983095, 0, 0, 983096, 0, 0, 983097, 0, 0, 983098, 0, 0, 983099, 0, 0, 983100, 0, 0, 983101, 0, 0, 983143, 0, 0, 983144, 0, 0, 983145, 0, 0, 983146, 0, 0, 983147, 0, 0, 983148, 0, 0, 983149, 0, 0, 983150, 0, 0, 983151, 0, 0, 983152, 0, 0, 983153, 0, 0, 983154, 0, 0, 983155, 0, 0, 983156, 0, 0, 983157, 0, 0, 983191, 536870912, 0, 983192, 536870912, 0, 983193, 536870912, 0, 983194, 536870912, 0, 983204, 536870912, 0, 983205, 536870912, 0, 983206, 536870912, 0, 983207, 536870912, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048616, 0, 0, 1048617, 0, 0, 1048618, 0, 0, 1048619, 0, 0, 1048620, 0, 0, 1048621, 0, 0, 1048622, 0, 0, 1048623, 0, 0, 1048624, 0, 0, 1048625, 0, 0, 1048626, 0, 0, 1048627, 0, 0, 1048628, 0, 0, 1048629, 0, 0, 1048630, 0, 0, 1048631, 0, 0, 1048632, 0, 0, 1048633, 0, 0, 1048634, 0, 0, 1048635, 0, 0, 1048636, 0, 0, 1048637, 0, 0, 1048679, 0, 0, 1048680, 0, 0, 1048681, 0, 0, 1048682, 0, 0, 1048683, 0, 0, 1048684, 0, 0, 1048685, 0, 0, 1048686, 0, 0, 1048687, 0, 0, 1048688, 0, 0, 1048689, 0, 0, 1048690, 0, 0, 1048691, 0, 0, 1048692, 0, 0, 1048693, 0, 0, 1048727, 536870912, 0, 1048728, 536870912, 0, 1048729, 536870912, 0, 1048730, 536870912, 0, 1048740, 536870912, 0, 1048741, 536870912, 0, 1048742, 536870912, 0, 1048743, 536870912, 0, 1179637, 0, 0, 1179638, 0, 0, 1179639, 0, 0, 1179640, 0, 0, 1179641, 0, 0, 1179642, 0, 0, 1179643, 0, 0, 1179644, 0, 0, 1179645, 0, 0, 1179646, 0, 0, 1179647, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1114132, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114155, 0, 0, 1114156, 0, 0, 1114157, 0, 0, 1114158, 0, 0, 1114159, 0, 0, 1114160, 0, 0, 1114161, 0, 0, 1114162, 0, 0, 1114163, 0, 0, 1114164, 0, 0, 1114165, 0, 0, 1114166, 0, 0, 1114167, 0, 0, 1114168, 0, 0, 1114169, 0, 0, 1114170, 0, 0, 1114171, 0, 0, 1114172, 0, 0, 1114173, 0, 0, 1114215, 0, 0, 1114216, 0, 0, 1114217, 0, 0, 1114218, 0, 0, 1114219, 0, 0, 1114220, 0, 0, 1114221, 0, 0, 1114222, 0, 0, 1114223, 0, 0, 1114224, 0, 0, 1114225, 0, 0, 1114226, 0, 0, 1114227, 0, 0, 1114228, 0, 0, 1114229, 0, 0, 1245173, 0, 0, 1245174, 0, 0, 1245175, 0, 0, 1245176, 0, 0, 1245177, 0, 0, 1245178, 0, 0, 1245179, 0, 0, 1245180, 0, 0, 1245181, 0, 0, 1245182, 0, 0, 1245183, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179688, 0, 0, 1179689, 0, 0, 1179690, 0, 0, 1179691, 0, 0, 1179692, 0, 0, 1179693, 0, 0, 1179694, 0, 0, 1179695, 0, 0, 1179696, 0, 0, 1179697, 0, 0, 1179698, 0, 0, 1179699, 0, 0, 1179700, 0, 0, 1179701, 0, 0, 1179702, 0, 0, 1179703, 0, 0, 1179704, 0, 0, 1179705, 0, 0, 1179706, 0, 0, 1179707, 0, 0, 1179708, 0, 0, 1179709, 0, 0, 1310709, 0, 0, 1310710, 0, 0, 1310711, 0, 0, 1310712, 0, 0, 1310713, 0, 0, 1310714, 0, 0, 1310715, 0, 0, 1310716, 0, 0, 1310717, 0, 0, 1310718, 0, 0, 1310719, 0, 0, 1245195, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1245204, 0, 0, 1245224, 0, 0, 1245225, 0, 0, 1245226, 0, 0, 1245227, 0, 0, 1245228, 0, 0, 1245229, 0, 0, 1245230, 0, 0, 1245231, 0, 0, 1245232, 0, 0, 1245233, 0, 0, 1245234, 0, 0, 1245235, 0, 0, 1245236, 0, 0, 1245237, 0, 0, 1245238, 0, 0, 1245239, 0, 0, 1245240, 0, 0, 1245241, 0, 0, 1245242, 0, 0, 1245243, 0, 0, 1245244, 0, 0, 1245245, 0, 0, 1245256, 0, 0, 1245257, 0, 0, 1245258, 0, 0, 1245259, 0, 0, 1245260, 0, 0, 1245261, 0, 0, 1245262, 0, 0, 1245263, 0, 0, 1245264, 0, 0, 1245265, 0, 0, 1245266, 0, 0, 1245267, 0, 0, 1376245, 0, 0, 1376246, 0, 0, 1376247, 0, 0, 1376248, 0, 0, 1376249, 0, 0, 1376250, 0, 0, 1376251, 0, 0, 1376252, 0, 0, 1376253, 0, 0, 1376254, 0, 0, 1376255, 0, 0, 1310792, 0, 0, 1310793, 0, 0, 1310794, 0, 0, 1310795, 0, 0, 1310796, 0, 0, 1310797, 0, 0, 1310798, 0, 0, 1310799, 0, 0, 1310800, 0, 0, 1310801, 0, 0, 1310802, 0, 0, 1310803, 0, 0, 1441781, 0, 0, 1441782, 0, 0, 1441783, 0, 0, 1441784, 0, 0, 1441785, 0, 0, 1441786, 0, 0, 1441789, 0, 0, 1441791, 0, 0, 1376328, 0, 0, 1376329, 0, 0, 1376330, 0, 0, 1376331, 0, 0, 1376332, 0, 0, 1376333, 0, 0, 1376334, 0, 0, 1376335, 0, 0, 1376336, 0, 0, 1376337, 0, 0, 1376338, 0, 0, 1376339, 0, 0, 1507317, 0, 0, 1507318, 0, 0, 1507319, 0, 0, 1507320, 0, 0, 1507321, 0, 0, 1507322, 0, 0, 1507323, 0, 0, 1507324, 0, 0, 1507325, 0, 0, 1507326, 0, 0, 1507327, 0, 0, 1441864, 0, 0, 1441865, 0, 0, 1441866, 0, 0, 1441867, 0, 0, 1441868, 0, 0, 1441869, 0, 0, 1441870, 0, 0, 1441871, 0, 0, 1441872, 0, 0, 1441873, 0, 0, 1441874, 0, 0, 1441875, 0, 0 )
+tile_data = PoolIntArray( 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 851988, 0, 0, 851989, 0, 0, 852071, 0, 0, 852072, 0, 0, 852073, 0, 0, 852074, 0, 0, 852075, 0, 0, 852076, 0, 0, 852077, 0, 0, 852078, 0, 0, 852079, 0, 0, 852080, 0, 0, 852081, 0, 0, 852082, 0, 0, 852083, 0, 0, 852084, 0, 0, 852085, 0, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917607, 0, 0, 917608, 0, 0, 917609, 0, 0, 917610, 0, 0, 917611, 0, 0, 917612, 0, 0, 917613, 0, 0, 917614, 0, 0, 917615, 0, 0, 917616, 0, 0, 917617, 0, 0, 917618, 0, 0, 917619, 0, 0, 917620, 0, 0, 917621, 0, 0, 917655, 536870912, 0, 917656, 536870912, 0, 917657, 536870912, 0, 917658, 536870912, 0, 917668, 536870912, 0, 917669, 536870912, 0, 917670, 536870912, 0, 917671, 536870912, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 983060, 0, 0, 983061, 0, 0, 983080, 0, 0, 983081, 0, 0, 983082, 0, 0, 983083, 0, 0, 983084, 0, 0, 983085, 0, 0, 983086, 0, 0, 983087, 0, 0, 983088, 0, 0, 983089, 0, 0, 983090, 0, 0, 983091, 0, 0, 983092, 0, 0, 983093, 0, 0, 983094, 0, 0, 983095, 0, 0, 983096, 0, 0, 983097, 0, 0, 983098, 0, 0, 983099, 0, 0, 983100, 0, 0, 983101, 0, 0, 983143, 0, 0, 983144, 0, 0, 983145, 0, 0, 983146, 0, 0, 983147, 0, 0, 983148, 0, 0, 983149, 0, 0, 983150, 0, 0, 983151, 0, 0, 983152, 0, 0, 983153, 0, 0, 983154, 0, 0, 983155, 0, 0, 983156, 0, 0, 983157, 0, 0, 983191, 536870912, 0, 983192, 536870912, 0, 983193, 536870912, 0, 983194, 536870912, 0, 983204, 536870912, 0, 983205, 536870912, 0, 983206, 536870912, 0, 983207, 536870912, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048616, 0, 0, 1048617, 0, 0, 1048618, 0, 0, 1048619, 0, 0, 1048620, 0, 0, 1048621, 0, 0, 1048622, 0, 0, 1048623, 0, 0, 1048624, 0, 0, 1048625, 0, 0, 1048626, 0, 0, 1048627, 0, 0, 1048628, 0, 0, 1048629, 0, 0, 1048630, 0, 0, 1048631, 0, 0, 1048632, 0, 0, 1048633, 0, 0, 1048634, 0, 0, 1048635, 0, 0, 1048636, 0, 0, 1048637, 0, 0, 1048679, 0, 0, 1048680, 0, 0, 1048681, 0, 0, 1048682, 0, 0, 1048683, 0, 0, 1048684, 0, 0, 1048685, 0, 0, 1048686, 0, 0, 1048687, 0, 0, 1048688, 0, 0, 1048689, 0, 0, 1048690, 0, 0, 1048691, 0, 0, 1048692, 0, 0, 1048693, 0, 0, 1048727, 536870912, 0, 1048728, 536870912, 0, 1048729, 536870912, 0, 1048730, 536870912, 0, 1048740, 536870912, 0, 1048741, 536870912, 0, 1048742, 536870912, 0, 1048743, 536870912, 0, 1179637, 0, 0, 1179638, 0, 0, 1179639, 0, 0, 1179640, 0, 0, 1179641, 0, 0, 1179642, 0, 0, 1179643, 0, 0, 1179644, 0, 0, 1179645, 0, 0, 1179646, 0, 0, 1179647, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1114132, 0, 0, 1114152, 0, 0, 1114153, 0, 0, 1114154, 0, 0, 1114155, 0, 0, 1114156, 0, 0, 1114157, 0, 0, 1114158, 0, 0, 1114159, 0, 0, 1114160, 0, 0, 1114161, 0, 0, 1114162, 0, 0, 1114163, 0, 0, 1114164, 0, 0, 1114165, 0, 0, 1114166, 0, 0, 1114167, 0, 0, 1114168, 0, 0, 1114169, 0, 0, 1114170, 0, 0, 1114171, 0, 0, 1114172, 0, 0, 1114173, 0, 0, 1114215, 0, 0, 1114216, 0, 0, 1114217, 0, 0, 1114218, 0, 0, 1114219, 0, 0, 1114220, 0, 0, 1114221, 0, 0, 1114222, 0, 0, 1114223, 0, 0, 1114224, 0, 0, 1114225, 0, 0, 1114226, 0, 0, 1114227, 0, 0, 1114228, 0, 0, 1114229, 0, 0, 1245173, 0, 0, 1245174, 0, 0, 1245175, 0, 0, 1245176, 0, 0, 1245177, 0, 0, 1245178, 0, 0, 1245179, 0, 0, 1245180, 0, 0, 1245181, 0, 0, 1245182, 0, 0, 1245183, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1179668, 0, 0, 1179688, 0, 0, 1179689, 0, 0, 1179690, 0, 0, 1179691, 0, 0, 1179692, 0, 0, 1179693, 0, 0, 1179694, 0, 0, 1179695, 0, 0, 1179696, 0, 0, 1179697, 0, 0, 1179698, 0, 0, 1179699, 0, 0, 1179700, 0, 0, 1179701, 0, 0, 1179702, 0, 0, 1179703, 0, 0, 1179704, 0, 0, 1179705, 0, 0, 1179706, 0, 0, 1179707, 0, 0, 1179708, 0, 0, 1179709, 0, 0, 1310709, 0, 0, 1310710, 0, 0, 1310711, 0, 0, 1310712, 0, 0, 1310713, 0, 0, 1310714, 0, 0, 1310715, 0, 0, 1310716, 0, 0, 1310717, 0, 0, 1310718, 0, 0, 1310719, 0, 0, 1245195, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1245204, 0, 0, 1245224, 0, 0, 1245225, 0, 0, 1245226, 0, 0, 1245227, 0, 0, 1245228, 0, 0, 1245229, 0, 0, 1245230, 0, 0, 1245231, 0, 0, 1245232, 0, 0, 1245233, 0, 0, 1245234, 0, 0, 1245235, 0, 0, 1245236, 0, 0, 1245237, 0, 0, 1245238, 0, 0, 1245239, 0, 0, 1245240, 0, 0, 1245241, 0, 0, 1245242, 0, 0, 1245243, 0, 0, 1245244, 0, 0, 1245245, 0, 0, 1245256, 0, 0, 1245257, 0, 0, 1245258, 0, 0, 1245259, 0, 0, 1245260, 0, 0, 1245261, 0, 0, 1245262, 0, 0, 1245263, 0, 0, 1245264, 0, 0, 1245265, 0, 0, 1245266, 0, 0, 1245267, 0, 0, 1376245, 0, 0, 1376246, 0, 0, 1376247, 0, 0, 1376248, 0, 0, 1376249, 0, 0, 1376250, 0, 0, 1376251, 0, 0, 1376252, 0, 0, 1376253, 0, 0, 1376254, 0, 0, 1376255, 0, 0, 1310792, 0, 0, 1310793, 0, 0, 1310794, 0, 0, 1310795, 0, 0, 1310796, 0, 0, 1310797, 0, 0, 1310798, 0, 0, 1310799, 0, 0, 1310800, 0, 0, 1310801, 0, 0, 1310802, 0, 0, 1310803, 0, 0, 1441781, 0, 0, 1441782, 0, 0, 1441783, 0, 0, 1441784, 0, 0, 1441785, 0, 0, 1441786, 0, 0, 1441789, 0, 0, 1441791, 0, 0, 1376328, 0, 0, 1376329, 0, 0, 1376330, 0, 0, 1376331, 0, 0, 1376332, 0, 0, 1376333, 0, 0, 1376334, 0, 0, 1376335, 0, 0, 1376336, 0, 0, 1376337, 0, 0, 1376338, 0, 0, 1376339, 0, 0, 1376464, 0, 0, 1376465, 0, 0, 1376466, 0, 0, 1376467, 0, 0, 1376468, 0, 0, 1376469, 0, 0, 1376470, 0, 0, 1376471, 0, 0, 1507317, 0, 0, 1507318, 0, 0, 1507319, 0, 0, 1507320, 0, 0, 1507321, 0, 0, 1507322, 0, 0, 1507323, 0, 0, 1507324, 0, 0, 1507325, 0, 0, 1507326, 0, 0, 1507327, 0, 0, 1441864, 0, 0, 1441865, 0, 0, 1441866, 0, 0, 1441867, 0, 0, 1441868, 0, 0, 1441869, 0, 0, 1441870, 0, 0, 1441871, 0, 0, 1441872, 0, 0, 1441873, 0, 0, 1441874, 0, 0, 1441875, 0, 0, 1442000, 0, 0, 1442001, 0, 0, 1442002, 0, 0, 1442003, 0, 0, 1442004, 0, 0, 1442005, 0, 0, 1442006, 0, 0, 1442007, 0, 0, 1507536, 0, 0, 1507537, 0, 0, 1507538, 0, 0, 1507539, 0, 0, 1507540, 0, 0, 1507541, 0, 0, 1507542, 0, 0, 1507543, 0, 0, 1573072, 0, 0, 1573073, 0, 0, 1573074, 0, 0, 1573075, 0, 0, 1573076, 0, 0, 1573077, 0, 0, 1573078, 0, 0, 1573079, 0, 0, 1638608, 0, 0, 1638609, 0, 0, 1638610, 0, 0, 1638611, 0, 0, 1638612, 0, 0, 1638613, 0, 0, 1638614, 0, 0, 1638615, 0, 0 )
 
 [node name="Soldier" parent="Environment/Entities/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 3392, 611 )
@@ -6227,48 +5482,79 @@ amount = 3
 extents = Vector2( 60, 41 )
 pathfinding_path = NodePath("../AstarTilemap")
 
-[node name="Pod" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 144, 707 )
-script = SubResource( 131 )
-
-[node name="Pod4" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 399, 706 )
-script = SubResource( 132 )
-
-[node name="Pod7" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 3046, 632 )
-script = SubResource( 133 )
-
-[node name="Pod8" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 3284, 687 )
+[node name="SoldierSpawner6" type="Position2D" parent="Environment/Entities/Enemies"]
+position = Vector2( 3487, 656 )
 script = SubResource( 134 )
+turret_scene = ExtResource( 7 )
+amount = 4
+pathfinding_path = NodePath("../AstarTilemap")
 
-[node name="Pod5" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 208, 657 )
-script = SubResource( 135 )
+[node name="BattlePod" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 202, 658 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
 
-[node name="Pod2" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 616, 643 )
-script = SubResource( 136 )
+[node name="BattlePod2" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 122, 706 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
 
-[node name="Pod6" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 800, 699 )
-script = SubResource( 137 )
+[node name="BattlePod3" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 383, 706 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
 
-[node name="Pod3" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 2032, 699 )
-script = SubResource( 138 )
+[node name="BattlePod4" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 609, 642 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
 
-[node name="Pod9" parent="Environment/Entities/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 2146, 702 )
-script = SubResource( 139 )
+[node name="BattlePod5" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 1095, 530 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
+
+[node name="BattlePod6" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 1867, 699 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
+
+[node name="BattlePod7" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 2077, 697 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
+
+[node name="BattlePod8" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 2400, 547 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
+
+[node name="BattlePod9" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 2600, 704 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
+
+[node name="BattlePod10" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
+position = Vector2( 3283, 689 )
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
+projectile_scene = ExtResource( 14 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 107, 436 )
+position = Vector2( 113, 439 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]
-position = Vector2( -53.3333, -26.6667 )
+position = Vector2( -6.66667, 6.66667 )
 current = true
 limit_left = 20
 limit_top = 40

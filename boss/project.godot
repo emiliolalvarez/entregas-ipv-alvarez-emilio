@@ -35,11 +35,6 @@ _global_script_classes=[ {
 "path": "res://src/game/entities/enemies/pod/BattlePodStateMachine.gd"
 }, {
 "base": "AbstractEnemy",
-"class": "EnemyPod",
-"language": "GDScript",
-"path": "res://src/game/entities/enemies/pod/Pod.gd"
-}, {
-"base": "AbstractEnemy",
 "class": "EnemySoldier",
 "language": "GDScript",
 "path": "res://src/game/entities/enemies/soldier/Soldier.gd"
@@ -85,7 +80,7 @@ _global_script_classes=[ {
 "path": "res://src/game/levels/level1/boss/ShipStateMachine.gd"
 }, {
 "base": "Node2D",
-"class": "SolderSpawner",
+"class": "SoldierSpawner",
 "language": "GDScript",
 "path": "res://src/game/entities/enemies/soldier/SoldierSpawner.gd"
 } ]
@@ -95,7 +90,6 @@ _global_script_class_icons={
 "AbstractState": "",
 "AbstractStateMachine": "",
 "BattlePodStateMachine": "",
-"EnemyPod": "",
 "EnemySoldier": "",
 "GameLevel": "",
 "Missile": "",
@@ -105,7 +99,7 @@ _global_script_class_icons={
 "PodStateMachine": "",
 "Projectile": "",
 "ShipStateMachine": "",
-"SolderSpawner": ""
+"SoldierSpawner": ""
 }
 
 [application]

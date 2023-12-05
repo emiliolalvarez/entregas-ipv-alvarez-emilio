@@ -23,8 +23,8 @@ script = ExtResource( 4 )
 [node name="BattlePod" parent="." instance=ExtResource( 1 )]
 position = Vector2( 239, 125 )
 scale = Vector2( 0.55, 0.55 )
-ATTACK_DISTANCE_THRESHOLD = 45.0
-EXPLODE_DISTANCE_THRESHOLD = 30.0
+ATTACK_DISTANCE_THRESHOLD = 70.0
+EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]

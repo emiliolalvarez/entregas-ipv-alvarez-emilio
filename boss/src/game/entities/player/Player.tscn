@@ -118,7 +118,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.00482582, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -36.6946, -36.6946 ]
+"values": [ -26.0, -26.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:position")
@@ -1018,7 +1018,7 @@ frame = 70
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
 position = Vector2( 12.152, -15.808 )
-rotation = -0.523599
+rotation = -0.453786
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1026,8 +1026,8 @@ position = Vector2( 2.333, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-position = Vector2( 14.3389, -16.6861 )
-rotation = -0.523599
+position = Vector2( 14.3949, -16.5314 )
+rotation = -0.453786
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]

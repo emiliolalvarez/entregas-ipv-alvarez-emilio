@@ -46,6 +46,10 @@ func add_access_key() -> void:
 	access_keys = access_keys + 1
 	hud._on_access_keys_changed(access_keys)
 	
+func clear_access_keys() -> void:
+	access_keys = 0	
+	hud._on_access_keys_changed(access_keys)
+	
 func has_access_key() -> bool:
 	return access_keys > 0
 

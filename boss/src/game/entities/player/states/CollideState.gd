@@ -27,12 +27,12 @@ func exit() -> void:
 	collide_timer.stop()
 
 func handle_input(event:InputEvent) -> void:
-	if event.is_action_pressed("fire_weapon"):
-		character._handle_weapon_actions()
 	if event.is_action_pressed("move_down") && character._is_robot_mode() && character.is_on_floor():
 		emit_signal("finished", "down")
 	if event.is_action_pressed("jump") && character.is_on_floor():
 		emit_signal("finished", "jump")
+	if event.is_action_pressed("change_mode"):
+		emit_signal("finished", "plane" if character._is_robot_mode() else "robot")
 
 # En esta función vamos a manejar las acciones apropiadas para este estado
 func update(delta: float) -> void:
@@ -40,6 +40,7 @@ func update(delta: float) -> void:
 	var backward_vector = Vector2(-1 if character.get_direction() == 1 else 1, 2.5 if character._is_robot_mode() else 0) 
 	var movement = backward_vector * move_speed
 	character.velocity = character.move_and_slide(movement)
+	character._handle_weapon_actions()
 	
 
 func on_collide_timer_timeout() -> void:

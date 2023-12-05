@@ -35,6 +35,7 @@ func _setup_level(id: int) -> void:
 		current = levels[id].instance()
 		animation_player.play("fade_in")
 		GameState.set_hud(hud)
+		_reset()
 		
 
 func _add_scene() -> void:
@@ -56,7 +57,7 @@ func _return_called() -> void:
 
 # Callback de reinicio del nivel.
 func _restart_called() -> void:
-	hud.reset()
+	_reset()
 	_setup_level(level)
 	get_tree().paused = false
 	
@@ -86,3 +87,7 @@ func _resume() -> void:
 func _on_MainMenu_start_button_pressed():
 	main_menu.hide()
 	_resume()
+
+func _reset() -> void:
+	hud.reset()
+	GameState.clear_access_keys()

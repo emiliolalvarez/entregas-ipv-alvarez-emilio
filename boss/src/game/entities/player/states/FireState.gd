@@ -11,6 +11,5 @@ func handle_input(event:InputEvent) -> void:
 		emit_signal("finished", "aim_up")
 	
 func _on_animation_finished(anim_name:String) -> void:
-	if (anim_name == "fire"):
-		character._handle_weapon_actions()
+	character._handle_weapon_actions()
 	emit_signal("finished", "idle")	

@@ -9,12 +9,12 @@ signal hit(amount)
 signal die()
 
 func _remove() -> void:
-	GameState.update_score(_get_points())
 	hide()
 	set_physics_process(false)
 	get_parent().remove_child(self)
 	queue_free()
 	emit_signal("die")
+	GameState.update_score(_get_points())
 	
 func _get_points() -> int:
 	return 1
