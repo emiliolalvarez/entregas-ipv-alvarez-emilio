@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/textures/items/space-shooter-game-objects/PNG/Props/Missile_01.png" type="Texture" id=1]
 [ext_resource path="res://src/game/environment/items/ManaKit.gd" type="Script" id=2]
 [ext_resource path="res://assets/textures/items/space-shooter-game-objects/PNG/Props/Explosion_01.png" type="Texture" id=3]
 [ext_resource path="res://src/game/shaders/dissolve.tres" type="Shader" id=4]
+[ext_resource path="res://assets/sounds/collect_pick_up.mp3" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
@@ -77,7 +78,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0.025, 0.025 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Container/Icon:material:shader_param/dissolve_state")
+tracks/5/path = NodePath("Container:material:shader_param/dissolve_state")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -104,13 +105,25 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Container/Icon:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"times": PoolRealArray( 0.00124514, 0.115024, 0.249631, 0.383591, 0.488068 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.05, 0.05 ), Vector2( 0.06, 0.06 ), Vector2( 0.07, 0.07 ), Vector2( 0.1, 0.1 ), Vector2( 0.11, 0.11 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0.492258 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -118,38 +131,14 @@ tracks/1/keys = {
 "method": "remove"
 } ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("Container/Icon:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.0873101, 0.198481, 0.308311, 0.396631, 0.488068 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.05, 0.05 ), Vector2( 0.06, 0.06 ), Vector2( 0.07, 0.07 ), Vector2( 0.1, 0.1 ), Vector2( 0.06, 0.06 ) ]
-}
 tracks/3/type = "value"
-tracks/3/path = NodePath("Container/Icon:material")
+tracks/3/path = NodePath("Container:material:shader_param/dissolve_state")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 1,
-"values": [  ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Container/Icon:material:shader_param/dissolve_state")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.00219891, 0.489005 ),
+"times": PoolRealArray( 0.00260803, 0.489005 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
@@ -214,5 +203,8 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 3 )
 anims/hit = SubResource( 4 )
 anims/idle = SubResource( 2 )
+
+[node name="pickUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="body_entered" from="Container/HitBox" to="." method="_on_HitBox_body_entered"]
