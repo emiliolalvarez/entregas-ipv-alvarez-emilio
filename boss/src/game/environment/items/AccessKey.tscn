@@ -53,6 +53,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.025, 0.025 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Container/Icon:material:shader_param/dissolve_state")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "hit"
@@ -90,10 +102,22 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.0489467, 0.151372, 0.248359, 0.347159, 0.408796, 0.483122 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.0462367, 0.176333, 0.325339, 0.483122 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.06, 0.06 ), Vector2( 0.05, 0.05 ), Vector2( 0.025, 0.025 ), Vector2( 0.07, 0.07 ), Vector2( 0.08, 0.08 ), Vector2( 0.1, 0.1 ) ]
+"values": [ Vector2( 0.025, 0.025 ), Vector2( 0.07, 0.07 ), Vector2( 0.08, 0.08 ), Vector2( 0.1, 0.1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Container/Icon:material:shader_param/dissolve_state")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.0469445, 0.482485 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=2]
