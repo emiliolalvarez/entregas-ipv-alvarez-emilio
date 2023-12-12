@@ -33,9 +33,13 @@ func _on_soldier_die():
 	soldiers-=1
 
 func _on_SoldierSpawnerTimer_timeout():
-	if soldiers == 0:
+	if soldiers < soldier_spawner.amount:
+		var original_amount = soldier_spawner.amount
+		var diff = original_amount - soldiers
 		soldiers = soldier_spawner.amount
+		soldier_spawner.amount = diff
 		soldier_spawner._initialize()
+		soldier_spawner.amount = original_amount
 
 func _on_Player_dead():
 	defeated_music.play()
