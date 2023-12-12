@@ -4,13 +4,19 @@
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/HUD_Sharp_backplate.png" type="Texture" id=2]
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/Health.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/items/life-mana-bar/HUD_Sharp/Aligned/Center_top.png" type="Texture" id=4]
-[ext_resource path="res://assets/fonts/Default-Big.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/fonts/Roboto-Bold.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/textures/items/access-key.png" type="Texture" id=7]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/Mana.png-4f770f359468bfa8dd05b31c3cf849d9.stex"
+
+[sub_resource type="DynamicFont" id=4]
+size = 14
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = 7
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 3
@@ -83,7 +89,7 @@ margin_bottom = 40.0
 [node name="PointsLabel" type="Label" parent="ControlPoints"]
 margin_right = 40.0
 margin_bottom = 14.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "0"
 align = 1
 

@@ -145,6 +145,7 @@ gravity = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Container/HitBox"]
 position = Vector2( 0, -2.38419e-07 )
+z_index = 1
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

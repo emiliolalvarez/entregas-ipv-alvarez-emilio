@@ -5550,7 +5550,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 113, 439 )
+position = Vector2( 3856, 361 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]
@@ -5601,6 +5601,7 @@ z_index = 0
 
 [node name="HealthKit" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 1934, 415 )
+z_index = 1
 
 [node name="HealthKit2" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 1133, 359 )
