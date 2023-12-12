@@ -57,3 +57,10 @@ func remove_acces_key() -> void:
 	if (has_access_key()):
 		access_keys = access_keys - 1
 		hud._on_access_keys_changed(access_keys)
+
+func enable_mana():
+	hud._on_mana_enable()
+	
+	
+func disable_mana():
+	hud._on_mana_disable()

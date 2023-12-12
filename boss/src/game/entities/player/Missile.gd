@@ -24,8 +24,8 @@ func can_fire() -> bool:
 	return projectiles_count == 0
 
 func fire(targets:Array = []) -> void:
-
 	if projectiles_count == 0:
+		GameState.disable_mana()
 		var projectiles = [
 			[weapon_tip1, projectile_scene.instance()],
 			[weapon_tip2, projectile_scene.instance()],
@@ -47,5 +47,7 @@ func fire(targets:Array = []) -> void:
 	
 func _on_projectile_removed():
 	projectiles_count-=1
+	if projectiles_count == 0:
+		GameState.enable_mana()
 
 
