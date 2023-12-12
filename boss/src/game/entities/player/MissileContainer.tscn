@@ -35,5 +35,7 @@ position = Vector2( 0, -8 )
 position = Vector2( 14, -8 )
 rotation = 0.645772
 
+[node name="WeaponTimer" type="Timer" parent="Weapon"]
+
 [connection signal="body_entered" from="EnemyDetector" to="." method="_on_EnemyDetector_body_entered"]
 [connection signal="body_exited" from="EnemyDetector" to="." method="_on_EnemyDetector_body_exited"]
