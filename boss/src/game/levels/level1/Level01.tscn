@@ -255,9 +255,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 0, 4, 5 ) ]
 outlines = [ PoolVector2Array( 136, 488, 264, 483, 288, 484, 584, 480, 584, 560, 144, 568 ) ]
 
 [sub_resource type="NavigationPolygon" id=26]
-vertices = PoolVector2Array( 1760, 472, 1760, 416, 2289, 410, 2289, 474 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 1760, 472, 1760, 416, 2289, 410, 2289, 474 ) ]
+vertices = PoolVector2Array( 1918, 471, 1858, 473, 1860, 432, 1919, 438, 2287, 431, 2289, 474 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
+outlines = [ PoolVector2Array( 1860, 432, 1919, 438, 2287, 431, 2289, 474, 1918, 471, 1858, 473 ) ]
 
 [sub_resource type="NavigationPolygon" id=131]
 vertices = PoolVector2Array( 1864, 479, 1865, 434, 2110, 438, 2110, 473 )
@@ -5600,15 +5600,16 @@ scale = Vector2( 1.4, 0.5 )
 z_index = 0
 
 [node name="HealthKit" parent="Environment/Objects" instance=ExtResource( 231 )]
-position = Vector2( 1934, 415 )
-z_index = 3
-z_as_relative = false
+position = Vector2( 1783, 403 )
 
 [node name="HealthKit2" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 1133, 359 )
 
 [node name="HealthKit3" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 3236, 327 )
+
+[node name="HealthKit4" parent="Environment/Objects" instance=ExtResource( 231 )]
+position = Vector2( 2866, 361 )
 
 [node name="ManaKit" parent="Environment/Objects" instance=ExtResource( 232 )]
 position = Vector2( 1381, 398 )
