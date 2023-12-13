@@ -24,7 +24,7 @@ wait_time = 10.0
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 240, 72 )
 FRICTION_WEIGHT = 0.0
-life = 5
+life = 100
 bean_hit_damage = 10
 
 [node name="SoldierSpawner" parent="." instance=ExtResource( 8 )]
