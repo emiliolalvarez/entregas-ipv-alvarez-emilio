@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/textures/items/access-key.png" type="Texture" id=1]
+[ext_resource path="res://assets/sounds/collect_pick_up.mp3" type="AudioStream" id=2]
 
 [sub_resource type="GDScript" id=5]
 script/source = "extends Node2D
 
 onready var hitbox: Area2D = $Container/HitBox
 onready var player:AnimationPlayer = $AnimationPlayer
+onready var pickup_sound = $PickupSound
 
 func _ready():
 	player.play(\"idle\")
@@ -15,6 +17,7 @@ func _on_HitBox_body_entered(body: Node) -> void:
 	if body.has_method(\"notify_key_found\"):
 		body.notify_key_found()
 	player.play(\"hit\")
+	pickup_sound.play()
 
 
 func remove() -> void:
@@ -162,5 +165,8 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 3 )
 anims/hit = SubResource( 4 )
 anims/idle = SubResource( 2 )
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 
 [connection signal="body_entered" from="Container/HitBox" to="." method="_on_HitBox_body_entered"]

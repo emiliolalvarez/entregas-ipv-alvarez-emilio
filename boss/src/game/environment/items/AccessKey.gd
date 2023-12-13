@@ -3,6 +3,7 @@ extends Node2D
 const HEAL_POINTS = 50
 onready var hitbox: Area2D = $Container/HitBox
 onready var player:AnimationPlayer = $AnimationPlayer
+onready var pickup_sound = $PickupSound
 
 func _ready():
 	player.play("idle")
@@ -11,6 +12,7 @@ func _on_HitBox_body_entered(body: Node) -> void:
 	if body.has_method("notify_healed"):
 		body.notify_healed(HEAL_POINTS)
 	player.play("hit")
+	pickup_sound.play()
 
 
 func remove() -> void:
