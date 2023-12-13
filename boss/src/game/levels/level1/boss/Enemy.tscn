@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/textures/enemies/ship/zentraedi-ship.png" type="Texture" id=1]
 [ext_resource path="res://src/game/levels/level1/boss/ShipStateMachine.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/game/levels/level1/boss/states/FireStart.gd" type="Script" id=9]
 [ext_resource path="res://src/game/levels/level1/boss/states/FireState.gd" type="Script" id=10]
 [ext_resource path="res://assets/sounds/distorted_laser.wav" type="AudioStream" id=11]
+[ext_resource path="res://src/game/fx/Explosion.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.72549, 0.109804, 0.345098, 1 )
@@ -52,6 +53,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "die"
+length = 1.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:self_modulate")
 tracks/0/interp = 1
@@ -59,7 +61,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.09, 0.59 ),
+"times": PoolRealArray( 0.09, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0.788235, 0.960784, 0.0666667, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -71,7 +73,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.8 ),
+"times": PoolRealArray( 1.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "" ],
@@ -171,6 +173,29 @@ collision_layer = 8
 collision_mask = 15
 script = ExtResource( 4 )
 
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="Explosion" parent="Explosions" instance=ExtResource( 12 )]
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+
+[node name="Explosion2" parent="Explosions" instance=ExtResource( 12 )]
+position = Vector2( -39, -8 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+
+[node name="Explosion3" parent="Explosions" instance=ExtResource( 12 )]
+position = Vector2( -24, 8 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+
+[node name="Explosion4" parent="Explosions" instance=ExtResource( 12 )]
+position = Vector2( -13, -2 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+
+[node name="ExplosionTimer" type="Timer" parent="Explosions"]
+
 [node name="ShipStateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
 character_path = NodePath("..")
@@ -225,6 +250,7 @@ rounded = true
 percent_visible = false
 
 [node name="Body" type="Sprite" parent="."]
+self_modulate = Color( 0.789737, 0.961062, 0.0732861, 0.992908 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 

@@ -24,7 +24,7 @@ wait_time = 10.0
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 240, 72 )
 FRICTION_WEIGHT = 0.0
-life = 150
+life = 5
 bean_hit_damage = 10
 
 [node name="SoldierSpawner" parent="." instance=ExtResource( 8 )]
@@ -98,7 +98,6 @@ visible = false
 [connection signal="die" from="Enemy" to="." method="_on_boss_die"]
 [connection signal="soldier_die" from="SoldierSpawner" to="." method="_on_soldier_die"]
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
-[connection signal="notify_die" from="Player" to="Player/StateMachine" method="notify_die"]
 [connection signal="exit_requested" from="Menu" to="." method="_on_exit_requested"]
 [connection signal="restart_requested" from="Menu" to="." method="_on_restart_requested"]
 [connection signal="on_intro_accept" from="Intro" to="." method="_on_intro_accept"]

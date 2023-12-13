@@ -48,8 +48,8 @@ func _do_fire() -> void:
 		)
 	
 func _remove() -> void:
-	._remove()
 	_disable_collision()
+	._remove()
 	
 func notify_hit(amount:int = 1) -> void:
 	.notify_hit(amount)

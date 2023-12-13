@@ -16,7 +16,7 @@ export (float) var FRICTION_WEIGHT: float = 0.1
 
 var velocity: Vector2 = Vector2.ZERO
 var direction: String = directions.DOWN
-
+var explosion_timer_seconds = 0
 
 onready var down_ray_cast: RayCast2D = $DownRayCast
 onready var up_ray_cast: RayCast2D = $UpRayCast
@@ -24,6 +24,10 @@ onready var body_animations: AnimationPlayer = $BodyAnimations
 onready var life_progress_bar = $HUD/Control/LifeProgressBar
 onready var hud = $HUD
 onready var bean_damage_timer = $BeanDamageTimer
+onready var explosions = [$Explosions/Explosion, $Explosions/Explosion2, $Explosions/Explosion3, $Explosions/Explosion4]
+onready var explosion_timer = $Explosions/ExplosionTimer
+onready var bean_start_timer = $ShipStateMachine/BeanStartTimer
+onready var bean_sound = $BeanSound
 
 export (int) var life: int = MAX_LIFE
 export (int) var bean_hit_damage: int = 5
@@ -36,6 +40,7 @@ signal die()
 func _ready():
 	life_progress_bar.max_value = MAX_LIFE
 	life_progress_bar.value = life
+	explosion_timer.wait_time = 3
 
 func _handle_move() -> void:
 	var move_horizontal_direction = 1 if direction == directions.RIGHT else (-1 if direction == directions.RIGHT else 0)
@@ -65,8 +70,6 @@ func _remove() -> void:
 	body_animations.stop()
 	$BeanSource.hide()
 	$Bean.hide()
-	collision_layer = 0
-	collision_mask = 0
 	set_physics_process(false)
 	$CollisionPolygon2D.get_parent().remove_child($CollisionPolygon2D)
 	for n in get_children():
@@ -108,3 +111,21 @@ func _on_body_exited(body):
 func _on_damage_timer_timeout() -> void:
 	if is_attacking() && target != null && target.has_method("notify_hit"):
 		target.notify_hit(bean_hit_damage)
+	
+func die() -> void:
+	collision_layer = 0
+	collision_mask = 0
+	bean_damage_timer.stop()
+	bean_start_timer.stop()
+	bean_sound.stop()
+	explosion_timer.wait_time = 1
+	explosion_timer.connect("timeout", self, "on_explosion_timer_timeout")
+	explosion_timer.start()
+	
+func on_explosion_timer_timeout() -> void:
+	explosion_timer_seconds = explosion_timer_seconds + 1
+	if explosion_timer_seconds >= explosions.size():
+		_play_animation("die")
+		_remove()
+	else:
+		explosions[randi() % explosions.size()].play()

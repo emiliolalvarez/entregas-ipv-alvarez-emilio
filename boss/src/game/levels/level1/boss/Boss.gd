@@ -25,6 +25,8 @@ func _on_exit_requested() -> void:
 
 func _on_boss_die():
 	level_accomplished_music.play()
+	$Player._disable_collision()
+	soldier_spawner_timer.stop()
 	menu.set_title("Mission accomplished!")
 	menu.show()
 	get_tree().paused = true

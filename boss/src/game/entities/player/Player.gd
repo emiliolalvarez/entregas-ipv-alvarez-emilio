@@ -189,6 +189,9 @@ func _handle_mana(amount: int = 1) -> void:
 func _remove() -> void:
 	mode = MODE_ROBOT
 	set_physics_process(false)
+	_disable_collision()
+	
+func _disable_collision() -> void:
 	collision_layer = 0
 	collision_mask = 0
 

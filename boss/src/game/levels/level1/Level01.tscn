@@ -5520,7 +5520,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="BattlePod6" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
-position = Vector2( 1867, 699 )
+position = Vector2( 1866, 705 )
 ATTACK_DISTANCE_THRESHOLD = 70.0
 EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
@@ -5550,7 +5550,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 131, 458 )
+position = Vector2( 131, 457 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]
@@ -5601,7 +5601,8 @@ z_index = 0
 
 [node name="HealthKit" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 1934, 415 )
-z_index = 1
+z_index = 3
+z_as_relative = false
 
 [node name="HealthKit2" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 1133, 359 )
@@ -5654,7 +5655,6 @@ autoplay = true
 bus = "Background"
 
 [connection signal="dead" from="Environment/Player" to="." method="_on_game_over"]
-[connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
 
 [editable path="Environment/Objects/Obstacles/Obstacle3"]

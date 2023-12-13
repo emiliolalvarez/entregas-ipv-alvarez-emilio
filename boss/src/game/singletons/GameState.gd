@@ -61,6 +61,5 @@ func remove_acces_key() -> void:
 func enable_mana():
 	hud._on_mana_enable()
 	
-	
 func disable_mana():
 	hud._on_mana_disable()
