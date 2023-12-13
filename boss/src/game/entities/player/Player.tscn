@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -91,6 +91,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -5, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BodyPivot/JetEngine:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -216,6 +228,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 151, 150, 152, 153, 154 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BodyPivot/JetEngine:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0122257, 0.542005 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -640,7 +664,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "plane"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
 tracks/0/interp = 1
@@ -651,7 +675,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.213449, 0.452493 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 180, 181, 183 ]
+"values": [ 180, 181, 154 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BodyPivot/WeaponPivot:position")
@@ -700,6 +724,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 2, 0.65 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BodyPivot/JetEngine:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -764,6 +800,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ -25.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BodyPivot/JetEngine:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -899,6 +947,22 @@ tracks/4/keys = {
 [sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 10.8333, 20.1667 )
 
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 8 )
+region = Rect2( 192, 768, 96, 96 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 8 )
+region = Rect2( 288, 768, 96, 96 )
+
+[sub_resource type="SpriteFrames" id=25]
+animations = [ {
+"frames": [ SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 24 ), SubResource( 24 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
 [sub_resource type="CapsuleShape2D" id=22]
 radius = 11.6667
 height = 23.3333
@@ -983,7 +1047,8 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4, 3 )
+position = Vector2( -1, 5 )
+scale = Vector2( 2, 0.65 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -1003,7 +1068,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -4, 3 )
+position = Vector2( -1, 5 )
+scale = Vector2( 2, 0.65 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1012,21 +1078,29 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 185
+frame = 154
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 13, -16 )
-rotation = -0.436332
+position = Vector2( 11, 10.332 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
 position = Vector2( 2.333, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
+[node name="JetEngine" type="Node2D" parent="BodyPivot"]
+position = Vector2( -28, 4.9 )
+scale = Vector2( 0.3, 0.1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="BodyPivot/JetEngine"]
+position = Vector2( 16.6667, -49.9999 )
+frames = SubResource( 25 )
+animation = "idle"
+frame = 2
+playing = true
+
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 15.2551, -16.6842 )
-rotation = -0.436332
+position = Vector2( 13.333, 10.665 )
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]

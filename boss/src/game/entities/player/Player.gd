@@ -65,7 +65,7 @@ func initialize(projectile_container: Node = get_parent()) -> void:
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
 	missile.projectile_container =  projectile_container
-
+	$BodyPivot/JetEngine.visible = false
 
 ## Se extrae el comportamiento de manejo del disparo del arma a
 ## una función para ser llamada apropiadamente desde la state machine
