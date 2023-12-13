@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/game/entities/enemies/pod/BattlePod.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/entities/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/hud/hud.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/game/test/test.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/enemies/pod/PodProjectile.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/levels/level1/boss/Enemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 263, 10 )
@@ -34,7 +35,11 @@ position = Vector2( 99, 118 )
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 266, 150 )
+position = Vector2( 266, 151 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 266, 7 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
@@ -42,6 +47,10 @@ position = Vector2( 32, 63 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 501, 78 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 501, 78 )
 shape = SubResource( 2 )
 
@@ -56,4 +65,5 @@ position = Vector2( 53, -3 )
 z_index = -1
 navpoly = SubResource( 3 )
 
-[connection signal="notify_die" from="Player" to="Player/StateMachine" method="notify_die"]
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 267, 68 )

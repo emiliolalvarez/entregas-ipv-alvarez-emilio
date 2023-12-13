@@ -176,22 +176,23 @@ script = ExtResource( 4 )
 [node name="Explosions" type="Node2D" parent="."]
 
 [node name="Explosion" parent="Explosions" instance=ExtResource( 12 )]
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -4, 2 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
 
 [node name="Explosion2" parent="Explosions" instance=ExtResource( 12 )]
-position = Vector2( -39, -8 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -43, -8 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
 
 [node name="Explosion3" parent="Explosions" instance=ExtResource( 12 )]
-position = Vector2( -24, 8 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -26, 7 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
 
 [node name="Explosion4" parent="Explosions" instance=ExtResource( 12 )]
-position = Vector2( -13, -2 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -17, -9 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
 
 [node name="ExplosionTimer" type="Timer" parent="Explosions"]

@@ -9,6 +9,7 @@ const directions = {
 }
 
 const MAX_LIFE = 50
+const POINTS = 1000
 
 export (float) var ACCELERATION: float = 25
 export (float) var H_SPEED_LIMIT: float = 50
@@ -77,6 +78,7 @@ func _remove() -> void:
 		n.queue_free()
 	get_parent().remove_child(self)
 	queue_free()
+	GameState.update_score(_get_points())
 	emit_signal("die")
 
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
@@ -129,3 +131,6 @@ func on_explosion_timer_timeout() -> void:
 		_remove()
 	else:
 		explosions[randi() % explosions.size()].play()
+
+func _get_points() -> int:
+	return POINTS
