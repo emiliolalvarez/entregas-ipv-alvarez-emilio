@@ -291,11 +291,11 @@ anims/hit = SubResource( 4 )
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( -47, -28 )
+position = Vector2( 1, 0 )
 shape = SubResource( 1 )
 
 [node name="Body" type="Node2D" parent="." index="3"]
-position = Vector2( -47, -28 )
+position = Vector2( 1, 0 )
 
 [node name="Fire" type="Node2D" parent="Body" index="0"]
 
@@ -348,7 +348,7 @@ vframes = 2
 frame = 5
 
 [node name="HitSFX" type="AudioStreamPlayer2D" parent="." index="5"]
-position = Vector2( -47, -28 )
+position = Vector2( 1, 0 )
 stream = ExtResource( 4 )
 bus = "TurretAudio"
 
