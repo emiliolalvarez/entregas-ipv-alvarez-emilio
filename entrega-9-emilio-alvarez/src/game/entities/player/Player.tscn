@@ -184,6 +184,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( -4, -7 ) ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("StateMachine/Jump/JumpSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "walk"
@@ -323,7 +337,7 @@ update_rotation = false
 update_scale = false
 
 [node name="WeaponManager" type="Node2D" parent="."]
-position = Vector2( -4, -5 )
+position = Vector2( -4, -7 )
 script = ExtResource( 18 )
 
 [connection signal="healed" from="." to="StateMachine" method="notify_healed"]
