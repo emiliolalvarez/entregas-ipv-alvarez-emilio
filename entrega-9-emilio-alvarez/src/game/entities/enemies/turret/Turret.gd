@@ -8,6 +8,7 @@ onready var fire_position: Node2D = $FirePosition
 onready var raycast: RayCast2D = $RayCast2D
 onready var body_anim: AnimatedSprite = $Body
 onready var hp_progress: ProgressBar = $HpProgress
+onready var attack_sound = $AttackSound
 
 export (PackedScene) var projectile_scene: PackedScene
 
@@ -51,6 +52,7 @@ func _fire() -> void:
 			fire_position.global_position,
 			fire_position.global_position.direction_to(target.global_position)
 		)
+		attack_sound.play()
 
 
 # Al igual que con el script del player, abstraemos a una función la detección del target
