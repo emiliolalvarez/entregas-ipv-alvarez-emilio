@@ -1,0 +1,355 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/textures/enemies/golem/Golem_AttackB_FX.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/enemies/golem/Golem_AttackA.png" type="Texture" id=2]
+[ext_resource path="res://src/game/entities/projectiles/regular/Projectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sound/sfx/enemies/20_orc_special_atk.wav" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Rocks/Sprite2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -3, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Rocks/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Rocks/Sprite3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 5, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Fx:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fire_loop"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Rocks/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Rocks/Sprite2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3, 3 ), Vector2( -3, 4 ), Vector2( -2, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Rocks/Sprite3:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 1 ), Vector2( 5, 1 ), Vector2( 3, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fire_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Rocks/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2, -4 ), Vector2( -1, -5 ), Vector2( -3, -4 ), Vector2( -2, -4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Rocks/Sprite2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3, 3 ), Vector2( -3, 4 ), Vector2( -2, 4 ), Vector2( -3, 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Rocks/Sprite3:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 1 ), Vector2( 5, 1 ), Vector2( 3, 1 ), Vector2( 4, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_remove"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Fx:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Fx:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("HitSFX")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="Shader" id=15]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture2;
+uniform sampler2D colorTexture;
+uniform vec2 scroll1 = vec2(0.1, 0.1);
+uniform vec2 scroll2 = vec2(0.2, 0.2);
+
+void fragment() {
+	float textureColor1 = texture(TEXTURE, UV + scroll1 * TIME).r;
+	float textureColor2 = texture(TEXTURE, UV + scroll2 * TIME).r;
+	float energy = textureColor1 * textureColor2 - (1.0 - UV.y) * 0.5;
+	vec4 color = texture(colorTexture, vec2(energy));
+	COLOR = color;
+}"
+
+[sub_resource type="Gradient" id=17]
+offsets = PoolRealArray( 0.116129, 0.232258, 0.374194, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.0117647, 0.828125, 0.0614624, 0.0614624, 1, 0.921875, 0.771924, 0.183655, 1, 0.929688, 0.920325, 0.330475, 1 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 17 )
+
+[sub_resource type="OpenSimplexNoise" id=19]
+
+[sub_resource type="NoiseTexture" id=20]
+seamless = true
+noise = SubResource( 19 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
+shader_param/scroll1 = Vector2( -0.2, 0.4 )
+shader_param/scroll2 = Vector2( 0.2, -0.3 )
+shader_param/texture2 = SubResource( 20 )
+shader_param/colorTexture = SubResource( 18 )
+
+[sub_resource type="OpenSimplexNoise" id=22]
+
+[sub_resource type="NoiseTexture" id=23]
+noise = SubResource( 22 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 38, 21, 6, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 18, 22, 6, 9 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 17, 37, 5, 8 )
+
+[node name="TurretProjectile" instance=ExtResource( 3 )]
+position = Vector2( 47, 29 )
+VELOCITY = 150.0
+
+[node name="LifetimeTimer" parent="." index="0"]
+wait_time = 3.0
+
+[node name="ProjectileAnimations" parent="." index="1"]
+anims/RESET = SubResource( 8 )
+anims/fire_loop = SubResource( 2 )
+anims/fire_start = SubResource( 3 )
+anims/hit = SubResource( 4 )
+
+[node name="Hitbox" parent="." index="2"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( -47, -28 )
+shape = SubResource( 1 )
+
+[node name="Body" type="Node2D" parent="." index="3"]
+position = Vector2( -47, -28 )
+
+[node name="Fire" type="Node2D" parent="Body" index="0"]
+
+[node name="Sprite4" type="Sprite" parent="Body/Fire" index="0"]
+material = SubResource( 16 )
+position = Vector2( -5.00135, -11.866 )
+rotation = -0.392699
+scale = Vector2( 0.0296822, 0.0578074 )
+texture = SubResource( 23 )
+
+[node name="Sprite5" type="Sprite" parent="Body/Fire" index="1"]
+material = SubResource( 16 )
+position = Vector2( -4.69606, 11.4103 )
+rotation = -2.78752
+scale = Vector2( 0.0276611, 0.0490673 )
+texture = SubResource( 23 )
+
+[node name="Sprite6" type="Sprite" parent="Body/Fire" index="2"]
+material = SubResource( 16 )
+position = Vector2( 14.9062, 0.29641 )
+rotation = 1.60996
+scale = Vector2( 0.0212441, 0.0627298 )
+texture = SubResource( 23 )
+
+[node name="Rocks" type="Node2D" parent="Body" index="1"]
+
+[node name="Sprite" type="Sprite" parent="Body/Rocks" index="0"]
+position = Vector2( -1, -5 )
+rotation = -1.2802
+texture = SubResource( 5 )
+
+[node name="Sprite2" type="Sprite" parent="Body/Rocks" index="1"]
+position = Vector2( -3, 4 )
+rotation = 1.45111
+texture = SubResource( 6 )
+
+[node name="Sprite3" type="Sprite" parent="Body/Rocks" index="2"]
+position = Vector2( 5, 1 )
+rotation = -1.49609
+texture = SubResource( 7 )
+
+[node name="Fx" type="Sprite" parent="." index="4"]
+visible = false
+self_modulate = Color( 1, 0.968627, 0.619608, 1 )
+position = Vector2( -2, -5 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 1 )
+hframes = 3
+vframes = 2
+frame = 5
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="." index="5"]
+position = Vector2( -47, -28 )
+stream = ExtResource( 4 )
+bus = "TurretAudio"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
