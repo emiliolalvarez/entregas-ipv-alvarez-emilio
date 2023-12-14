@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/game/entities/player/weapons/SwordWeapon.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/player/sword.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://src/game/entities/projectiles/DistantCuts.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/game/entities/effects/SlashCutEffect.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/game/ui/tutorials/SwordTutorial.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sound/player_movement_samples/56_Attack_03.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/sound/player_movement_samples/88_Teleport_02.wav" type="AudioStream" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -321,6 +323,20 @@ tracks/10/keys = {
 "method": "_apply_cut_impulse"
 } ]
 }
+tracks/11/type = "audio"
+tracks/11/path = NodePath("SwordSound")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0.06 )
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "dash_cut"
@@ -399,10 +415,24 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Color( 1, 0.584314, 0.4, 0 ), Color( 1, 0.584314, 0.4, 0.501961 ), Color( 1, 1, 1, 0.501961 ), Color( 1, 0.341176, 0.341176, 0.827451 ) ]
 }
+tracks/6/type = "audio"
+tracks/6/path = NodePath("SwordSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0.04 )
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "far_cut"
-length = 0.6
+length = 1.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("SwordPivot/SwordSprite:position")
@@ -526,6 +556,20 @@ tracks/9/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/10/type = "audio"
+tracks/10/path = NodePath("SwordSound")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"clips": [ {
+"end_offset": 2.63,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.878431, 0.811765, 0, 1 )
@@ -577,7 +621,6 @@ percent_visible = false
 [node name="Fx" type="Sprite" parent="SwordPivot"]
 visible = false
 position = Vector2( 14, 0 )
-texture = ExtResource( 3 )
 
 [node name="CutArea" type="Area2D" parent="SwordPivot"]
 collision_layer = 0
@@ -604,6 +647,9 @@ default_color = Color( 1, 0.584314, 0.4, 0.827451 )
 [node name="LineRaycast" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 enabled = true
+
+[node name="SwordSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [connection signal="animation_finished" from="AttacksAnim" to="." method="_on_AttacksAnim_animation_finished"]
 [connection signal="body_entered" from="SwordPivot/CutArea" to="." method="_on_CutArea_body_entered"]
