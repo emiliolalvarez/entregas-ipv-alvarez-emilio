@@ -235,7 +235,7 @@
 [ext_resource path="res://src/game/environment/items/Hammer.tscn" type="PackedScene" id=233]
 [ext_resource path="res://assets/textures/items/Gate.tscn" type="PackedScene" id=234]
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.tscn" type="PackedScene" id=235]
-[ext_resource path="res://assets/music/robotech/1-32-alien-attack.ogg" type="AudioStream" id=236]
+[ext_resource path="res://assets/music/robotech/awake10_megaWall.mp3" type="AudioStream" id=236]
 [ext_resource path="res://src/game/environment/items/AccessGate.tscn" type="PackedScene" id=237]
 [ext_resource path="res://src/game/entities/enemies/pod/BattlePod.tscn" type="PackedScene" id=238]
 
@@ -265,9 +265,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 1864, 479, 1865, 434, 2110, 438, 2110, 473 ) ]
 
 [sub_resource type="NavigationPolygon" id=132]
-vertices = PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2110, 473 )
+vertices = PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2111, 477 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2110, 473 ) ]
+outlines = [ PoolVector2Array( 1840, 476, 1842, 435, 2110, 438, 2111, 477 ) ]
 
 [sub_resource type="NavigationPolygon" id=133]
 vertices = PoolVector2Array( 1840, 476, 1842, 435, 2006, 436, 2007, 477 )
@@ -5526,7 +5526,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="BattlePod7" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
-position = Vector2( 2077, 697 )
+position = Vector2( 2076, 707 )
 ATTACK_DISTANCE_THRESHOLD = 70.0
 EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
@@ -5538,7 +5538,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="BattlePod9" parent="Environment/Entities/Enemies" instance=ExtResource( 238 )]
-position = Vector2( 2600, 704 )
+position = Vector2( 2600, 707 )
 ATTACK_DISTANCE_THRESHOLD = 70.0
 EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
@@ -5609,7 +5609,7 @@ position = Vector2( 1133, 359 )
 position = Vector2( 3236, 327 )
 
 [node name="HealthKit4" parent="Environment/Objects" instance=ExtResource( 231 )]
-position = Vector2( 2866, 361 )
+position = Vector2( 2852, 357 )
 
 [node name="ManaKit" parent="Environment/Objects" instance=ExtResource( 232 )]
 position = Vector2( 1381, 398 )
@@ -5628,7 +5628,7 @@ position = Vector2( 685, 341 )
 scale = Vector2( 1.02, 0.8 )
 
 [node name="Gate2" parent="Environment/Objects" instance=ExtResource( 234 )]
-position = Vector2( 797, 341 )
+position = Vector2( 783, 341 )
 scale = Vector2( 1.02, 0.8 )
 
 [node name="Hammer" parent="Environment/Objects" instance=ExtResource( 233 )]
@@ -5656,6 +5656,7 @@ autoplay = true
 bus = "Background"
 
 [connection signal="dead" from="Environment/Player" to="." method="_on_game_over"]
+[connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
 
 [editable path="Environment/Objects/Obstacles/Obstacle3"]

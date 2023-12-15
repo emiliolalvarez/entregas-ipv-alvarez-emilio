@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Orbital Colossus.mp3-1db87835427ac7e5b83b42da09ee1d85.mp3str"
+
+[deps]
+
+source_file="res://assets/music/robotech/Orbital Colossus.mp3"
+dest_files=[ "res://.import/Orbital Colossus.mp3-1db87835427ac7e5b83b42da09ee1d85.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

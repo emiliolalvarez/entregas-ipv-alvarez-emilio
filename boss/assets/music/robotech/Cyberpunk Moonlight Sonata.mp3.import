@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cyberpunk Moonlight Sonata.mp3-2dff8bf5c31124d5d73479ad3533f249.mp3str"
+
+[deps]
+
+source_file="res://assets/music/robotech/Cyberpunk Moonlight Sonata.mp3"
+dest_files=[ "res://.import/Cyberpunk Moonlight Sonata.mp3-2dff8bf5c31124d5d73479ad3533f249.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/awake10_megaWall.mp3-27124f74e4699842d718ef69089ae512.mp3str"
+
+[deps]
+
+source_file="res://assets/music/robotech/awake10_megaWall.mp3"
+dest_files=[ "res://.import/awake10_megaWall.mp3-27124f74e4699842d718ef69089ae512.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

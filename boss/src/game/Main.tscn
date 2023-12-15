@@ -4,7 +4,7 @@
 [ext_resource path="res://src/game/Main.gd" type="Script" id=2]
 [ext_resource path="res://src/game/ui/MainMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/LevelManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/music/robotech/1 01 Main Title.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/music/robotech/trance-menu.mp3" type="AudioStream" id=5]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -21,6 +21,6 @@ position = Vector2( -12, 0 )
 
 [node name="introMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-bus = "Background"
+bus = "Menu"
 
 [connection signal="start_button_pressed" from="MainMenu" to="." method="_on_start_requested"]
