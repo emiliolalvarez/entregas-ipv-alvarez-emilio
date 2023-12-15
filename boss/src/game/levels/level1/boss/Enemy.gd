@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends AbstractEnemy
 
 const directions = {
 	UP="up", 
@@ -35,9 +35,6 @@ export (int) var bean_hit_damage: int = 5
 
 var target: Node2D
 
-signal hit()
-signal die()
-
 func _ready():
 	life_progress_bar.max_value = MAX_LIFE
 	life_progress_bar.value = life
@@ -71,16 +68,8 @@ func _remove() -> void:
 	body_animations.stop()
 	$BeanSource.hide()
 	$Bean.hide()
-	set_physics_process(false)
 	$CollisionPolygon2D.get_parent().remove_child($CollisionPolygon2D)
-	for n in get_children():
-		remove_child(n)
-		n.queue_free()
-	get_parent().remove_child(self)
-	queue_free()
-	GameState.update_score(_get_points())
-	emit_signal("die")
-
+	._remove()
 ## Wrapper sobre el llamado a animación para tener un solo punto de entrada controlable
 ## (en el caso de que necesitemos expandir la lógica o debuggear, por ejemplo)
 func _play_animation(animation: String) -> void:
@@ -128,7 +117,6 @@ func on_explosion_timer_timeout() -> void:
 	explosion_timer_seconds = explosion_timer_seconds + 1
 	if explosion_timer_seconds >= explosions.size():
 		_play_animation("die")
-		_remove()
 	else:
 		explosions[randi() % explosions.size()].play()
 

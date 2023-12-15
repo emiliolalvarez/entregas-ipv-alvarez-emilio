@@ -67,7 +67,7 @@ tracks/0/keys = {
 "values": [ Color( 0.788235, 0.960784, 0.0666667, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("ShipStateMachine/Die")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -76,8 +76,8 @@ tracks/1/keys = {
 "times": PoolRealArray( 1.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "" ],
-"method": "_on_animation_finished"
+"args": [  ],
+"method": "_remove"
 } ]
 }
 
