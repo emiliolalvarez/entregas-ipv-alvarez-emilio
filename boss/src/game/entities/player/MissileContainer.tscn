@@ -5,7 +5,7 @@
 [ext_resource path="res://src/game/entities/player/Missile.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 424.075
+radius = 280.0
 
 [node name="MissileContainer" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,7 +15,6 @@ collision_mask = 12
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
-visible = false
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 
