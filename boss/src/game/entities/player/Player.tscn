@@ -87,10 +87,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.001 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 5 ) ]
+"values": [ Vector2( 0, 6 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
@@ -144,6 +144,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 19, -6 ), Vector2( 19, -17 ), Vector2( 15, -18 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.2, 0.9 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "aim_up_walk"
@@ -186,16 +210,16 @@ tracks/2/keys = {
 "values": [ -32.0, -32.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/path = NodePath("BodyPivot/CollisionShapeTransform:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.00138067 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.33333, 1.66667 ) ]
+"values": [ Vector2( 0, 6 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -553,7 +577,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 5 ) ]
+"values": [ Vector2( 0, 6 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
@@ -1013,7 +1037,9 @@ state_id = "walk"
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
 state_id = "jump"
-jumps_limit = 0
+jumps_limit = 1
+time_to_jump_peak = 0.7
+jump_height = 64
 
 [node name="Fire" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )
@@ -1059,7 +1085,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 6 )
 scale = Vector2( 1.2, 0.9 )
 shape = SubResource( 17 )
 
@@ -1080,7 +1106,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( 0, 5 )
+position = Vector2( 0, 6 )
 scale = Vector2( 1.2, 0.9 )
 remote_path = NodePath("../../CollisionShape2D")
 
@@ -1090,10 +1116,11 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 90
+frame = 60
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 21, -6 )
+position = Vector2( 18, -19 )
+rotation = -0.558505
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1109,12 +1136,12 @@ scale = Vector2( 0.3, 0.1 )
 position = Vector2( 16.6667, -49.9999 )
 frames = SubResource( 25 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 23.333, -5.667 )
+position = Vector2( 20.155, -19.9539 )
+rotation = -0.558505
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]

@@ -67,3 +67,5 @@ navpoly = SubResource( 3 )
 
 [node name="Enemy" parent="." instance=ExtResource( 6 )]
 position = Vector2( 267, 68 )
+
+[connection signal="notify_die" from="Player" to="Player/StateMachine" method="notify_die"]

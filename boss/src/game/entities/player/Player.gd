@@ -23,6 +23,7 @@ onready var weapondy_pivot: Node2D = $WeaponPivot
 onready var weapon_container: Node2D = $WeaponContainer
 onready var missile_container: Node2D = $MissileContainer
 onready var floor_raycasts: Array = $FloorRaycasts.get_children()
+onready var jet_engine = $BodyPivot/JetEngine
 
 ## Estas variables de exportación podríamos abstraerlas a cada
 ## estado correspondiente de la state machine, pero como queremos
@@ -65,7 +66,7 @@ func initialize(projectile_container: Node = get_parent()) -> void:
 	self.projectile_container = projectile_container
 	weapon.projectile_container = projectile_container
 	missile.projectile_container =  projectile_container
-	$BodyPivot/JetEngine.visible = false
+	jet_engine.visible = false
 
 ## Se extrae el comportamiento de manejo del disparo del arma a
 ## una función para ser llamada apropiadamente desde la state machine
