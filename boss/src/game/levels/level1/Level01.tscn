@@ -1,7 +1,5 @@
-[gd_scene load_steps=371 format=2]
+[gd_scene load_steps=369 format=2]
 
-[ext_resource path="res://src/game/environment/Obstacle.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/textures/items/Barrel-pixel-oleo.png" type="Texture" id=2]
 [ext_resource path="res://src/game/levels/GameLevel.gd" type="Script" id=3]
 [ext_resource path="res://src/Camera.gd" type="Script" id=4]
 [ext_resource path="res://src/game/entities/enemies/soldier/SoldierSpawner.gd" type="Script" id=5]
@@ -5571,29 +5569,6 @@ z_as_relative = false
 [node name="Obstacles" type="Node2D" parent="Environment/Objects"]
 position = Vector2( -35, 142 )
 
-[node name="Obstacle" parent="Environment/Objects/Obstacles" instance=ExtResource( 1 )]
-position = Vector2( 2320, 224 )
-
-[node name="Obstacle2" parent="Environment/Objects/Obstacles" instance=ExtResource( 1 )]
-position = Vector2( 624, 168 )
-
-[node name="Obstacle3" parent="Environment/Objects/Obstacles" instance=ExtResource( 1 )]
-position = Vector2( 784, 120 )
-mass = 20.0
-
-[node name="Sprite" parent="Environment/Objects/Obstacles/Obstacle3" index="0"]
-position = Vector2( 464, 80 )
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" parent="Environment/Objects/Obstacles/Obstacle3" index="1"]
-position = Vector2( -197.266, 28.935 )
-
-[node name="Obstacle4" parent="Environment/Objects/Obstacles" instance=ExtResource( 1 )]
-position = Vector2( 648, 152 )
-
-[node name="Obstacle5" parent="Environment/Objects/Obstacles" instance=ExtResource( 1 )]
-position = Vector2( 632, 104 )
-
 [node name="Goal" parent="Environment/Objects" instance=ExtResource( 10 )]
 position = Vector2( 3837, 332 )
 scale = Vector2( 1.4, 0.5 )
@@ -5664,5 +5639,3 @@ bus = "Background"
 [connection signal="dead" from="Environment/Player" to="." method="_on_game_over"]
 [connection signal="notify_die" from="Environment/Player" to="Environment/Player/StateMachine" method="notify_die"]
 [connection signal="goal_reached" from="Environment/Objects/Goal" to="." method="_on_level_won"]
-
-[editable path="Environment/Objects/Obstacles/Obstacle3"]
