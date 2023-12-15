@@ -51,6 +51,7 @@ func fire(targets:Array = []) -> void:
 				global_position.direction_to(projectiles[i][0].global_position),
 				last_target
 			)
+			#print("Target for missile " + str(i) + ": " + str(last_target))
 		
 	
 func _on_projectile_removed():
