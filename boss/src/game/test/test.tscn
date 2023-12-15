@@ -51,6 +51,15 @@ projectile_scene = ExtResource( 5 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 99, 118 )
 
+[node name="CollisionShape2D" parent="Player" index="2"]
+position = Vector2( 0, 9.00002 )
+
+[node name="AnimatedSprite" parent="Player/BodyPivot/JetEngine" index="0"]
+frame = 1
+
+[node name="WeaponContainer" parent="Player" index="5"]
+position = Vector2( 16.333, 4.33301 )
+
 [node name="Area2D" type="StaticBody2D" parent="."]
 collision_mask = 15
 
@@ -59,7 +68,7 @@ position = Vector2( 159.5, 151 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 178.25, 82 )
+position = Vector2( 212.25, 82 )
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Area2D"]
@@ -97,3 +106,5 @@ navpoly = SubResource( 3 )
 position = Vector2( 267, 68 )
 
 [connection signal="notify_die" from="Player" to="Player/StateMachine" method="notify_die"]
+
+[editable path="Player"]

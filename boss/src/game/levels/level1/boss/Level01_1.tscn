@@ -41,7 +41,7 @@ gravity = 0
 START_STATE = NodePath("Plane")
 
 [node name="AnimatedSprite" parent="Player/BodyPivot/JetEngine" index="0"]
-frame = 1
+frame = 4
 
 [node name="WeaponContainer" parent="Player" index="5"]
 position = Vector2( 16.333, 4.333 )
