@@ -11,8 +11,9 @@ func enter() -> void:
 	character._play_animation("die")
 	explossion.play()
 	if character.target:
-		var abs_position_diff = abs(character.target.global_position.x - character.global_position.x)
-		if abs_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD && character.target:
+		var x_abs_position_diff = abs(character.target.global_position.x - character.global_position.x)
+		var y_abs_position_diff = abs(character.target.global_position.y - character.global_position.y)
+		if y_abs_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD && x_abs_position_diff <= character.EXPLODE_DISTANCE_THRESHOLD && character.target:
 			character._on_collision_area_body_enter(character.target)
 	emit_signal("die_state_entered")
 	
