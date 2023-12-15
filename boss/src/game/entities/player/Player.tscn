@@ -747,7 +747,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.0508566, 0.0529779, 0.126489, 0.197648, 0.2, 0.3, 0.307679, 0.4, 0.407522, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 12.37, -16.174 ), Vector2( 18.3333, 6.66667 ), Vector2( 24, 31 ), Vector2( 16.6667, 16.6667 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 11, 10.332 ) ]
+"values": [ Vector2( 12.37, -16.174 ), Vector2( 18.3333, 6.66667 ), Vector2( 24, 31 ), Vector2( 16.6667, 16.6667 ), Vector2( 24, 31 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 24, 31 ), Vector2( 25, 3.33334 ), Vector2( 11, 2.9 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("BodyPivot/WeaponPivot:rotation_degrees")
@@ -795,7 +795,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.501252 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 5 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 4 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -1109,8 +1109,8 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.962, 5 )
-scale = Vector2( 1.33393, 0.881147 )
+position = Vector2( 0, 4 )
+scale = Vector2( 1.2, 0.9 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -1130,8 +1130,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -0.962, 5 )
-scale = Vector2( 1.33393, 0.881147 )
+position = Vector2( 0, 4 )
+scale = Vector2( 1.2, 0.9 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1140,14 +1140,14 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 11
+frame = 180
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 16.667, -9.5 )
+position = Vector2( 24, 31 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
-position = Vector2( 2.333, 0.333 )
+position = Vector2( -2.667, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="JetEngine" type="Node2D" parent="BodyPivot"]
@@ -1159,11 +1159,11 @@ scale = Vector2( 0.3, 0.1 )
 position = Vector2( 16.6667, -49.9999 )
 frames = SubResource( 25 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
-visible = false
-position = Vector2( 19, -9.167 )
+position = Vector2( 21.333, 31.333 )
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]

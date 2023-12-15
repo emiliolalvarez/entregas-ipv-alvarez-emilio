@@ -1,15 +1,18 @@
 extends AbstractEnemyState
 
+const EXPLODE_TIMER_MAX_TICS = 8
+
 onready var explossion = $"../../Explossion"
 onready var body = $"../../Pivot/Body"
 onready var timer = $Timer
 onready var animation_player = $"../../AnimationPlayer"
+onready var collision_area = $"../../Pivot/CollisionArea"
+onready var tween = $"../../Tween"
 
 var counter = 0
 
-
 signal die_state_entered()
-onready var tween = $"../../Tween"
+
 
 func enter() -> void:
 	#print("POD enter alert state")
@@ -52,5 +55,5 @@ func _on_explode_alert_finished() -> void:
 	print("_on_explode_alert_finished => notify hit")
 	counter+=1
 	body.material.set_shader_param("flash_modifier", 0 if counter %2 == 0 else 0.6)
-	if (counter == 8):
+	if (counter == EXPLODE_TIMER_MAX_TICS):
 		character.notify_hit(character.life)
