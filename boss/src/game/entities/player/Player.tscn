@@ -1140,7 +1140,6 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 138
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
 position = Vector2( 19, 4 )

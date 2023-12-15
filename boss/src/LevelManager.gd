@@ -42,6 +42,7 @@ func _add_scene() -> void:
 	current_level_container.add_child(current)
 	current.connect("return_requested", self, "_return_called")
 	current.connect("restart_requested", self, "_restart_called")
+	current.connect("prev_level_requested", self, "_prev_called")
 	current.connect("next_level_requested", self, "_next_called")
 	current.connect("menu_requested", self, "_menu_requested_called")
 	current.connect("game_over_menu_requested", self, "game_over_menu_requested_called")
@@ -60,6 +61,12 @@ func _restart_called() -> void:
 	_reset()
 	_setup_level(level)
 	get_tree().paused = false
+
+func _prev_called() -> void:
+	_reset()
+	_setup_level(level - 1 if level > 0 else level )
+	get_tree().paused = false
+
 	
 # Callback para mostrar main menu.
 func _menu_requested_called() -> void:

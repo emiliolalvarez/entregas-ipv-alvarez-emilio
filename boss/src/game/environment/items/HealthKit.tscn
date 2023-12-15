@@ -1,13 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/game/shaders/dissolve.tres" type="Shader" id=1]
 [ext_resource path="res://src/game/environment/items/AccessKey.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/collect_pick_up.mp3" type="AudioStream" id=3]
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 1 )
-shader_param/fragment_number = Vector2( 20, 20 )
-shader_param/dissolve_state = 1.0
 
 [sub_resource type="StreamTexture" id=5]
 flags = 4
@@ -134,9 +128,7 @@ script = ExtResource( 2 )
 
 [node name="Icon" type="Sprite" parent="Container"]
 self_modulate = Color( 1, 1, 1, 0.968708 )
-material = SubResource( 6 )
 scale = Vector2( 0.025, 0.025 )
-z_index = -1
 texture = SubResource( 5 )
 
 [node name="HitBox" type="Area2D" parent="Container"]

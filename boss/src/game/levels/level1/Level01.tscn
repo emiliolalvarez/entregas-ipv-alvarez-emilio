@@ -5550,7 +5550,7 @@ EXPLODE_DISTANCE_THRESHOLD = 50.0
 projectile_scene = ExtResource( 14 )
 
 [node name="Player" parent="Environment" instance=ExtResource( 13 )]
-position = Vector2( 131, 457 )
+position = Vector2( 65, 454 )
 z_index = 1
 
 [node name="Camera" type="Camera2D" parent="Environment/Player"]

@@ -55,7 +55,7 @@ position = Vector2( 99, 118 )
 position = Vector2( 0, 9.00002 )
 
 [node name="AnimatedSprite" parent="Player/BodyPivot/JetEngine" index="0"]
-frame = 1
+frame = 2
 
 [node name="WeaponContainer" parent="Player" index="5"]
 position = Vector2( 16.333, 4.33301 )

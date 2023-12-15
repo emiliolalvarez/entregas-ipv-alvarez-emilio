@@ -20,6 +20,8 @@ signal return_requested()
 signal restart_requested()
 # Inicia el siguiente nivel
 signal next_level_requested()
+# Inicia el nivel anterior
+signal prev_level_requested()
 # Muestra el main menu
 signal menu_requested()
 # Muestra game over menu
@@ -43,11 +45,17 @@ func _input(event: InputEvent) -> void:
 func _on_level_won() -> void:
 	emit_signal("next_level_requested")
 
+func _on_prev_level() -> void:
+	emit_signal("prev_level_requested")
+
 func _on_return_requested() -> void:
 	emit_signal("return_requested")
 
 func _on_restart_requested() -> void:
 	emit_signal("restart_requested")
+	
+func _on_game_restart_requested() -> void:
+	emit_signal("game_restart_requested")
 	
 func _on_game_over() -> void:
 	emit_signal("game_over_menu_requested")
