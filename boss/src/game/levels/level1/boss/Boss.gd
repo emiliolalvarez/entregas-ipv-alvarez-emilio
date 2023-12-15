@@ -51,6 +51,7 @@ func _on_Player_dead():
 	get_tree().paused = true
 
 func _on_intro_accept():
+	background_music.play()
 	print("On intro accept")
 	intro.hide()
 	get_tree().paused = false

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/5 Open Surge score jingle - A.ogg-1a10eb0891b71cf48f64b29dcd440743.oggstr"
+
+[deps]
+
+source_file="res://assets/music/robotech/5 Open Surge score jingle - A.ogg"
+dest_files=[ "res://.import/5 Open Surge score jingle - A.ogg-1a10eb0891b71cf48f64b29dcd440743.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

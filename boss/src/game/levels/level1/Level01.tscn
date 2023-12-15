@@ -5611,6 +5611,12 @@ position = Vector2( 3236, 327 )
 [node name="HealthKit4" parent="Environment/Objects" instance=ExtResource( 231 )]
 position = Vector2( 2852, 357 )
 
+[node name="HealthKit5" parent="Environment/Objects" instance=ExtResource( 231 )]
+position = Vector2( 2959, 406 )
+
+[node name="HealthKit6" parent="Environment/Objects" instance=ExtResource( 231 )]
+position = Vector2( 2358, 238 )
+
 [node name="ManaKit" parent="Environment/Objects" instance=ExtResource( 232 )]
 position = Vector2( 1381, 398 )
 
