@@ -869,6 +869,30 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Vector2( 0, 4 ), Vector2( 0, 0 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollisionArea/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -0.669 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollisionArea/CollisionShape2D:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.6, 1 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "robot"
@@ -1096,8 +1120,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=22]
-radius = 11.6667
-height = 23.3333
+radius = 12.0014
+height = 26.6666
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.6, 0.6 )
@@ -1182,8 +1206,7 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 4 )
-scale = Vector2( 1.3, 0.9 )
+scale = Vector2( 2.2, 0.4 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -1203,8 +1226,7 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-position = Vector2( -1, 4 )
-scale = Vector2( 1.3, 0.9 )
+scale = Vector2( 2.2, 0.4 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1213,10 +1235,10 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 12
+frame = 154
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 20, -6 )
+position = Vector2( 11, 2.9 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1224,7 +1246,6 @@ position = Vector2( -2.667, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="JetEngine" type="Node2D" parent="BodyPivot"]
-visible = false
 position = Vector2( -28, 4.9 )
 scale = Vector2( 0.3, 0.1 )
 
@@ -1232,12 +1253,12 @@ scale = Vector2( 0.3, 0.1 )
 position = Vector2( 16.6667, -49.9999 )
 frames = SubResource( 25 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 17.333, -5.667 )
+position = Vector2( 8.333, 3.233 )
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
@@ -1252,8 +1273,9 @@ bus = "Items"
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
-position = Vector2( -5, 3.33333 )
+position = Vector2( -1, -0.669 )
 rotation = 1.57079
+scale = Vector2( 0.6, 1 )
 shape = SubResource( 22 )
 
 [connection signal="dead" from="." to="." method="_on_Player_dead"]
