@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://src/game/entities/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/game/entities/player/states/AimUpWalkState.gd" type="Script" id=2]
@@ -337,6 +337,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [ -5.0, 0.0, -23.0, 0.0, 0.0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("BodyPivot/CollisionShapeTransform:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 2 ), Vector2( 0, -2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BodyPivot/CollisionShapeTransform:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2.1, 0.7 ), Vector2( 2.1, 0.3 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "die"
@@ -460,7 +484,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "fall"
-length = 2.0
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("BodyPivot/Body:frame")
 tracks/0/interp = 1
@@ -480,7 +504,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.0976081, 0.24402, 2 ),
+"times": PoolRealArray( 0, 0.0976081, 0.24402, 0.306579 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 18.152, -21.808 ), Vector2( 17.434, -22.077 ), Vector2( 17.394, -20.785 ), Vector2( 17.394, -20.785 ) ]
@@ -492,7 +516,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.0976081, 0.24402, 2 ),
+"times": PoolRealArray( 0, 0.0976081, 0.24402, 0.306579 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ -30.0, -33.8, -32.8, -32.8 ]
@@ -504,7 +528,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 0.297248 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 2 ), Vector2( 0, 2 ) ]
@@ -516,7 +540,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 0.301913 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1.2, 1 ), Vector2( 1.2, 1 ) ]
@@ -852,10 +876,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.501252 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1.2, 0.9 ), Vector2( 2.2, 0.4 ) ]
+"values": [ Vector2( 1.2, 0.9 ), Vector2( 2.093, 0.3 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -864,34 +888,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.501252 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 4 ), Vector2( 0, 0 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("CollisionArea/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -1, -0.669 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("CollisionArea/CollisionShape2D:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.6, 1 ) ]
+"values": [ Vector2( 0, 4 ), Vector2( 0, -1.579 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -916,7 +916,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.219258, 0.415191 ),
+"times": PoolRealArray( 0, 0.219258, 0.443182 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 13, 8 ), Vector2( 27, 15 ), Vector2( 21, -4.5 ) ]
@@ -928,7 +928,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.219258, 0.415191 ),
+"times": PoolRealArray( 0, 0.219258, 0.438517 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 37.0, 0.0 ]
@@ -952,10 +952,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.415673 ),
+"times": PoolRealArray( 0, 0.45 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 2.2, 0.4 ), Vector2( 1.3, 0.9 ) ]
+"values": [ Vector2( 2.2, 0.3 ), Vector2( 1.3, 0.9 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("BodyPivot/CollisionShapeTransform:position")
@@ -964,10 +964,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.415673 ),
+"times": PoolRealArray( 0, 0.45 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 5 ), Vector2( -1, 5 ) ]
+"values": [ Vector2( 0, 3 ), Vector2( -1, 4 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -1119,10 +1119,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=22]
-radius = 12.0014
-height = 26.6666
-
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 2
@@ -1206,7 +1202,8 @@ anims/walk = SubResource( 6 )
 anims/walk_fire = SubResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 2.2, 0.4 )
+position = Vector2( -1, 5 )
+scale = Vector2( 1.3, 0.9 )
 shape = SubResource( 17 )
 
 [node name="FloorRaycasts" type="Node2D" parent="."]
@@ -1226,7 +1223,8 @@ cast_to = Vector2( 0, 1 )
 [node name="BodyPivot" type="Node2D" parent="."]
 
 [node name="CollisionShapeTransform" type="RemoteTransform2D" parent="BodyPivot"]
-scale = Vector2( 2.2, 0.4 )
+position = Vector2( -1, 5 )
+scale = Vector2( 1.3, 0.9 )
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
@@ -1235,10 +1233,10 @@ z_index = 2
 texture = ExtResource( 8 )
 hframes = 30
 vframes = 24
-frame = 154
+frame = 11
 
 [node name="WeaponPivot" type="Node2D" parent="BodyPivot"]
-position = Vector2( 11, 2.9 )
+position = Vector2( 20.667, -5.5 )
 z_as_relative = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="BodyPivot/WeaponPivot"]
@@ -1246,6 +1244,7 @@ position = Vector2( -2.667, 0.333 )
 remote_path = NodePath("../../../WeaponContainer")
 
 [node name="JetEngine" type="Node2D" parent="BodyPivot"]
+visible = false
 position = Vector2( -28, 4.9 )
 scale = Vector2( 0.3, 0.1 )
 
@@ -1253,12 +1252,11 @@ scale = Vector2( 0.3, 0.1 )
 position = Vector2( 16.6667, -49.9999 )
 frames = SubResource( 25 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="WeaponContainer" parent="." instance=ExtResource( 9 )]
 visible = false
-position = Vector2( 8.333, 3.233 )
+position = Vector2( 18, -5.167 )
 script = ExtResource( 7 )
 
 [node name="MissileContainer" parent="." instance=ExtResource( 10 )]
@@ -1269,17 +1267,7 @@ script = ExtResource( 7 )
 stream = ExtResource( 17 )
 bus = "Items"
 
-[node name="CollisionArea" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
-position = Vector2( -1, -0.669 )
-rotation = 1.57079
-scale = Vector2( 0.6, 1 )
-shape = SubResource( 22 )
-
 [connection signal="dead" from="." to="." method="_on_Player_dead"]
 [connection signal="enemy_collied" from="." to="StateMachine" method="_on_enemy_collied"]
 [connection signal="notify_die" from="." to="StateMachine" method="notify_die"]
 [connection signal="animation_finished" from="BodyAnimations" to="StateMachine" method="_on_animation_finished"]
-[connection signal="body_entered" from="CollisionArea" to="." method="_on_CollisionArea_body_entered"]

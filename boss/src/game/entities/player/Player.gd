@@ -223,7 +223,3 @@ func _is_robot_mode() -> bool:
 	
 func force_plane_mode(force: bool) -> void:
 	force_plane = force
-
-func _on_CollisionArea_body_entered(body) -> void:	
-	if _is_plane_mode():
-		emit_signal("enemy_collied")
