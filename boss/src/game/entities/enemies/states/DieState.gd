@@ -11,5 +11,5 @@ func enter() -> void:
 	character.collision_mask = 0
 	
 func _on_animation_finished(anim_name: String) ->  void:
-	print("removing soldier")
+	#print("removing soldier")
 	character._remove()

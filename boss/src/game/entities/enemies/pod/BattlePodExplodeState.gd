@@ -52,7 +52,7 @@ func _get_score() -> int:
 	return 10	
 
 func _on_explode_alert_finished() -> void:
-	print("_on_explode_alert_finished => notify hit")
+	#print("_on_explode_alert_finished => notify hit")
 	counter+=1
 	body.material.set_shader_param("flash_modifier", 0 if counter %2 == 0 else 0.6)
 	if (counter == EXPLODE_TIMER_MAX_TICS):

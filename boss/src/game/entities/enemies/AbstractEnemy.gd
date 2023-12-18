@@ -23,7 +23,6 @@ func notify_hit(amount:int = 1) -> void:
 	emit_signal("hit", amount)
 
 func _on_collision_area_body_enter(body):
-	print("on enemy collide")
 	if body.has_method('notify_enemy_collision'):
 		body.notify_enemy_collision(_get_collision_damage())
 		

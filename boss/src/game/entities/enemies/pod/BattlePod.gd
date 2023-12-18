@@ -1,4 +1,4 @@
-extends AbstractEnemy
+extends Abstract	Enemy
 
 onready var animation_player = $AnimationPlayer
 onready var raycast = $Pivot/RayCast2D

@@ -1,8 +1,8 @@
 extends AbstractEnemyState
 
 func enter() -> void:
-	print("POD enter Idle state")
-	print(character)
+	#print("POD enter Idle state")
+	#print(character)
 	character._play_animation("idle")
 
 func exit() -> void: 

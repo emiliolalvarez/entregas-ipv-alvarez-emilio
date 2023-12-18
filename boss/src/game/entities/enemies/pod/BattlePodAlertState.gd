@@ -2,7 +2,7 @@ extends AbstractEnemyState
 onready var timer:Timer = $Timer
 
 func enter() -> void:
-	print("POD enter alert state")
+	#print("POD enter alert state")
 	character.velocity = Vector2.ZERO
 	character._play_animation("alert")
 	timer.connect("timeout", self, "_on_timer_timeout")
