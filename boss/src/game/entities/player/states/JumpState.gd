@@ -24,7 +24,7 @@ func handle_input(event:InputEvent) -> void:
 		do_jump()
 
 func do_jump() -> void: 
-	character.velocity.y -= JUMPSPEED
+	character.velocity.y -= (JUMPSPEED if jumps == 0 else JUMPSPEED/2)
 	character._play_animation("jump")
 
 func update(delta: float) -> void:

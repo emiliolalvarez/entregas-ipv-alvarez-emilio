@@ -260,6 +260,7 @@ tracks/4/keys = {
 radius = 2.0
 
 [node name="PlayerProjectile" instance=ExtResource( 1 )]
+z_as_relative = true
 VELOCITY = 400.0
 
 [node name="ProjectileAnimations" parent="." index="1"]
