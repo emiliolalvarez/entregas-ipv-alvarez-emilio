@@ -1,0 +1,187 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/game/environment/items/Gate.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/background/industrial-zone-tileset-pixel-art/4 Animated objects/Gate.png" type="Texture" id=2]
+[ext_resource path="res://assets/sounds/gate_metal_flimsy_close_001_16639.mp3" type="AudioStream" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/Collision2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/Collision1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionA:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3.934 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionB:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 3.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 4, 5, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/Collision2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 6.882 ), Vector2( 0, 25.831 ), Vector2( 0, 29.3 ), Vector2( 0, 29.282 ), Vector2( 0, 26.3 ), Vector2( 0, -0.62 ), Vector2( 0, -0.62 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/Collision1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3.934 ), Vector2( 0, -4.934 ), Vector2( 0, -14.8164 ), Vector2( 0, -34.365 ), Vector2( 0, -35.6833 ), Vector2( 0, -36.138 ), Vector2( 0, -32.9369 ), Vector2( 0, -5.336 ), Vector2( 0, -4.40133 ) ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Gate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.72901,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 3.1807 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionB:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 6.88235 ), Vector2( 0, 25.8314 ), Vector2( 0, 29.3 ), Vector2( 0, 29.2818 ), Vector2( 0, 26.3 ), Vector2( 0, -0.620003 ), Vector2( 0, -1.87333 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionA:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6, 2.4, 2.8, 3.2, 3.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -3.934 ), Vector2( 0, -4.934 ), Vector2( 0, -14.816 ), Vector2( 0, -34.3651 ), Vector2( 0, -35.683 ), Vector2( 0, -36.1379 ), Vector2( 0, -32.937 ), Vector2( 0, -5.3358 ), Vector2( 0, -4.40127 ) ]
+}
+
+[node name="Gate" type="KinematicBody2D"]
+collision_mask = 15
+script = ExtResource( 1 )
+
+[node name="CollisionA" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -3.934 )
+polygon = PoolVector2Array( -15, 3.467, -15, -27.533, 14, -27.533, 14, 3.467, 7, 3.467, 3, 7.467, 0, 7.467, -8, -0.533, -12, 3.467 )
+
+[node name="CollisionB" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -1 )
+z_index = 1
+polygon = PoolVector2Array( -15, 1, -15, 31.8733, 15, 31.8733, 15, 0.873334, 7, 1, 5, 5, -1, -3, -7, -3, -9, -3, -12, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/idle = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 8
+
+[node name="Gate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 600.0
+bus = "Items"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 15
+
+[node name="Collision1" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 0, -2 )
+polygon = PoolVector2Array( -15, 3.467, -15, -27.533, 14, -27.533, 14, 3.467, 7, 3.467, 3, 7.467, 0, 7.467, -8, -0.533, -12, 3.467 )
+
+[node name="Collision2" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2( 0, 1 )
+polygon = PoolVector2Array( -15, 1, -15, 30.62, 14, 30.62, 14, 0.62, 7, 0.62, 5, 5, -1, -3, -7, -3, -9, -3, -12, 1 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
